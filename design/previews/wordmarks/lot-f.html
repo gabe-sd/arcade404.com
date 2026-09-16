@@ -1,0 +1,262 @@
+<style>
+.lot-f .stage {
+  background: var(--p-panel);
+  border: 1px solid var(--p-hairline);
+  border-radius: 3px;
+  padding: 52px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+.lot-f .mark {
+  font-family: "VT323", monospace;
+  font-size: 52px;
+  letter-spacing: 0.08em;
+  color: var(--p-amber);
+  text-shadow: var(--bloom);
+  white-space: nowrap;
+  line-height: 1;
+}
+
+/* ---------- 1. vertical roll ---------- */
+.lot-f .vroll-stage { height: 68px; align-items: flex-start; padding-top: 0; padding-bottom: 0; }
+.lot-f .vroll-track { display: flex; flex-direction: column; }
+.lot-f .vroll-track .mark { height: 68px; display: flex; align-items: center; justify-content: center; width: 100%; }
+@media (prefers-reduced-motion: no-preference) {
+  .lot-f .vroll-track { animation: lot-f-vroll 6s linear infinite; }
+}
+@keyframes lot-f-vroll {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(-68px); }
+}
+.lot-f.v-vroll.peak .vroll-track { animation: none; transform: translateY(-25px); }
+
+/* ---------- 2. tracking bar ---------- */
+.lot-f .trackbar-wrap { position: relative; display: inline-block; }
+.lot-f .trackbar-wrap .smear {
+  position: absolute; inset: 0;
+  color: var(--p-hot);
+  text-shadow: var(--bloom-lg);
+  filter: blur(2.5px);
+  clip-path: inset(-30% 0 100% 0);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .lot-f .trackbar-wrap .smear { animation: lot-f-trackbar 7s linear infinite; }
+}
+@keyframes lot-f-trackbar {
+  0%   { clip-path: inset(-30% 0 100% 0); }
+  45%  { clip-path: inset(-30% 0 100% 0); }
+  60%  { clip-path: inset(38% 0 42% 0); }
+  75%  { clip-path: inset(100% 0 -30% 0); }
+  100% { clip-path: inset(100% 0 -30% 0); }
+}
+.lot-f.v-trackbar.peak .smear { animation: none; clip-path: inset(38% 0 42% 0); }
+
+/* ---------- 3. misconvergence ---------- */
+.lot-f .converge-wrap { position: relative; display: inline-block; }
+.lot-f .converge-wrap .fringe {
+  position: absolute; inset: 0;
+  mix-blend-mode: screen;
+  opacity: 0;
+  transform: translate(0, 0);
+}
+.lot-f .converge-wrap .fringe.r { color: var(--p-coral); }
+.lot-f .converge-wrap .fringe.b { color: var(--p-cyan); }
+@media (prefers-reduced-motion: no-preference) {
+  .lot-f .converge-wrap .fringe.r { animation: lot-f-fringe-r 8s steps(1) infinite; }
+  .lot-f .converge-wrap .fringe.b { animation: lot-f-fringe-b 8s steps(1) infinite; }
+}
+@keyframes lot-f-fringe-r {
+  0%, 92%, 100% { opacity: 0; transform: translate(0, 0); }
+  94%, 97%      { opacity: .85; transform: translate(-2.5px, 0); }
+}
+@keyframes lot-f-fringe-b {
+  0%, 92%, 100% { opacity: 0; transform: translate(0, 0); }
+  94%, 97%      { opacity: .85; transform: translate(2.5px, 0); }
+}
+.lot-f.v-converge.peak .fringe.r { animation: none; opacity: .85; transform: translate(-2.5px, 0); }
+.lot-f.v-converge.peak .fringe.b { animation: none; opacity: .85; transform: translate(2.5px, 0); }
+
+/* ---------- 4. brownout ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .lot-f .mark.brownout { animation: lot-f-brownout 9s ease-in-out infinite; }
+}
+@keyframes lot-f-brownout {
+  0%, 84%, 100% { opacity: 1;   filter: brightness(1);    color: var(--p-amber); text-shadow: var(--bloom); }
+  89%           { opacity: .5;  filter: brightness(.45);  color: var(--p-dim);   text-shadow: none; }
+  93%           { opacity: .68; filter: brightness(.6);   color: var(--p-dim);   text-shadow: none; }
+}
+.lot-f.v-brownout.peak .mark { animation: none; opacity: .5; filter: brightness(.45); color: var(--p-dim); text-shadow: none; }
+
+/* ---------- 5. degauss ---------- */
+.lot-f .degauss-wrap { position: relative; display: inline-block; }
+.lot-f .degauss-wrap::after {
+  content: "";
+  position: absolute;
+  inset: -60% -20%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 176, 0, 0.4), transparent 62%);
+  opacity: 0;
+  transform: scale(.3);
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .lot-f .degauss-wrap .mark { animation: lot-f-degauss-warp 9s ease-in-out infinite; }
+  .lot-f .degauss-wrap::after { animation: lot-f-degauss-bloom 9s ease-in-out infinite; }
+}
+@keyframes lot-f-degauss-warp {
+  0%, 88%, 100% { transform: scale(1) skewX(0deg);      filter: none; }
+  91%           { transform: scale(1.05) skewX(-3deg);  filter: hue-rotate(18deg) saturate(1.5); }
+  94%           { transform: scale(.96) skewX(3deg);    filter: hue-rotate(-14deg) saturate(1.7); }
+  97%           { transform: scale(1.02) skewX(-1deg);  filter: hue-rotate(6deg) saturate(1.2); }
+}
+@keyframes lot-f-degauss-bloom {
+  0%, 88%, 100% { opacity: 0;   transform: scale(.3); }
+  92%           { opacity: .55; transform: scale(1);  }
+  97%           { opacity: 0;   transform: scale(1.5); }
+}
+.lot-f.v-degauss.peak .mark { animation: none; transform: scale(.96) skewX(3deg); filter: hue-rotate(-14deg) saturate(1.7); }
+.lot-f.v-degauss.peak .degauss-wrap::after { animation: none; opacity: .55; transform: scale(1); }
+
+/* ---------- 6. interlace flicker ---------- */
+.lot-f .interlace-wrap { position: relative; display: inline-block; }
+.lot-f .interlace-wrap::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(to bottom, var(--p-panel) 0 1px, transparent 1px 3px);
+  opacity: 0;
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .lot-f .interlace-wrap::before { animation: lot-f-interlace 6s steps(1) infinite; }
+}
+@keyframes lot-f-interlace {
+  0%, 93%, 100%  { opacity: 0;   background-position: 0 0; }
+  95%            { opacity: .85; background-position: 0 0; }
+  96%            { opacity: .85; background-position: 0 2px; }
+  98%            { opacity: .85; background-position: 0 0; }
+}
+.lot-f.v-interlace.peak .interlace-wrap::before { animation: none; opacity: .85; background-position: 0 2px; }
+
+/* ---------- 7. phosphor burn-in / ghost ---------- */
+.lot-f .burnin-wrap { position: relative; display: inline-block; }
+.lot-f .burnin-wrap .ghost {
+  position: absolute; inset: 0;
+  color: var(--p-rule);
+  text-shadow: none;
+  opacity: .3;
+  transform: translate(4px, -3px);
+  z-index: 0;
+}
+.lot-f .burnin-wrap .mark { position: relative; z-index: 1; }
+/* The rule above matches the ghost too and would pull it back into the flow;
+   this restates the ghost's own positioning after it. */
+.lot-f .burnin-wrap .mark.ghost { position: absolute; z-index: 0; }
+@media (prefers-reduced-motion: no-preference) {
+  .lot-f .burnin-wrap .ghost { animation: lot-f-burnin-breathe 10s ease-in-out infinite; }
+}
+@keyframes lot-f-burnin-breathe {
+  0%, 100% { opacity: .24; }
+  50%      { opacity: .38; }
+}
+.lot-f.v-burnin.peak .ghost { animation: none; opacity: .5; }
+
+/* ---------- 8. dead pixels / missing segments ---------- */
+.lot-f .deadpix .cell { position: relative; display: inline-block; }
+@media (prefers-reduced-motion: no-preference) {
+  .lot-f .deadpix .cell.blank { animation: lot-f-cell-blank 7s steps(1) infinite; }
+  .lot-f .deadpix .cell.wrong::after { animation: lot-f-cell-wrong 7s steps(1) infinite; animation-delay: .35s; }
+}
+@keyframes lot-f-cell-blank {
+  0%, 90%, 100% { color: var(--p-amber); text-shadow: var(--bloom); }
+  92%, 96%      { color: var(--p-panel); text-shadow: none; }
+}
+.lot-f .deadpix .cell.wrong::after {
+  content: "X";
+  position: absolute; inset: 0;
+  background: var(--p-panel);
+  color: var(--p-pale);
+  opacity: 0;
+}
+@keyframes lot-f-cell-wrong {
+  0%, 90%, 100% { opacity: 0; }
+  92%, 96%      { opacity: 1; }
+}
+.lot-f.v-deadpix.peak .cell.blank { animation: none; color: var(--p-panel); text-shadow: none; }
+.lot-f.v-deadpix.peak .cell.wrong::after { animation: none; opacity: 1; }
+</style>
+
+<article class="card lot-f v-vroll">
+  <h2 class="cap">Vertical roll — bad vertical hold, the picture climbs and wraps</h2>
+  <div class="stage vroll-stage">
+    <div class="vroll-track">
+      <span class="mark">ARCADE404</span>
+      <span class="mark">ARCADE404</span>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-f v-trackbar">
+  <h2 class="cap">Tracking bar — a band of distortion sweeps once through the mark</h2>
+  <div class="stage">
+    <span class="trackbar-wrap">
+      <span class="mark">ARCADE404</span>
+      <span class="mark smear" aria-hidden="true">ARCADE404</span>
+    </span>
+  </div>
+</article>
+
+<article class="card lot-f v-converge">
+  <h2 class="cap">Misconvergence — clean amber at rest, guns drift apart for a moment</h2>
+  <div class="stage">
+    <span class="converge-wrap">
+      <span class="mark">ARCADE404</span>
+      <span class="mark fringe r" aria-hidden="true">ARCADE404</span>
+      <span class="mark fringe b" aria-hidden="true">ARCADE404</span>
+    </span>
+  </div>
+</article>
+
+<article class="card lot-f v-brownout">
+  <h2 class="cap">Brownout — the glow sags toward dim, then recovers</h2>
+  <div class="stage">
+    <span class="mark brownout">ARCADE404</span>
+  </div>
+</article>
+
+<article class="card lot-f v-degauss">
+  <h2 class="cap">Degauss — a warp and colour bloom on a slow cycle</h2>
+  <div class="stage">
+    <span class="degauss-wrap">
+      <span class="mark">ARCADE404</span>
+    </span>
+  </div>
+</article>
+
+<article class="card lot-f v-interlace">
+  <h2 class="cap">Interlace flicker — alternate scanlines drop for a frame</h2>
+  <div class="stage">
+    <span class="interlace-wrap">
+      <span class="mark">ARCADE404</span>
+    </span>
+  </div>
+</article>
+
+<article class="card lot-f v-burnin">
+  <h2 class="cap">Phosphor ghost — a stale copy sits behind the live mark, permanently</h2>
+  <div class="stage">
+    <span class="burnin-wrap">
+      <span class="mark ghost" aria-hidden="true">ARCADE404</span>
+      <span class="mark">ARCADE404</span>
+    </span>
+  </div>
+</article>
+
+<article class="card lot-f v-deadpix">
+  <h2 class="cap">Dead cells — a couple of characters stay dark or misread, then heal</h2>
+  <div class="stage">
+    <span class="mark deadpix">AR<span class="cell blank">C</span>ADE<span class="cell wrong">4</span>04</span>
+  </div>
+</article>

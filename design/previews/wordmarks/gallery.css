@@ -87,3 +87,21 @@ body {
   padding: 2rem 1.4rem;
   background: var(--p-ground);
 }
+
+#freeze {
+  font-family: inherit;
+  font-size: 1.05rem;
+  letter-spacing: 0.08em;
+  color: var(--p-amber);
+  background: var(--p-panel-lit);
+  border: 1px solid var(--p-rule);
+  padding: 0.3rem 0.9rem;
+  cursor: pointer;
+}
+
+#freeze:hover,
+#freeze:focus-visible {
+  color: var(--p-hot);
+  border-color: var(--p-amber);
+  outline: none;
+}

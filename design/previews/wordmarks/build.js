@@ -9,6 +9,10 @@ const lots = [
   ['lot-b.html', 'Lot B — the 404 joke attached to the name'],
   ['lot-c.html', 'Lot C — the name as a piece of hardware'],
   ['lot-d.html', 'Lot D — wild cards: each one breaks a rule, and says which'],
+  ['lot-e.html', 'Lot E — the torn-signal family: clean at rest, briefly destroyed'],
+  ['lot-h.html', 'Lot H — hybrids: the tear and the misconverged tube together'],
+  ['lot-f.html', 'Lot F — the display failing: ten kinds of fault, none of them a tear'],
+  ['lot-g.html', 'Lot G — the error as meaning: the mark behaving like software reporting a fault'],
 ];
 
 const sections = lots
@@ -32,11 +36,15 @@ const page = `<!DOCTYPE html>
 <div class="sheet">
 <header>
   <h1>arcade404 — wordmark sheet</h1>
-  <p>Branding only: the name set many ways, nothing else about the page. Round one.
-     Pick the ones worth seeing as whole hub compositions.</p>
+  <p>Branding only: the name set many ways, nothing else about the page.
+     Lots A-D are round one. Lots E-H are the glitch round: every one of those is
+     clean at rest and comes apart only briefly, so watch them for a few seconds
+     rather than judging the still.</p>
+  <p><button type="button" id="freeze" aria-pressed="false">Freeze the glitch</button></p>
 </header>
 ${sections}
 </div>
+<script src="gallery.js"></script>
 </body>
 </html>
 `;

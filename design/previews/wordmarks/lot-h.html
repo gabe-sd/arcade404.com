@@ -1,0 +1,369 @@
+<style>
+/* ===== shared scaffolding for lot-h, all rules namespaced under .lot-h ===== */
+.lot-h .stage {
+  background: var(--p-ground);
+  padding: 56px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.lot-h .rig {
+  position: relative;
+  display: inline-block;
+  font-family: "VT323", monospace;
+  font-size: 64px;
+  line-height: 1;
+  letter-spacing: 2px;
+  white-space: nowrap;
+}
+.lot-h .name {
+  display: block;
+  color: var(--p-amber);
+  text-shadow: var(--bloom);
+}
+.lot-h .layer {
+  position: absolute;
+  inset: 0;
+  display: block;
+  pointer-events: none;
+}
+
+/* ===================================================================== */
+/* v1 — each torn band gets its own gun: coral top / amber mid / cyan low */
+/* ===================================================================== */
+.lot-h.lh-v1 .rig { color: var(--p-amber); }
+.lot-h.lh-v1 .band {
+  color: currentColor;
+  mix-blend-mode: screen;
+  opacity: 0;
+  transform: translateX(0);
+}
+.lot-h.lh-v1 .band-top    { clip-path: inset(0% 0% 66% 0%); color: var(--p-coral); }
+.lot-h.lh-v1 .band-mid    { clip-path: inset(33% 0% 33% 0%); color: var(--p-amber); }
+.lot-h.lh-v1 .band-bottom { clip-path: inset(66% 0% 0% 0%);  color: var(--p-cyan); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .lot-h.lh-v1 .band-top    { animation: lh-v1-top 7s steps(1) infinite; }
+  .lot-h.lh-v1 .band-mid    { animation: lh-v1-mid 7s steps(1) infinite; }
+  .lot-h.lh-v1 .band-bottom { animation: lh-v1-bot 7s steps(1) infinite; }
+  @keyframes lh-v1-top {
+    0%, 93% { opacity: 0; transform: translateX(0); }
+    93.5%   { opacity: 1; transform: translateX(-10px); }
+    96%     { opacity: 1; transform: translateX(6px); }
+    97%, 100% { opacity: 0; transform: translateX(0); }
+  }
+  @keyframes lh-v1-mid {
+    0%, 93% { opacity: 0; transform: translateX(0); }
+    93.5%, 97% { opacity: .55; transform: translateX(0); }
+    97.5%, 100% { opacity: 0; transform: translateX(0); }
+  }
+  @keyframes lh-v1-bot {
+    0%, 93% { opacity: 0; transform: translateX(0); }
+    93.5%   { opacity: 1; transform: translateX(9px); }
+    96%     { opacity: 1; transform: translateX(-7px); }
+    97%, 100% { opacity: 0; transform: translateX(0); }
+  }
+}
+.lot-h.lh-v1.peak .band-top    { animation: none; opacity: 1; transform: translateX(-10px); }
+.lot-h.lh-v1.peak .band-mid    { animation: none; opacity: .55; transform: translateX(0); }
+.lot-h.lh-v1.peak .band-bottom { animation: none; opacity: 1; transform: translateX(9px); }
+
+/* ===================================================================== */
+/* v2 — always a faint fringe; the tear is what briefly widens it        */
+/* ===================================================================== */
+.lot-h.lh-v2 .rig { color: var(--p-amber); }
+.lot-h.lh-v2 .ghost {
+  color: var(--p-coral);
+  mix-blend-mode: screen;
+  opacity: .35;
+  transform: translateX(1px);
+}
+.lot-h.lh-v2 .ghost.cy {
+  color: var(--p-cyan);
+  transform: translateX(-1px);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .lot-h.lh-v2 .ghost      { animation: lh-v2-cr 6s steps(2, end) infinite; }
+  .lot-h.lh-v2 .ghost.cy   { animation: lh-v2-cy 6s steps(2, end) infinite; }
+  @keyframes lh-v2-cr {
+    0%, 90% { opacity: .35; transform: translateX(1px); }
+    91%     { opacity: .9; transform: translateX(11px); }
+    93.5%   { opacity: .9; transform: translateX(9px); }
+    95%, 100% { opacity: .35; transform: translateX(1px); }
+  }
+  @keyframes lh-v2-cy {
+    0%, 90% { opacity: .35; transform: translateX(-1px); }
+    91%     { opacity: .9; transform: translateX(-12px); }
+    93.5%   { opacity: .9; transform: translateX(-8px); }
+    95%, 100% { opacity: .35; transform: translateX(-1px); }
+  }
+}
+.lot-h.lh-v2.peak .ghost    { animation: none; opacity: .9; transform: translateX(11px); }
+.lot-h.lh-v2.peak .ghost.cy { animation: none; opacity: .9; transform: translateX(-12px); }
+
+/* ===================================================================== */
+/* v3 — clean amber at rest; colour appears only inside the torn band    */
+/* ===================================================================== */
+.lot-h.lh-v3 .rig { color: var(--p-amber); }
+.lot-h.lh-v3 .damage {
+  clip-path: inset(38% 0% 38% 0%);
+  opacity: 0;
+}
+.lot-h.lh-v3 .damage.cr { color: var(--p-coral); mix-blend-mode: screen; transform: translateX(0); }
+.lot-h.lh-v3 .damage.cy { color: var(--p-cyan);  mix-blend-mode: screen; transform: translateX(0); }
+.lot-h.lh-v3 .cut {
+  clip-path: inset(38% 0% 38% 0%);
+  color: var(--p-ground);
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .lot-h.lh-v3 .cut       { animation: lh-v3-cut 8s steps(1) infinite; }
+  .lot-h.lh-v3 .damage.cr { animation: lh-v3-cr 8s steps(1) infinite; }
+  .lot-h.lh-v3 .damage.cy { animation: lh-v3-cy 8s steps(1) infinite; }
+  @keyframes lh-v3-cut {
+    0%, 95% { opacity: 0; }
+    95.5%, 97% { opacity: 1; }
+    97.5%, 100% { opacity: 0; }
+  }
+  @keyframes lh-v3-cr {
+    0%, 95% { opacity: 0; transform: translateX(0); }
+    95.5%   { opacity: 1; transform: translateX(-13px); }
+    97%     { opacity: 1; transform: translateX(-13px); }
+    97.5%, 100% { opacity: 0; transform: translateX(0); }
+  }
+  @keyframes lh-v3-cy {
+    0%, 95% { opacity: 0; transform: translateX(0); }
+    95.5%   { opacity: 1; transform: translateX(13px); }
+    97%     { opacity: 1; transform: translateX(13px); }
+    97.5%, 100% { opacity: 0; transform: translateX(0); }
+  }
+}
+.lot-h.lh-v3.peak .cut       { animation: none; opacity: 1; }
+.lot-h.lh-v3.peak .damage.cr { animation: none; opacity: 1; transform: translateX(-13px); }
+.lot-h.lh-v3.peak .damage.cy { animation: none; opacity: 1; transform: translateX(13px); }
+
+/* ===================================================================== */
+/* v4 — colour separation runs horizontal, the tear line runs vertical   */
+/* ===================================================================== */
+.lot-h.lh-v4 .rig { color: var(--p-amber); }
+.lot-h.lh-v4 .half {
+  clip-path: inset(0 50% 0 0);
+  transform: translateY(0);
+}
+.lot-h.lh-v4 .half.right {
+  clip-path: inset(0 0 0 50%);
+}
+.lot-h.lh-v4 .gun {
+  opacity: 0;
+  mix-blend-mode: screen;
+  transform: translateX(0);
+}
+.lot-h.lh-v4 .gun.cr { color: var(--p-coral); }
+.lot-h.lh-v4 .gun.cy { color: var(--p-cyan); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .lot-h.lh-v4 .half.left  { animation: lh-v4-up 6.5s steps(1) infinite; }
+  .lot-h.lh-v4 .half.right { animation: lh-v4-down 6.5s steps(1) infinite; }
+  .lot-h.lh-v4 .gun.cr     { animation: lh-v4-cr 6.5s steps(1) infinite; }
+  .lot-h.lh-v4 .gun.cy     { animation: lh-v4-cy 6.5s steps(1) infinite; }
+  @keyframes lh-v4-up {
+    0%, 92% { transform: translateY(0); }
+    92.5%, 95% { transform: translateY(-7px); }
+    95.5%, 100% { transform: translateY(0); }
+  }
+  @keyframes lh-v4-down {
+    0%, 92% { transform: translateY(0); }
+    92.5%, 95% { transform: translateY(7px); }
+    95.5%, 100% { transform: translateY(0); }
+  }
+  @keyframes lh-v4-cr {
+    0%, 92% { opacity: 0; transform: translateX(0); }
+    92.5%, 95% { opacity: .85; transform: translateX(-8px); }
+    95.5%, 100% { opacity: 0; transform: translateX(0); }
+  }
+  @keyframes lh-v4-cy {
+    0%, 92% { opacity: 0; transform: translateX(0); }
+    92.5%, 95% { opacity: .85; transform: translateX(8px); }
+    95.5%, 100% { opacity: 0; transform: translateX(0); }
+  }
+}
+.lot-h.lh-v4.peak .half.left  { animation: none; transform: translateY(-7px); }
+.lot-h.lh-v4.peak .half.right { animation: none; transform: translateY(7px); }
+.lot-h.lh-v4.peak .gun.cr     { animation: none; opacity: .85; transform: translateX(-8px); }
+.lot-h.lh-v4.peak .gun.cy     { animation: none; opacity: .85; transform: translateX(8px); }
+
+/* ===================================================================== */
+/* v5 — bands snap back instantly, the colour fringe takes half a second */
+/* ===================================================================== */
+.lot-h.lh-v5 .rig { color: var(--p-amber); }
+.lot-h.lh-v5 .snap {
+  clip-path: inset(30% 0% 30% 0%);
+  transform: translateX(0);
+}
+.lot-h.lh-v5 .fringe {
+  clip-path: inset(30% 0% 30% 0%);
+  opacity: 0;
+  mix-blend-mode: screen;
+}
+.lot-h.lh-v5 .fringe.cr { color: var(--p-coral); transform: translateX(0); }
+.lot-h.lh-v5 .fringe.cy { color: var(--p-cyan);  transform: translateX(0); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .lot-h.lh-v5 .snap {
+    animation: lh-v5-snap 9s steps(1, end) infinite;
+  }
+  .lot-h.lh-v5 .fringe.cr {
+    animation: lh-v5-fringe-cr 9s infinite;
+  }
+  .lot-h.lh-v5 .fringe.cy {
+    animation: lh-v5-fringe-cy 9s infinite;
+  }
+  /* the band itself: displaced for one instant, then gone — no easing */
+  @keyframes lh-v5-snap {
+    0%, 90% { transform: translateX(0); }
+    90.2%   { transform: translateX(14px); }
+    91%, 100% { transform: translateX(0); }
+  }
+  /* the colour fringe: appears with the snap, but eases closed over ~0.5s */
+  @keyframes lh-v5-fringe-cr {
+    0%, 90% { opacity: 0; transform: translateX(0); }
+    90.2%   { opacity: .9; transform: translateX(16px); }
+    96%     { opacity: 0; transform: translateX(1px); }
+    100%    { opacity: 0; transform: translateX(0); }
+  }
+  @keyframes lh-v5-fringe-cy {
+    0%, 90% { opacity: 0; transform: translateX(0); }
+    90.2%   { opacity: .9; transform: translateX(-16px); }
+    96%     { opacity: 0; transform: translateX(-1px); }
+    100%    { opacity: 0; transform: translateX(0); }
+  }
+}
+.lot-h.lh-v5.peak .snap      { animation: none; transform: translateX(0); }
+.lot-h.lh-v5.peak .fringe.cr { animation: none; opacity: .9; transform: translateX(16px); }
+.lot-h.lh-v5.peak .fringe.cy { animation: none; opacity: .9; transform: translateX(-16px); }
+
+/* ===================================================================== */
+/* v6 — heavy: many thin bands, each its own hue, clean amber at rest    */
+/* ===================================================================== */
+.lot-h.lh-v6 .rig { color: var(--p-amber); }
+.lot-h.lh-v6 .th {
+  opacity: 0;
+  mix-blend-mode: screen;
+  transform: translateX(0);
+}
+.lot-h.lh-v6 .th1 { clip-path: inset(0%   0% 87.5% 0%); color: var(--p-coral); }
+.lot-h.lh-v6 .th2 { clip-path: inset(12.5% 0% 75%  0%); color: var(--p-lime);  }
+.lot-h.lh-v6 .th3 { clip-path: inset(25%  0% 62.5% 0%); color: var(--p-jade);  }
+.lot-h.lh-v6 .th4 { clip-path: inset(37.5% 0% 50%  0%); color: var(--p-cyan);  }
+.lot-h.lh-v6 .th5 { clip-path: inset(50%  0% 37.5% 0%); color: var(--p-violet); }
+.lot-h.lh-v6 .th6 { clip-path: inset(62.5% 0% 25%  0%); color: var(--p-rose);  }
+.lot-h.lh-v6 .th7 { clip-path: inset(75%  0% 12.5% 0%); color: var(--p-coral); }
+.lot-h.lh-v6 .th8 { clip-path: inset(87.5% 0% 0%   0%); color: var(--p-cyan);  }
+
+@media (prefers-reduced-motion: no-preference) {
+  .lot-h.lh-v6 .th { animation: lh-v6-shred 7.5s steps(1) infinite; }
+  .lot-h.lh-v6 .th1 { animation-delay: 0s;    --dx: -13px; }
+  .lot-h.lh-v6 .th2 { animation-delay: 0s;    --dx: 9px; }
+  .lot-h.lh-v6 .th3 { animation-delay: 0s;    --dx: -6px; }
+  .lot-h.lh-v6 .th4 { animation-delay: 0s;    --dx: 15px; }
+  .lot-h.lh-v6 .th5 { animation-delay: 0s;    --dx: -11px; }
+  .lot-h.lh-v6 .th6 { animation-delay: 0s;    --dx: 7px; }
+  .lot-h.lh-v6 .th7 { animation-delay: 0s;    --dx: -16px; }
+  .lot-h.lh-v6 .th8 { animation-delay: 0s;    --dx: 10px; }
+  @keyframes lh-v6-shred {
+    0%, 94% { opacity: 0; transform: translateX(0); }
+    94.5%   { opacity: .95; transform: translateX(var(--dx)); }
+    97%     { opacity: .95; transform: translateX(calc(var(--dx) * -0.4)); }
+    97.5%, 100% { opacity: 0; transform: translateX(0); }
+  }
+}
+.lot-h.lh-v6.peak .th { animation: none; opacity: .95; }
+.lot-h.lh-v6.peak .th1 { transform: translateX(-13px); }
+.lot-h.lh-v6.peak .th2 { transform: translateX(9px); }
+.lot-h.lh-v6.peak .th3 { transform: translateX(-6px); }
+.lot-h.lh-v6.peak .th4 { transform: translateX(15px); }
+.lot-h.lh-v6.peak .th5 { transform: translateX(-11px); }
+.lot-h.lh-v6.peak .th6 { transform: translateX(7px); }
+.lot-h.lh-v6.peak .th7 { transform: translateX(-16px); }
+.lot-h.lh-v6.peak .th8 { transform: translateX(10px); }
+</style>
+
+<article class="card lot-h lh-v1">
+  <h2 class="cap">Band-split guns — top drifts coral, middle stays amber, bottom drifts cyan</h2>
+  <div class="stage">
+    <div class="rig">
+      <span class="name">ARCADE404</span>
+      <span class="layer band band-top">ARCADE404</span>
+      <span class="layer band band-mid">ARCADE404</span>
+      <span class="layer band band-bottom">ARCADE404</span>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-h lh-v2">
+  <h2 class="cap">Standing fringe — a faint permanent mis-registration, and the tear briefly widens it</h2>
+  <div class="stage">
+    <div class="rig">
+      <span class="layer ghost">ARCADE404</span>
+      <span class="layer ghost cy">ARCADE404</span>
+      <span class="name">ARCADE404</span>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-h lh-v3">
+  <h2 class="cap">Damage-only colour — clean amber everywhere except inside the torn band</h2>
+  <div class="stage">
+    <div class="rig">
+      <span class="name">ARCADE404</span>
+      <span class="layer cut">ARCADE404</span>
+      <span class="layer damage cr">ARCADE404</span>
+      <span class="layer damage cy">ARCADE404</span>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-h lh-v4">
+  <h2 class="cap">Crossed axes — colour separates sideways while the tear splits up and down</h2>
+  <div class="stage">
+    <div class="rig">
+      <span class="layer half left">ARCADE404</span>
+      <span class="layer half right">ARCADE404</span>
+      <span class="layer gun cr">ARCADE404</span>
+      <span class="layer gun cy">ARCADE404</span>
+      <span class="name" style="opacity:.001">ARCADE404</span>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-h lh-v5">
+  <h2 class="cap">Mismatched recovery — the band snaps back instantly, the colour takes half a second to close</h2>
+  <div class="stage">
+    <div class="rig">
+      <span class="name">ARCADE404</span>
+      <span class="layer snap" style="color:var(--p-amber)">ARCADE404</span>
+      <span class="layer fringe cr">ARCADE404</span>
+      <span class="layer fringe cy">ARCADE404</span>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-h lh-v6">
+  <h2 class="cap">Shredded — eight thin bands, eight guest hues, clean amber at rest</h2>
+  <div class="stage">
+    <div class="rig">
+      <span class="name">ARCADE404</span>
+      <span class="layer th th1">ARCADE404</span>
+      <span class="layer th th2">ARCADE404</span>
+      <span class="layer th th3">ARCADE404</span>
+      <span class="layer th th4">ARCADE404</span>
+      <span class="layer th th5">ARCADE404</span>
+      <span class="layer th th6">ARCADE404</span>
+      <span class="layer th th7">ARCADE404</span>
+      <span class="layer th th8">ARCADE404</span>
+    </div>
+  </div>
+</article>
