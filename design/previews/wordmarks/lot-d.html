@@ -1,0 +1,225 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
+
+.lot-d .stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 140px;
+  padding: 28px 16px;
+  background: var(--p-ground);
+  font-family: "VT323", monospace;
+}
+
+/* 1: guest hue infiltration */
+.lot-d .v1-mark {
+  font-size: 56px;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  text-shadow: var(--bloom);
+}
+.lot-d .v1-mark .arcade { color: var(--p-amber); }
+.lot-d .v1-mark .num { color: var(--p-cyan); }
+
+/* 2: misconverged tube */
+.lot-d .v2-wrap {
+  position: relative;
+  font-size: 52px;
+  letter-spacing: 0.05em;
+  line-height: 1;
+}
+.lot-d .v2-wrap span {
+  display: block;
+  position: absolute;
+  top: 0; left: 0;
+  white-space: nowrap;
+}
+.lot-d .v2-r { color: var(--p-coral); mix-blend-mode: screen; transform: translate(-2.5px, 0); }
+.lot-d .v2-g { color: var(--p-jade); mix-blend-mode: screen; transform: translate(2px, 1px); }
+.lot-d .v2-b { color: var(--p-cyan); mix-blend-mode: screen; transform: translate(0.5px, -1.5px); }
+.lot-d .v2-base { position: relative; color: var(--p-pale); }
+@media (prefers-reduced-motion: no-preference) {
+  .lot-d .v2-r { animation: lot-d-jitr 2.6s steps(1) infinite; }
+  .lot-d .v2-g { animation: lot-d-jitg 3.1s steps(1) infinite; }
+  .lot-d .v2-b { animation: lot-d-jitb 2.3s steps(1) infinite; }
+}
+@keyframes lot-d-jitr {
+  0%, 40% { transform: translate(-2.5px, 0); }
+  50% { transform: translate(-4px, 0.5px); }
+  100% { transform: translate(-2.5px, 0); }
+}
+@keyframes lot-d-jitg {
+  0%, 60% { transform: translate(2px, 1px); }
+  70% { transform: translate(3.5px, -0.5px); }
+  100% { transform: translate(2px, 1px); }
+}
+@keyframes lot-d-jitb {
+  0%, 50% { transform: translate(0.5px, -1.5px); }
+  55% { transform: translate(-1px, -2.5px); }
+  100% { transform: translate(0.5px, -1.5px); }
+}
+
+/* 3: heavy display import */
+.lot-d .v3-mark {
+  font-family: "Bungee", "Arial Black", sans-serif;
+  font-size: 30px;
+  letter-spacing: 0.02em;
+  line-height: 1.3;
+  color: var(--p-amber);
+  text-shadow: var(--bloom);
+  text-align: center;
+}
+.lot-d .v3-mark small {
+  display: block;
+  margin-top: 6px;
+  font-family: "VT323", monospace;
+  font-size: 18px;
+  letter-spacing: 0.3em;
+  color: var(--p-dim);
+}
+
+/* 4: drawn, not typed */
+.lot-d .v4-row {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+.lot-d .v4-digit {
+  position: relative;
+  width: 40px;
+  height: 60px;
+  flex: 0 0 auto;
+}
+.lot-d .v4-px {
+  position: absolute;
+  top: 0; left: 0;
+  width: 8px;
+  height: 8px;
+  background: transparent;
+}
+.lot-d .v4-px.p4 { box-shadow:
+  30px 0px 0 var(--p-amber),
+  20px 10px 0 var(--p-amber), 30px 10px 0 var(--p-amber),
+  10px 20px 0 var(--p-amber), 30px 20px 0 var(--p-amber),
+  0px 30px 0 var(--p-amber), 30px 30px 0 var(--p-amber),
+  0px 40px 0 var(--p-amber), 10px 40px 0 var(--p-amber), 20px 40px 0 var(--p-amber), 30px 40px 0 var(--p-amber), 40px 40px 0 var(--p-amber),
+  30px 50px 0 var(--p-amber),
+  30px 60px 0 var(--p-amber);
+}
+.lot-d .v4-px.p0 { box-shadow:
+  10px 0px 0 var(--p-amber), 20px 0px 0 var(--p-amber), 30px 0px 0 var(--p-amber),
+  0px 10px 0 var(--p-amber), 40px 10px 0 var(--p-amber),
+  0px 20px 0 var(--p-amber), 30px 20px 0 var(--p-amber), 40px 20px 0 var(--p-amber),
+  0px 30px 0 var(--p-amber), 20px 30px 0 var(--p-amber), 40px 30px 0 var(--p-amber),
+  0px 40px 0 var(--p-amber), 10px 40px 0 var(--p-amber), 40px 40px 0 var(--p-amber),
+  0px 50px 0 var(--p-amber), 40px 50px 0 var(--p-amber),
+  10px 60px 0 var(--p-amber), 20px 60px 0 var(--p-amber), 30px 60px 0 var(--p-amber);
+}
+.lot-d .v4-cap { margin-top: 10px; font-size: 15px; letter-spacing: 0.2em; color: var(--p-dim); text-align: center; }
+
+/* 5: torn signal */
+.lot-d .v5-wrap {
+  position: relative;
+  width: 340px;
+  height: 58px;
+  font-size: 54px;
+  letter-spacing: 0.04em;
+  line-height: 58px;
+  color: var(--p-amber);
+  text-shadow: var(--bloom);
+}
+.lot-d .v5-slice {
+  position: absolute;
+  inset: 0;
+  white-space: nowrap;
+}
+.lot-d .v5-s1 { clip-path: inset(0 0 66% 0); transform: translateX(8px); }
+.lot-d .v5-s2 { clip-path: inset(34% 0 34% 0); transform: translateX(-10px); }
+.lot-d .v5-s3 { clip-path: inset(66% 0 0 0); transform: translateX(4px); }
+@media (prefers-reduced-motion: no-preference) {
+  .lot-d .v5-s1 { animation: lot-d-tear1 4s steps(1) infinite; }
+  .lot-d .v5-s2 { animation: lot-d-tear2 4s steps(1) infinite; }
+}
+@keyframes lot-d-tear1 {
+  0%, 92% { transform: translateX(8px); }
+  94% { transform: translateX(20px); }
+  96%, 100% { transform: translateX(8px); }
+}
+@keyframes lot-d-tear2 {
+  0%, 90% { transform: translateX(-10px); }
+  93% { transform: translateX(-24px); }
+  95%, 100% { transform: translateX(-10px); }
+}
+
+/* 6: negative image */
+.lot-d .v6-block {
+  background: var(--p-amber);
+  padding: 22px 30px;
+  border-radius: 2px;
+}
+.lot-d .v6-mark {
+  font-size: 50px;
+  letter-spacing: 0.03em;
+  line-height: 1;
+  color: var(--p-ground);
+  mix-blend-mode: normal;
+}
+</style>
+
+<article class="card lot-d">
+  <h2 class="cap">Guest hue infiltration — breaks: admits cyan into the chrome (404 set in --p-cyan, a screen-only colour, beside amber ARCADE)</h2>
+  <div class="stage">
+    <div class="v1-mark"><span class="arcade">ARCADE</span><span class="num">404</span></div>
+  </div>
+</article>
+
+<article class="card lot-d">
+  <h2 class="cap">Misconverged tube — breaks: the wordmark is drawn three times in offset guest hues (coral/jade/cyan) like a mis-registered CRT, not one solid amber mark</h2>
+  <div class="stage">
+    <div class="v2-wrap">
+      <span class="v2-r">ARCADE404</span>
+      <span class="v2-g">ARCADE404</span>
+      <span class="v2-b">ARCADE404</span>
+      <span class="v2-base">ARCADE404</span>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-d">
+  <h2 class="cap">Heavy display import — breaks: swaps VT323 for Bungee (Google Fonts) in the mark itself, the one thing the system says stays VT323</h2>
+  <div class="stage">
+    <div class="v3-mark">ARCADE404<small>// ERROR GAME NOT FOUND</small></div>
+  </div>
+</article>
+
+<article class="card lot-d">
+  <h2 class="cap">Drawn, not typed — breaks: 404 is not set in any typeface at all, it's built pixel-by-pixel from CSS box-shadow squares</h2>
+  <div class="stage">
+    <div>
+      <div class="v4-row">
+        <div class="v4-digit"><div class="v4-px p4"></div></div>
+        <div class="v4-digit"><div class="v4-px p0"></div></div>
+        <div class="v4-digit"><div class="v4-px p4"></div></div>
+      </div>
+      <div class="v4-cap">ARCADE</div>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-d">
+  <h2 class="cap">Torn signal — breaks: the mark is sliced into three misaligned bands, refusing to sit as one continuous line of type</h2>
+  <div class="stage">
+    <div class="v5-wrap">
+      <div class="v5-slice v5-s1">ARCADE404</div>
+      <div class="v5-slice v5-s2">ARCADE404</div>
+      <div class="v5-slice v5-s3">ARCADE404</div>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-d">
+  <h2 class="cap">Negative image — breaks: inverts the ground/figure contract — a solid amber field in the chrome, with the name knocked out in page-black instead of amber text on dark</h2>
+  <div class="stage">
+    <div class="v6-block"><div class="v6-mark">ARCADE404</div></div>
+  </div>
+</article>

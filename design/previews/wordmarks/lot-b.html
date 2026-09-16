@@ -1,0 +1,254 @@
+<style>
+.lot-b .stage {
+  font-family: "VT323", monospace;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4em;
+  padding: 2.2em 1em;
+  background: var(--p-ground);
+  color: var(--p-amber);
+}
+.lot-b .stage * { font-family: inherit; }
+
+/* shared name treatment */
+.lot-b .name {
+  font-size: 3rem;
+  letter-spacing: 0.04em;
+  color: var(--p-amber);
+  text-shadow: var(--bloom);
+  line-height: 1;
+}
+
+/* 1: inline comment tail, one line */
+.lot-b .v-inline .name {
+  font-size: 2.2rem;
+}
+.lot-b .v-inline .lockup {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.35em;
+  text-align: center;
+}
+.lot-b .v-inline .tail {
+  font-size: 1.15rem;
+  color: var(--p-dim);
+  letter-spacing: 0.03em;
+}
+
+/* 2: subtitle underneath, dim */
+.lot-b .v-subtitle .lockup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25em;
+}
+.lot-b .v-subtitle .tail {
+  font-size: 1.05rem;
+  color: var(--p-dim);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* 3: http status framing */
+.lot-b .v-http .lockup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5em;
+}
+.lot-b .v-http .status-line {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5em;
+  padding: 0.3em 0.9em;
+  border: 1px solid var(--p-rule);
+  background: var(--p-panel);
+}
+.lot-b .v-http .code {
+  font-size: 1.6rem;
+  color: var(--p-pale);
+  text-shadow: var(--bloom);
+}
+.lot-b .v-http .reason {
+  font-size: 1.15rem;
+  color: var(--p-soft);
+  letter-spacing: 0.06em;
+}
+
+/* 4: terminal transcript */
+.lot-b .v-term .lockup {
+  width: 100%;
+  max-width: 22em;
+  text-align: left;
+  background: var(--p-panel);
+  border: 1px solid var(--p-hairline);
+  padding: 0.9em 1em;
+}
+.lot-b .v-term .line {
+  display: flex;
+  gap: 0.5em;
+  font-size: 1.2rem;
+  line-height: 1.5;
+}
+.lot-b .v-term .prompt { color: var(--p-rule); }
+.lot-b .v-term .typed { color: var(--p-amber); }
+.lot-b .v-term .err { color: var(--p-dim); padding-left: 1.7em; }
+.lot-b .v-term .cursor {
+  display: inline-block;
+  width: 0.55em;
+  height: 1em;
+  background: var(--p-amber);
+  margin-left: 0.15em;
+  vertical-align: -0.15em;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .lot-b .v-term .cursor { animation: lot-b-blink 1s steps(1) infinite; }
+}
+@keyframes lot-b-blink { 50% { opacity: 0; } }
+
+/* 5: url / path form */
+.lot-b .v-path .lockup {
+  font-size: 1.5rem;
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+.lot-b .v-path .host { color: var(--p-amber); text-shadow: var(--bloom); }
+.lot-b .v-path .slash { color: var(--p-rule); }
+.lot-b .v-path .code { color: var(--p-pale); }
+.lot-b .v-path .seg { color: var(--p-dim); }
+
+/* 6: inverted, error is the big element */
+.lot-b .v-invert .lockup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15em;
+}
+.lot-b .v-invert .big404 {
+  font-size: 4.2rem;
+  color: var(--p-pale);
+  text-shadow: var(--bloom-lg);
+  line-height: 0.9;
+  letter-spacing: 0.02em;
+}
+.lot-b .v-invert .small-name {
+  font-size: 1.1rem;
+  color: var(--p-dim);
+  letter-spacing: 0.1em;
+}
+.lot-b .v-invert .small-tail {
+  font-size: 0.95rem;
+  color: var(--p-dim);
+  opacity: 0.8;
+  letter-spacing: 0.06em;
+}
+
+/* 7: status readout, label/value */
+.lot-b .v-readout .lockup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6em;
+}
+.lot-b .v-readout .readout {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6em;
+  padding: 0.25em 0.9em;
+  border-top: 1px solid var(--p-hairline);
+  border-bottom: 1px solid var(--p-hairline);
+}
+.lot-b .v-readout .label {
+  font-size: 1rem;
+  color: var(--p-rule);
+  letter-spacing: 0.12em;
+}
+.lot-b .v-readout .value {
+  font-size: 1.15rem;
+  color: var(--p-soft);
+  letter-spacing: 0.08em;
+}
+</style>
+
+<article class="card lot-b">
+  <h2 class="cap">Inline comment — the owner's line, set as one row</h2>
+  <div class="stage v-inline">
+    <div class="lockup">
+      <span class="name">ARCADE404</span>
+      <span class="tail">// ERROR GAME NOT FOUND</span>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-b">
+  <h2 class="cap">Subtitle — name carries it, tail rides dim underneath</h2>
+  <div class="stage v-subtitle">
+    <div class="lockup">
+      <span class="name">ARCADE404</span>
+      <span class="tail">error game not found</span>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-b">
+  <h2 class="cap">HTTP framing — name above a server-response line</h2>
+  <div class="stage v-http">
+    <div class="lockup">
+      <span class="name">ARCADE404</span>
+      <div class="status-line">
+        <span class="code">404</span>
+        <span class="reason">GAME NOT FOUND</span>
+      </div>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-b">
+  <h2 class="cap">Terminal transcript — typed, then the error returns</h2>
+  <div class="stage v-term">
+    <div class="lockup">
+      <div class="line">
+        <span class="prompt">&gt;</span>
+        <span class="typed">arcade404<span class="cursor"></span></span>
+      </div>
+      <div class="err">error: game not found</div>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-b">
+  <h2 class="cap">Path form — the domain resolving to its own error</h2>
+  <div class="stage v-path">
+    <div class="lockup">
+      <span class="host">arcade404.com</span><span class="slash">/</span><span class="seg">play</span><span class="slash">/</span><span class="code">404</span>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-b">
+  <h2 class="cap">Inverted — the error is loud, the name rides small</h2>
+  <div class="stage v-invert">
+    <div class="lockup">
+      <span class="big404">404</span>
+      <span class="small-name">ARCADE404</span>
+      <span class="small-tail">game not found</span>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-b">
+  <h2 class="cap">Status readout — label/value, like a diagnostic line</h2>
+  <div class="stage v-readout">
+    <div class="lockup">
+      <span class="name" style="font-size:2.4rem;">ARCADE404</span>
+      <div class="readout">
+        <span class="label">STATUS:</span>
+        <span class="value">GAME NOT FOUND</span>
+      </div>
+    </div>
+  </div>
+</article>
