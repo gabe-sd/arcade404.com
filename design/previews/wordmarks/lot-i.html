@@ -1,0 +1,321 @@
+<style>
+.lot-i .stage {
+  background: var(--p-ground);
+  padding: 48px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  font-family: "VT323", monospace;
+}
+
+/* ---------- v1: the dying tube ---------- */
+.lot-i .v1 {
+  position: relative;
+  font-size: 52px;
+  letter-spacing: 0.06em;
+  color: var(--p-rule);
+  text-shadow: none;
+}
+.lot-i .v1 .tail {
+  color: var(--p-hairline);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .lot-i .v1 { animation: lot-i-dying 7s ease-in-out infinite; }
+}
+@keyframes lot-i-dying {
+  0%, 100% { color: var(--p-rule); text-shadow: none; }
+  50% { color: var(--p-dim); text-shadow: 0 0 6px rgba(255,176,0,0.15); }
+}
+.lot-i .v1.peak { color: var(--p-dim); text-shadow: 0 0 6px rgba(255,176,0,0.15); }
+.lot-i .v1.peak .tail { color: var(--p-hairline); }
+
+/* ---------- v2: something behind it ---------- */
+.lot-i .v2 {
+  position: relative;
+  width: 100%;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.lot-i .v2 .ghost {
+  position: absolute;
+  font-size: 68px;
+  color: var(--p-hairline);
+  opacity: 0.35;
+  left: 50%;
+  top: 55%;
+  transform: translate(-46%, -50%) scale(1.15);
+  letter-spacing: 0.08em;
+  filter: blur(0.4px);
+}
+.lot-i .v2 .front {
+  position: relative;
+  font-size: 44px;
+  color: var(--p-amber);
+  text-shadow: var(--bloom);
+  letter-spacing: 0.05em;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .lot-i .v2 .ghost { animation: lot-i-drift 9s ease-in-out infinite; }
+}
+@keyframes lot-i-drift {
+  0%, 100% { transform: translate(-46%, -50%) scale(1.15); opacity: 0.35; }
+  50% { transform: translate(-44%, -52%) scale(1.17); opacity: 0.5; }
+}
+.lot-i .v2.peak .ghost { transform: translate(-44%, -52%) scale(1.17); opacity: 0.5; }
+
+/* ---------- v3: the watcher ---------- */
+.lot-i .v3 {
+  position: relative;
+  font-size: 52px;
+  letter-spacing: 0.05em;
+  color: var(--p-amber);
+  text-shadow: var(--bloom);
+}
+.lot-i .v3 .eyes {
+  position: absolute;
+  top: 46%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  gap: 22px;
+  pointer-events: none;
+}
+.lot-i .v3 .eyes span {
+  width: 7px;
+  height: 4px;
+  background: var(--p-ground);
+  border-radius: 1px;
+  box-shadow: 0 0 3px rgba(0,0,0,0.9);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .lot-i .v3 .eyes span { animation: lot-i-blink 8s ease-in-out infinite; }
+}
+@keyframes lot-i-blink {
+  0%, 92%, 100% { height: 4px; }
+  95% { height: 1px; }
+}
+.lot-i .v3.peak .eyes span { height: 1px; }
+
+/* ---------- v4: the slow approach ---------- */
+.lot-i .v4 {
+  font-size: 46px;
+  letter-spacing: 0.05em;
+  color: var(--p-soft);
+  text-shadow: 0 0 3px rgba(242,188,98,0.2);
+  display: inline-block;
+  transform: scale(1);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .lot-i .v4 { animation: lot-i-creep 20s linear infinite; }
+}
+@keyframes lot-i-creep {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.6); }
+}
+.lot-i .v4.peak { transform: scale(1.6); }
+
+/* ---------- v5: the flicker that stops ---------- */
+.lot-i .v5 {
+  font-size: 50px;
+  letter-spacing: 0.05em;
+  color: var(--p-amber);
+  text-shadow: var(--bloom);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .lot-i .v5 { animation: lot-i-die 10s steps(1, end) infinite; }
+}
+@keyframes lot-i-die {
+  0%, 79% { color: var(--p-amber); text-shadow: var(--bloom); }
+  80%, 90% { color: var(--p-ground); text-shadow: none; }
+  91%, 100% { color: var(--p-amber); text-shadow: var(--bloom); }
+}
+.lot-i .v5.peak { color: var(--p-ground); text-shadow: none; }
+
+/* ---------- v6: breathing glow ---------- */
+.lot-i .v6 {
+  font-size: 50px;
+  letter-spacing: 0.05em;
+  color: var(--p-pale);
+  text-shadow: var(--bloom);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .lot-i .v6 { animation: lot-i-breathe 8s ease-in-out infinite; }
+}
+@keyframes lot-i-breathe {
+  0%, 100% { text-shadow: 0 0 4px rgba(255,176,0,0.25); }
+  50% { text-shadow: var(--bloom-lg); }
+}
+.lot-i .v6.peak { text-shadow: var(--bloom-lg); }
+
+/* ---------- v7: the long shadow ---------- */
+.lot-i .v7 {
+  font-size: 50px;
+  letter-spacing: 0.05em;
+  color: var(--p-soft);
+  text-shadow:
+    2px 3px 0 var(--p-hairline),
+    4px 6px 0 var(--p-hairline),
+    6px 9px 0 var(--p-hairline),
+    8px 12px 0 var(--p-hairline),
+    10px 15px 2px rgba(0,0,0,0.6);
+}
+.lot-i .v7.peak { text-shadow:
+    2px 3px 0 var(--p-hairline),
+    4px 6px 0 var(--p-hairline),
+    6px 9px 0 var(--p-hairline),
+    8px 12px 0 var(--p-hairline),
+    10px 15px 2px rgba(0,0,0,0.6); }
+
+/* ---------- v8: wrong spacing ---------- */
+.lot-i .v8 {
+  font-size: 50px;
+  letter-spacing: 0.05em;
+  color: var(--p-amber);
+  text-shadow: var(--bloom);
+}
+.lot-i .v8 .off {
+  display: inline-block;
+  transform: translateY(6px);
+  margin-left: 0.14em;
+}
+.lot-i .v8.peak .off { transform: translateY(6px); }
+
+/* ---------- v9: scratched into the dark ---------- */
+.lot-i .v9 {
+  font-size: 50px;
+  letter-spacing: 0.05em;
+  color: var(--p-ground);
+  background: var(--p-ground);
+  -webkit-text-stroke: 1px var(--p-rule);
+  text-shadow: 0 0 2px rgba(255,176,0,0.3);
+}
+.lot-i .v9.peak { -webkit-text-stroke: 1px var(--p-amber); text-shadow: 0 0 4px rgba(255,176,0,0.5); }
+@media (prefers-reduced-motion: no-preference) {
+  .lot-i .v9 { animation: lot-i-scratch 9s ease-in-out infinite; }
+}
+@keyframes lot-i-scratch {
+  0%, 100% { -webkit-text-stroke: 1px var(--p-rule); text-shadow: 0 0 2px rgba(255,176,0,0.3); }
+  50% { -webkit-text-stroke: 1px var(--p-amber); text-shadow: 0 0 4px rgba(255,176,0,0.5); }
+}
+
+/* ---------- v10: the last frame ---------- */
+.lot-i .v10 {
+  position: relative;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.lot-i .v10 .txt {
+  font-size: 50px;
+  letter-spacing: 0.05em;
+  color: var(--p-amber);
+  text-shadow: var(--bloom);
+  transform: scaleY(1);
+}
+.lot-i .v10 .line {
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: var(--p-amber);
+  box-shadow: var(--bloom);
+  opacity: 0;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .lot-i .v10 .txt { animation: lot-i-collapse 9s ease-in-out infinite; }
+  .lot-i .v10 .line { animation: lot-i-line 9s ease-in-out infinite; }
+}
+@keyframes lot-i-collapse {
+  0%, 70%, 100% { transform: scaleY(1); opacity: 1; }
+  78%, 92% { transform: scaleY(0.02); opacity: 0; }
+}
+@keyframes lot-i-line {
+  0%, 70%, 100% { opacity: 0; }
+  78%, 92% { opacity: 1; }
+}
+.lot-i .v10.peak .txt { transform: scaleY(0.02); opacity: 0; }
+.lot-i .v10.peak .line { opacity: 1; }
+</style>
+
+<article class="card lot-i">
+  <h2 class="cap">the dying tube — most of the mark swallowed by the ground, as if the power is nearly gone</h2>
+  <div class="stage">
+    <div class="v1 peak">arcade<span class="tail">404</span></div>
+  </div>
+</article>
+
+<article class="card lot-i">
+  <h2 class="cap">something behind it — a dimmer, misaligned copy of the name sitting deeper in the dark</h2>
+  <div class="stage">
+    <div class="v2 peak">
+      <span class="ghost">arcade404</span>
+      <span class="front">arcade404</span>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-i">
+  <h2 class="cap">the watcher — two unlit gaps in the letterforms that read as eyes once you notice them</h2>
+  <div class="stage">
+    <div class="v3 peak">
+      arcade404
+      <span class="eyes"><span></span><span></span></span>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-i">
+  <h2 class="cap">the slow approach — the mark creeps larger over 20s with no reset, as if coming closer</h2>
+  <div class="stage">
+    <span class="v4 peak">arcade404</span>
+  </div>
+</article>
+
+<article class="card lot-i">
+  <h2 class="cap">the flicker that stops — a steady lamp that dies for a full second, long enough to feel wrong, then returns</h2>
+  <div class="stage">
+    <div class="v5 peak">arcade404</div>
+  </div>
+</article>
+
+<article class="card lot-i">
+  <h2 class="cap">breathing glow — the bloom swells and fades on a slow human breathing rhythm</h2>
+  <div class="stage">
+    <div class="v6 peak">arcade404</div>
+  </div>
+</article>
+
+<article class="card lot-i">
+  <h2 class="cap">the long shadow — the letters cast a hard shadow into the dark as if a single bare light hangs above</h2>
+  <div class="stage">
+    <div class="v7 peak">arcade404</div>
+  </div>
+</article>
+
+<article class="card lot-i">
+  <h2 class="cap">wrong spacing — one character sitting fractionally low, barely perceptible, uncanny rather than broken</h2>
+  <div class="stage">
+    <div class="v8 peak">arcade40<span class="off">4</span></div>
+  </div>
+</article>
+
+<article class="card lot-i">
+  <h2 class="cap">scratched into the dark — the name gouged out of a black surface, thin bright edges where the phosphor shows through</h2>
+  <div class="stage">
+    <div class="v9 peak">arcade404</div>
+  </div>
+</article>
+
+<article class="card lot-i">
+  <h2 class="cap">the last frame — the mark collapses to a single line like an old tube switching off, then slowly reopens</h2>
+  <div class="stage">
+    <div class="v10 peak">
+      <span class="txt">arcade404</span>
+      <span class="line"></span>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,193 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nosifer&family=Special+Elite&display=swap');
+
+/* ---------- v1 : Emergency Red ---------- */
+.lot-j.v1 .stage{ display:flex; align-items:center; justify-content:center; padding:48px 32px; background:var(--p-ground); }
+.lot-j.v1 .mark{ font-family:"VT323",monospace; font-size:64px; letter-spacing:3px; color:#ff2b2b; text-shadow:0 0 6px rgba(255,40,40,.6),0 0 18px rgba(255,20,20,.4); }
+@media (prefers-reduced-motion: no-preference){
+  .lot-j.v1 .mark{ animation:v1pulse 3.4s ease-in-out infinite; }
+}
+@keyframes v1pulse{
+  0%,100%{ text-shadow:0 0 6px rgba(255,40,40,.6),0 0 18px rgba(255,20,20,.4); }
+  50%{ text-shadow:0 0 10px rgba(255,60,60,1),0 0 34px rgba(255,20,20,.85); }
+}
+.lot-j.v1.peak .mark{ animation:none; text-shadow:0 0 10px rgba(255,60,60,1),0 0 34px rgba(255,20,20,.85); }
+
+/* ---------- v2 : The Wrong Hue Creeping In ---------- */
+.lot-j.v2 .stage{ display:flex; align-items:center; justify-content:center; padding:48px 32px; background:var(--p-ground); }
+.lot-j.v2 .markwrap{ position:relative; display:inline-block; font-family:"VT323",monospace; font-size:64px; letter-spacing:2px; }
+.lot-j.v2 .base{ position:relative; display:block; white-space:nowrap; color:var(--p-amber); text-shadow:var(--bloom); }
+.lot-j.v2 .creep{ position:absolute; inset:0; display:block; white-space:nowrap; color:#6bff4a; text-shadow:0 0 10px #3a7d1e; clip-path:inset(0 100% 0 0); }
+@media (prefers-reduced-motion: no-preference){
+  .lot-j.v2 .creep{ animation:v2creep 9s ease-in-out infinite; }
+}
+@keyframes v2creep{
+  0%,15%{ clip-path:inset(0 100% 0 0); }
+  45%,55%{ clip-path:inset(0 55% 0 0); }
+  85%,100%{ clip-path:inset(0 100% 0 0); }
+}
+.lot-j.v2.peak .creep{ animation:none; clip-path:inset(0 55% 0 0); }
+
+/* ---------- v3 : Bone ---------- */
+.lot-j.v3 .stage{ display:flex; align-items:center; justify-content:center; padding:48px 32px; background:#000; }
+.lot-j.v3 .mark{ font-family:"VT323",monospace; font-size:64px; letter-spacing:2px; color:#f2f0e6; text-shadow:none; }
+@media (prefers-reduced-motion: no-preference){
+  .lot-j.v3 .mark{ animation:v3flicker 14s linear infinite; }
+}
+@keyframes v3flicker{
+  0%,96%,100%{ opacity:1; }
+  97%{ opacity:.55; }
+  98%{ opacity:.9; }
+  99%{ opacity:.6; }
+}
+.lot-j.v3.peak .mark{ animation:none; opacity:.55; }
+
+/* ---------- v4 : Wet ---------- */
+.lot-j.v4 .stage{ display:flex; align-items:center; justify-content:center; padding:56px 32px; background:var(--p-ground); }
+.lot-j.v4 .markwrap{ position:relative; display:inline-block; }
+.lot-j.v4 .mark{ display:block; font-family:"VT323",monospace; font-size:64px; letter-spacing:2px; color:#d94a33; text-shadow:0 0 8px rgba(120,10,0,.5); }
+.lot-j.v4 .drip{ position:absolute; top:76%; width:5px; background:linear-gradient(to bottom, #7a0000, rgba(122,0,0,0)); border-radius:0 0 3px 3px; transform-origin:top center; transform:scaleY(.15); }
+.lot-j.v4 .d1{ left:10%; height:60px; }
+.lot-j.v4 .d2{ left:47%; height:80px; }
+.lot-j.v4 .d3{ left:83%; height:56px; }
+@media (prefers-reduced-motion: no-preference){
+  .lot-j.v4 .drip{ animation:v4drip 10s ease-in-out infinite; }
+  .lot-j.v4 .d2{ animation-delay:1.5s; }
+  .lot-j.v4 .d3{ animation-delay:3s; }
+}
+@keyframes v4drip{
+  0%,20%{ transform:scaleY(.15); }
+  60%,80%{ transform:scaleY(1); }
+  100%{ transform:scaleY(.15); }
+}
+.lot-j.v4.peak .drip{ animation:none; transform:scaleY(1); }
+
+/* ---------- v5 : The Carved Face ---------- */
+.lot-j.v5 .stage{ display:flex; align-items:center; justify-content:center; padding:56px 32px; background:#0a0806; }
+.lot-j.v5 .mark{ font-family:"Nosifer","Creepster",cursive; font-size:36px; letter-spacing:1px; color:#120b06; text-shadow:0 0 2px rgba(140,180,255,.9),0 0 10px rgba(90,150,255,.6),0 0 34px rgba(60,110,220,.4); }
+@media (prefers-reduced-motion: no-preference){
+  .lot-j.v5 .mark{ animation:v5flicker 6s ease-in-out infinite; }
+}
+@keyframes v5flicker{
+  0%,100%{ text-shadow:0 0 2px rgba(140,180,255,.9),0 0 10px rgba(90,150,255,.6),0 0 34px rgba(60,110,220,.4); }
+  50%{ text-shadow:0 0 3px rgba(140,180,255,1),0 0 16px rgba(90,150,255,.85),0 0 46px rgba(60,110,220,.6); }
+}
+.lot-j.v5.peak .mark{ animation:none; text-shadow:0 0 3px rgba(140,180,255,1),0 0 16px rgba(90,150,255,.85),0 0 46px rgba(60,110,220,.6); }
+
+/* ---------- v6 : Decay ---------- */
+.lot-j.v6 .stage{ display:flex; align-items:center; justify-content:center; padding:48px 32px; background:var(--p-ground); }
+.lot-j.v6 .markwrap{ position:relative; display:inline-block; }
+.lot-j.v6 .mark{ display:block; font-family:"VT323",monospace; font-size:66px; letter-spacing:3px; color:var(--p-amber); text-shadow:var(--bloom); }
+.lot-j.v6 .hole{ position:absolute; border-radius:50%; background:radial-gradient(circle, #16280f 0%, #0a0704 70%); box-shadow:inset 0 0 6px rgba(0,0,0,.85); transform:scale(.7); }
+.lot-j.v6 .h1{ width:14px; height:14px; left:19%; top:30%; }
+.lot-j.v6 .h2{ width:20px; height:20px; left:53%; top:55%; }
+.lot-j.v6 .h3{ width:11px; height:11px; left:74%; top:25%; }
+.lot-j.v6 .h4{ width:16px; height:16px; left:90%; top:50%; }
+@media (prefers-reduced-motion: no-preference){
+  .lot-j.v6 .hole{ animation:v6rot 11s ease-in-out infinite; }
+  .lot-j.v6 .h2{ animation-delay:1.2s; }
+  .lot-j.v6 .h3{ animation-delay:2.4s; }
+  .lot-j.v6 .h4{ animation-delay:.6s; }
+}
+@keyframes v6rot{
+  0%,20%{ transform:scale(.55); opacity:.7; }
+  55%,75%{ transform:scale(1.1); opacity:1; }
+  100%{ transform:scale(.55); opacity:.7; }
+}
+.lot-j.v6.peak .hole{ animation:none; transform:scale(1.1); opacity:1; }
+
+/* ---------- v7 : The Negative ---------- */
+.lot-j.v7 .stage{ display:flex; align-items:center; justify-content:center; padding:48px 32px; background:#efe6d2; }
+.lot-j.v7 .mark{ font-family:"VT323",monospace; font-size:64px; letter-spacing:3px; color:#1c1208; text-shadow:none; }
+@media (prefers-reduced-motion: no-preference){
+  .lot-j.v7 .mark{ animation:v7weave 13s linear infinite; }
+}
+@keyframes v7weave{
+  0%,92%,100%{ transform:translate(0,0); }
+  94%{ transform:translate(1px,-1px); }
+  96%{ transform:translate(-1px,0); }
+}
+.lot-j.v7.peak .mark{ animation:none; transform:translate(1px,-1px); }
+
+/* ---------- v8 : Candlelight ---------- */
+.lot-j.v8 .stage{ position:relative; display:flex; align-items:center; justify-content:center; padding:64px 32px 48px; background:#0a0704; overflow:hidden; }
+.lot-j.v8 .glow{ position:absolute; left:50%; bottom:14px; width:420px; height:170px; transform:translateX(-50%) scale(1); background:radial-gradient(ellipse at center, rgba(255,170,80,.55), rgba(255,120,40,.15) 45%, transparent 70%); filter:blur(6px); }
+.lot-j.v8 .mark{ position:relative; display:block; text-align:center; font-family:"Special Elite","Courier New",monospace; font-size:38px; letter-spacing:2px; color:#f2d6a4; text-shadow:0 6px 16px rgba(255,150,60,.55), 0 2px 2px rgba(255,120,40,.5), 0 -3px 0 rgba(0,0,0,.65), 0 -16px 24px rgba(0,0,0,.6); }
+@media (prefers-reduced-motion: no-preference){
+  .lot-j.v8 .glow{ animation:v8flickerA 4.2s ease-in-out infinite, v8flickerB 5.7s ease-in-out infinite; }
+}
+@keyframes v8flickerA{ 0%,100%{ opacity:.85; } 50%{ opacity:1; } }
+@keyframes v8flickerB{ 0%,100%{ transform:translateX(-50%) scale(1); } 50%{ transform:translateX(-50%) scale(1.06); } }
+.lot-j.v8.peak .glow{ animation:none; opacity:1; transform:translateX(-50%) scale(1.06); }
+</style>
+
+<article class="card lot-j v1">
+  <h2 class="cap">Emergency Red — restrained enough to ship as an accent. breaks: amber replaced wholesale by a deep signal red that is in no token</h2>
+  <div class="stage">
+    <div class="mark">ARCADE404</div>
+  </div>
+</article>
+
+<article class="card lot-j v2">
+  <h2 class="cap">The Wrong Hue Creeping In — breaks: a sick green outside the guest-hue set, bleeding into chrome that is normally amber-only</h2>
+  <div class="stage">
+    <div class="markwrap">
+      <span class="base">ARCADE404</span>
+      <span class="creep" aria-hidden="true">ARCADE404</span>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-j v3">
+  <h2 class="cap">Bone — restrained enough to ship as an accent. breaks: pure black ground and a flat dead white with the phosphor bloom removed entirely</h2>
+  <div class="stage">
+    <div class="mark">arcade404</div>
+  </div>
+</article>
+
+<article class="card lot-j v4">
+  <h2 class="cap">Wet — breaks: a deep arterial red, in no token, bleeding downward off the letters</h2>
+  <div class="stage">
+    <div class="markwrap">
+      <span class="mark">ARCADE404</span>
+      <span class="drip d1" aria-hidden="true"></span>
+      <span class="drip d2" aria-hidden="true"></span>
+      <span class="drip d3" aria-hidden="true"></span>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-j v5">
+  <h2 class="cap">The Carved Face — legible but slower to read than the rest of the lot. breaks: swaps VT323 for a heavy display face (Nosifer) and lights the mark with a cold blue backlight instead of amber</h2>
+  <div class="stage">
+    <div class="mark">ARCADE404</div>
+  </div>
+</article>
+
+<article class="card lot-j v6">
+  <h2 class="cap">Decay — breaks: a diseased green showing through the ground wherever a letter has rotted out</h2>
+  <div class="stage">
+    <div class="markwrap">
+      <span class="mark">ARCADE404</span>
+      <span class="hole h1" aria-hidden="true"></span>
+      <span class="hole h2" aria-hidden="true"></span>
+      <span class="hole h3" aria-hidden="true"></span>
+      <span class="hole h4" aria-hidden="true"></span>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-j v7">
+  <h2 class="cap">The Negative — breaks: chrome inverted outright, a bright parchment ground with dark letters and no phosphor glow anywhere</h2>
+  <div class="stage">
+    <div class="mark">ARCADE404</div>
+  </div>
+</article>
+
+<article class="card lot-j v8">
+  <h2 class="cap">Candlelight — legible, but nothing about it reads as a screen any more. breaks: a warm firelight palette and a typewriter face (Special Elite) in place of amber and VT323</h2>
+  <div class="stage">
+    <div class="glow" aria-hidden="true"></div>
+    <div class="mark">arcade404</div>
+  </div>
+</article>

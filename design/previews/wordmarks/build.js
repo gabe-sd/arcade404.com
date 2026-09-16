@@ -13,6 +13,8 @@ const lots = [
   ['lot-h.html', 'Lot H — hybrids: the tear and the misconverged tube together'],
   ['lot-f.html', 'Lot F — the display failing: ten kinds of fault, none of them a tear'],
   ['lot-g.html', 'Lot G — the error as meaning: the mark behaving like software reporting a fault'],
+  ['lot-i.html', 'Lot I — horror inside the amber palette: no colour that is not already a token'],
+  ['lot-j.html', 'Lot J — horror that breaks the palette, and says what it broke'],
 ];
 
 const sections = lots
