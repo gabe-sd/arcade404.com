@@ -62,19 +62,22 @@
   );
 }
 
+/* Deliberately the hub's `.screen` geometry, to the pixel: same max-width, same
+   horizontal padding, same padding-top. The wordmark sits in the top-left corner
+   of both, and if these two disagree it visibly jumps as you move between them.
+   Change one and change the other. */
 .game-in {
   position: relative;
-  max-width: 1120px;
+  max-width: 1080px;
   margin: 0 auto;
-  padding: 1.4rem 1.6rem 2rem;
+  padding: 2.6rem 1.8rem 2rem;
 }
 
 /* ---------- the head ---------- */
 
-/* Holds the shared header and the game's own title under it. It used to be a row
-   - breadcrumb on one side, title on the other - and carried the hairline that
-   separated the head of the page from the board. The header brings its own rule
-   now, so this only has to stack them. */
+/* Holds the shared header. It used to be a row of its own - breadcrumb on one
+   side, title on the other - and carried the hairline under the head of the
+   page; the header brings both now. */
 .game-top {
   display: flex;
   flex-direction: column;
@@ -262,11 +265,16 @@
   font-weight: 400;
 }
 
-@media (max-width: 620px) {
+/* The hub narrows at 760px, so this does too and at the same values - see
+   `.game-in` above, and `.screen` in hub.css. A different breakpoint here would
+   put the wordmark in two different places between 620px and 760px. */
+@media (max-width: 760px) {
   .game-in {
-    padding: 1.1rem 1rem 1.6rem;
+    padding: 1.8rem 1.1rem 2.6rem;
   }
+}
 
+@media (max-width: 620px) {
   .game-title {
     font-size: 1.7rem;
   }

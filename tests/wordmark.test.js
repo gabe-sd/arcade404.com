@@ -81,6 +81,38 @@ const pages = ["/", "/about/"].concat(games.map((g) => `/games/${g}/`));
     await page.close();
   }
 
+  // --- the mark does not move between pages --------------------------------
+  // It sits in the top-left corner of every page, and the frame it sits in is
+  // defined twice - `.screen` in hub.css, `.game-in` in game.css. They drifted
+  // apart once already: 23px across and 20px down, enough to see the mark jump
+  // as you moved from the hub into a game. Checked at more than one width
+  // because the two frames also narrow at their own breakpoints.
+  {
+    const widths = [1440, 1000, 700];
+    for (const width of widths) {
+      const context = await browser.newContext({ viewport: { width, height: 800 } });
+      const page = await context.newPage();
+      const spots = [];
+      for (const p of pages) {
+        await page.goto(url(p));
+        await page.evaluate(() => document.fonts && document.fonts.ready);
+        const box = await page.evaluate(() => {
+          const r = document.querySelector("a.brand").getBoundingClientRect();
+          return { x: Math.round(r.x), y: Math.round(r.y) };
+        });
+        spots.push({ page: p, ...box });
+      }
+      const first = spots[0];
+      const adrift = spots.filter((s) => s.x !== first.x || s.y !== first.y);
+      check(`at ${width}px the wordmark is in the same place on all eight pages`,
+        adrift.length === 0,
+        adrift.length
+          ? adrift.map((s) => `${s.page} ${s.x},${s.y} vs ${first.x},${first.y}`).join(" | ")
+          : `${first.x},${first.y}`);
+      await context.close();
+    }
+  }
+
   // --- the name survives with the script absent ----------------------------
   // The mark is text in the HTML; the script only ever adds to it. If that ever
   // stops being true the site loses its own name whenever the file 404s.
