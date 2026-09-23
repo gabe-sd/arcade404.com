@@ -439,18 +439,22 @@ stylesheet, so a game can override anything in it and
 | Frame | `.game-in`, max-width 1120px, padding `1.4rem 1.6rem 2rem` |
 | Wash | `.game-deco`, z-index 0 — amber bloom off the top, vignette into the corners |
 | Scanlines | `.game-crt`, z-index 6 — `rgba(0,0,0,.34)` 1px every 3px |
-| Header | `.top` from `shared.css` — the same wordmark and nav the hub wears, at the same size |
+| Header | `.top` from `shared.css` — the wordmark left, the game's own title right |
 | Title | `.game-title`, 2.1rem (1.7rem under 620px), `--p-hot`, `--bloom-lg`, letter-spacing 0.09em |
 | Head rule | 1px `--p-hairline` under the top row |
 | Status strap | `.game-strap`, 1.22rem, `--p-pale`, with the hub's fading block cursor |
 | Stage | `.game-stage`, z-index 7 — the board, lifted clear of the scanlines |
-| Foot | `.game-foot`, 1rem, `--p-dim`, 1px `--p-hairline` above, two columns that stack under 620px |
+| Foot | `.game-foot`, 1rem, `--p-dim`, 1px `--p-hairline` above, two columns that stack under 620px, with `.site-nav` on a row of its own beneath them |
 
 Three rules under it:
 
 - **Chrome against screen, in z-index terms.** The wash is 0, the scanlines are
   6, the board is 7 with its own opaque ground. A scanline over a chess hairline
   or a Sudoku digit is texture bought at the price of reading the game.
+- **There is no nav in the header, and no Home link anywhere.** About and GitHub
+  sit in the footer of all eight pages, on a line of their own; Home was a second
+  copy of what the wordmark already does. Gabriel's call of 2026-09-22, which is
+  also what freed the top row for the game's title.
 - **The wordmark is the contract's link home**, on every page that has one. A
   game page used to carry a breadcrumb here instead — `← ARCADE / GAME NAME` —
   which said where you were as well as where you could go, but meant that moving

@@ -214,10 +214,14 @@ async function describe(button) {
       deco: !!document.querySelector(".game-deco"),
       crt: !!document.querySelector(".game-crt"),
       inner: !!document.querySelector(".game-in"),
-      // The same header the hub and about page wear: the wordmark, and the nav
-      // beside it. A game page used to carry a breadcrumb here instead, which
-      // is what made arriving from the hub feel like a different site.
-      header: !!document.querySelector(".game-top header.top .nav"),
+      // The same header the hub and about page wear. A game page used to carry
+      // a breadcrumb here instead, which is what made arriving from the hub
+      // feel like a different site.
+      header: !!document.querySelector(".game-top header.top a.brand"),
+      // About and GitHub live in the footer on every page, and there is no Home
+      // link anywhere: the wordmark is the way home.
+      footNav: !!document.querySelector(".game-foot .site-nav a[href$='about/']"),
+      noHomeLink: !document.querySelector(".site-nav a[href='../../']"),
       // The wordmark *is* the contract's link home on a framed page - it is the
       // element that carries the href, not the mark inside it.
       home: document.querySelector("a.brand")?.getAttribute("href") ?? null,
