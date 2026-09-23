@@ -278,14 +278,9 @@ Each game page follows a contract that `shared.css` depends on:
   `shared.css` gives `.status` a reserved min-height so its text can change without
   shifting the board.
 - Links back to `../../`, and the wordmark in the shared header (`a.brand`) is
-  what carries that link. Every page wears the same mark; each points at its
-  own way home, so the hub's is `./` and the about page's is `../`.
-- **Loads `../../wordmark.js`**, the root-level script that upgrades the plain
-  name in the header into the mark that faults. `tests/contract.test.js` does
-  catch a page that forgets it, but only by accident: what fails is the
-  assertion that the mark carries `role="img"`, and that attribute is applied
-  by the script at runtime. Move the role into the HTML and the guard stops
-  guarding without a word.
+  what carries that link.
+- **Loads `../../wordmark.js`**, the root-level script that turns the plain name
+  in the header into the mark that faults. `tests/contract.test.js` asserts it.
 - **Hands the focus back after a pointer click on its own buttons**, in any game
   whose keys drive play. A clicked button keeps the focus, and a focused button
   takes Space and Enter as its own activation — so the key that plays the game
