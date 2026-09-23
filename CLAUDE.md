@@ -264,7 +264,7 @@ Each game page follows a contract that `shared.css` depends on:
   then its own `style.css`. The order is load-bearing — the game's own sheet loads
   last so it can override the frame — and `tests/contract.test.js` asserts it.
   `shared.css` carries the tokens and the controls; `game.css` is the frame every
-  game page wears (`.game-page`, `.crumb`, `.game-title`, `.game-strap`,
+  game page wears (`.game-page`, `.game-title`, `.game-strap`,
   `.game-stage`, `.hud`, `.instructions`, `.game-foot`).
 - Uses the ids `#board`, `#status`, `#restart`. Game scripts look these up by id,
   and `shared.css` styles `.status`, `.btn` (with `.secondary` and `.icon`) and
