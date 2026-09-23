@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wordmark cycle — arcade404</title>
+<link rel="stylesheet" href="../../../shared.css">
+<link rel="stylesheet" href="cycle-fx.css">
+<style>
+  /* The page around the mark. Exploration only — none of this is the site. */
+  body {
+    margin: 0;
+    background: var(--p-ground);
+    color: var(--p-soft);
+    font-family: "VT323", monospace;
+    font-size: 18px;
+  }
+
+  .page {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 5rem;
+  }
+
+  .page > header {
+    border-bottom: 1px solid var(--p-hairline);
+    padding-bottom: 0.8rem;
+    margin-bottom: 1.6rem;
+  }
+
+  .page h1 {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    color: var(--p-amber);
+    text-shadow: var(--bloom);
+  }
+
+  .page header p {
+    margin: 0.3rem 0 0;
+    color: var(--p-desc);
+    font-size: 1.1rem;
+    max-width: 66ch;
+  }
+
+  /* The stage the mark sits on, sized so a tear has room to travel. */
+  .theatre {
+    border: 1px solid var(--p-hairline);
+    background: var(--p-panel);
+    padding: 3.4rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 210px;
+    overflow: hidden;
+  }
+
+  .readout {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    border: 1px solid var(--p-hairline);
+    border-top: 0;
+    padding: 0.45rem 0.8rem;
+    color: var(--p-dim);
+    font-size: 1.05rem;
+    letter-spacing: 0.04em;
+  }
+
+  .readout b { color: var(--p-amber); font-weight: 400; }
+
+  .panel {
+    margin-top: 1.6rem;
+    display: grid;
+    gap: 1.4rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+
+  fieldset {
+    border: 1px solid var(--p-hairline);
+    padding: 0.8rem 1rem 1rem;
+    margin: 0;
+  }
+
+  legend {
+    color: var(--p-rule);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-size: 0.95rem;
+    padding: 0 0.4rem;
+  }
+
+  button {
+    font-family: inherit;
+    font-size: 1.05rem;
+    letter-spacing: 0.06em;
+    color: var(--p-amber);
+    background: var(--p-panel-lit);
+    border: 1px solid var(--p-rule);
+    padding: 0.25rem 0.7rem;
+    cursor: pointer;
+  }
+
+  button:hover,
+  button:focus-visible {
+    color: var(--p-hot);
+    border-color: var(--p-amber);
+    outline: none;
+  }
+
+  button[aria-pressed="true"] {
+    color: var(--p-ground);
+    background: var(--p-amber);
+    border-color: var(--p-amber);
+  }
+
+  .row { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
+  .row + .row { margin-top: 0.7rem; }
+
+  label { color: var(--p-desc); }
+
+  input[type="range"] { accent-color: var(--p-amber); }
+
+  .fx-list { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .fx-list button { font-size: 1rem; }
+
+  .note { color: var(--p-desc); font-size: 1.05rem; max-width: 66ch; }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <h1>arcade404 — one mark, twelve faults</h1>
+    <p>The twelve effects you picked, rebuilt on a single wordmark so they can be
+       swapped by changing one class. Watch it idle, or drive it by hand below.</p>
+  </header>
+
+  <div class="theatre">
+    <!-- One mark. `.base` is the only layer in the normal flow: it sizes the box,
+         and its per-character spans are what the dead-cells fault needs. Every
+         other layer is an absolutely positioned copy, invisible until an effect
+         asks for it. -->
+    <div class="wm" id="wm">
+      <span class="base" aria-hidden="true"><span class="ch">A</span><span class="ch">R</span><span class="ch">C</span><span class="ch">A</span><span class="ch">D</span><span class="ch">E</span><span class="ch">4</span><span class="ch">0</span><span class="ch">4</span></span>
+      <span class="layer l1" aria-hidden="true">ARCADE404</span>
+      <span class="layer l2" aria-hidden="true">ARCADE404</span>
+      <span class="layer l3" aria-hidden="true">ARCADE404</span>
+      <span class="layer l4" aria-hidden="true">ARCADE404</span>
+      <span class="layer l5" aria-hidden="true">ARCADE404</span>
+      <span class="layer l6" aria-hidden="true">ARCADE404</span>
+      <span class="layer l7" aria-hidden="true">ARCADE404</span>
+      <span class="layer l8" aria-hidden="true">ARCADE404</span>
+      <span class="fringe fr1" aria-hidden="true">ARCADE404</span>
+      <span class="fringe fr2" aria-hidden="true">ARCADE404</span>
+      <span class="fringe fr3" aria-hidden="true">ARCADE404</span>
+      <span class="scan" aria-hidden="true"></span>
+      <span class="sr">arcade404</span>
+    </div>
+  </div>
+
+  <p class="readout">
+    <span>last fault: <b id="last">—</b></span>
+    <span>next in: <b id="next">—</b></span>
+    <span>fired: <b id="count">0</b></span>
+  </p>
+
+  <div class="panel">
+    <fieldset>
+      <legend>Behaviour</legend>
+      <div class="row">
+        <button type="button" id="mode-cycle" aria-pressed="true">Cycle</button>
+        <button type="button" id="mode-load" aria-pressed="false">Once per load</button>
+        <button type="button" id="reload">Reload</button>
+      </div>
+      <div class="row">
+        <label for="gap">calm between faults</label>
+        <input type="range" id="gap" min="1" max="20" step="1" value="6">
+        <span><b id="gap-val">6</b>s ± half</span>
+      </div>
+      <p class="note" id="mode-note">Cycling: a fault is picked at random, fires
+         once, and the mark goes quiet until the next one.</p>
+    </fieldset>
+
+    <fieldset>
+      <legend>Fire one by hand</legend>
+      <div class="fx-list" id="fx-list"></div>
+      <div class="row">
+        <button type="button" id="hold" aria-pressed="false">Hold the worst frame</button>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>In the pool</legend>
+      <div class="fx-list" id="pool-list"></div>
+      <p class="note">Untick one to keep it out of the random cycle. What is in the
+         pool is the real decision — the effects do not have to be equally likely.</p>
+    </fieldset>
+  </div>
+</div>
+<script src="cycle.js"></script>
+</body>
+</html>

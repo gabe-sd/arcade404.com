@@ -1,0 +1,342 @@
+/* One wordmark, twelve faults. Every effect is scoped as `.wm.fx-<name>` — the
+   effect class and `.wm` live on the same element. With only that class present
+   the mark is clean; `.glitch` runs the fault once; `.peak` freezes its worst
+   frame. Nothing here loops: every animation is `1` iteration and finishes
+   inside the window the harness holds `.glitch` for.
+
+   Shared trick used throughout: a band that needs to move independently of the
+   rest of the word is drawn twice — once by `.base` (always there, unclipped)
+   and once by a `.layer`/`.fringe` copy clipped to just that band. While an
+   effect runs, a `mask-image` on `.base` punches a hole where the moving copy
+   lives, so the two don't double-print; removing `.glitch`/`.peak` removes the
+   mask and the hole closes. Where a copy only ever adds colour on top (screen
+   blend, never displacing pixels), no hole is needed and `.base` stays whole
+   underneath it. */
+
+.wm {
+  position: relative;
+  display: inline-block;
+  font-family: "VT323", monospace;
+  font-size: 64px;
+  line-height: 1;
+  letter-spacing: 2px;
+  color: var(--p-amber);
+  text-shadow: var(--bloom);
+  white-space: nowrap;
+  user-select: none;
+}
+
+.wm .base {
+  /* Normal flow: this is what gives .wm its box. */
+}
+
+.wm .ch {
+  display: inline;
+  position: relative;
+}
+
+.wm .layer,
+.wm .fringe {
+  position: absolute;
+  inset: 0;
+  display: block;
+  margin: 0;
+  color: inherit;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.wm .scan {
+  position: absolute;
+  inset: 0;
+  display: block;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.wm .sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ===================================================================== */
+/* fx-quiet-tear — port of lot-e v1. One thin band across the middle slips
+   sideways once and snaps back. Reads clean almost always. */
+/* ===================================================================== */
+
+.wm.fx-quiet-tear.glitch .base,
+.wm.fx-quiet-tear.peak .base {
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 38%, transparent 38%, transparent 76%, black 76%, black 100%);
+  mask-image: linear-gradient(to bottom, black 0%, black 38%, transparent 38%, transparent 76%, black 76%, black 100%);
+}
+.wm.fx-quiet-tear.glitch .l1,
+.wm.fx-quiet-tear.peak .l1 {
+  clip-path: inset(38% 0 24% 0);
+  opacity: 1;
+}
+.wm.fx-quiet-tear.glitch .l1 { animation: wm-quiet-tear 420ms ease 1; }
+.wm.fx-quiet-tear.peak .l1 { animation: none; transform: translateX(9px); }
+@keyframes wm-quiet-tear {
+  0%   { transform: translateX(0); }
+  12%  { transform: translateX(9px); }
+  38%  { transform: translateX(9px); }
+  50%  { transform: translateX(-6px); }
+  62%  { transform: translateX(0); }
+  100% { transform: translateX(0); }
+}
+
+/* ===================================================================== */
+/* fx-six-thin-slices — port of lot-e v2. Six hairline bands; four of them
+   fire in a quick staggered burst, two stay put. */
+/* ===================================================================== */
+
+.wm.fx-six-thin-slices.glitch .base,
+.wm.fx-six-thin-slices.peak .base {
+  -webkit-mask-image: linear-gradient(to bottom,
+    transparent 0%, transparent 16.6667%,
+    black 16.6667%, black 33.3333%,
+    transparent 33.3333%, transparent 66.6667%,
+    black 66.6667%, black 83.3333%,
+    transparent 83.3333%, transparent 100%);
+  mask-image: linear-gradient(to bottom,
+    transparent 0%, transparent 16.6667%,
+    black 16.6667%, black 33.3333%,
+    transparent 33.3333%, transparent 66.6667%,
+    black 66.6667%, black 83.3333%,
+    transparent 83.3333%, transparent 100%);
+}
+.wm.fx-six-thin-slices.glitch .l1, .wm.fx-six-thin-slices.peak .l1 { clip-path: inset(0% 0 83.3333% 0); opacity: 1; }
+.wm.fx-six-thin-slices.glitch .l2, .wm.fx-six-thin-slices.peak .l2 { clip-path: inset(33.3333% 0 50% 0); opacity: 1; }
+.wm.fx-six-thin-slices.glitch .l3, .wm.fx-six-thin-slices.peak .l3 { clip-path: inset(50% 0 33.3333% 0); opacity: 1; }
+.wm.fx-six-thin-slices.glitch .l4, .wm.fx-six-thin-slices.peak .l4 { clip-path: inset(83.3333% 0 0% 0); opacity: 1; }
+.wm.fx-six-thin-slices.glitch .l1 { animation: wm-six-a 700ms steps(1, end) 1; }
+.wm.fx-six-thin-slices.glitch .l2 { animation: wm-six-b 700ms steps(1, end) 1; }
+.wm.fx-six-thin-slices.glitch .l3 { animation: wm-six-c 700ms steps(1, end) 1; }
+.wm.fx-six-thin-slices.glitch .l4 { animation: wm-six-d 700ms steps(1, end) 1; }
+.wm.fx-six-thin-slices.peak .l1 { animation: none; transform: translateX(7px); }
+.wm.fx-six-thin-slices.peak .l2 { animation: none; transform: translateX(-10px); }
+.wm.fx-six-thin-slices.peak .l3 { animation: none; transform: translateX(6px); }
+.wm.fx-six-thin-slices.peak .l4 { animation: none; transform: translateX(-7px); }
+@keyframes wm-six-a { 0% { transform: translateX(0); } 10% { transform: translateX(7px); } 25% { transform: translateX(7px); } 35%, 100% { transform: translateX(0); } }
+@keyframes wm-six-b { 0%, 25% { transform: translateX(0); } 35% { transform: translateX(-10px); } 50% { transform: translateX(-10px); } 60%, 100% { transform: translateX(0); } }
+@keyframes wm-six-c { 0%, 45% { transform: translateX(0); } 55% { transform: translateX(6px); } 70% { transform: translateX(6px); } 80%, 100% { transform: translateX(0); } }
+@keyframes wm-six-d { 0% { transform: translateX(0); } 10% { transform: translateX(-7px); } 25% { transform: translateX(-7px); } 35%, 100% { transform: translateX(0); } }
+
+/* ===================================================================== */
+/* fx-big-tear — port of lot-e v4. Two fat halves, one hard 30px snap that
+   briefly destroys the word entirely. */
+/* ===================================================================== */
+
+.wm.fx-big-tear.glitch .base,
+.wm.fx-big-tear.peak .base { opacity: 0; }
+.wm.fx-big-tear.glitch .l1, .wm.fx-big-tear.peak .l1 { clip-path: inset(0 0 50% 0); opacity: 1; }
+.wm.fx-big-tear.glitch .l2, .wm.fx-big-tear.peak .l2 { clip-path: inset(50% 0 0 0); opacity: 1; }
+.wm.fx-big-tear.glitch .l1 { animation: wm-big-tear-top 520ms steps(1, end) 1; }
+.wm.fx-big-tear.glitch .l2 { animation: wm-big-tear-bot 520ms steps(1, end) 1; }
+.wm.fx-big-tear.peak .l1 { animation: none; transform: translateX(-30px); }
+.wm.fx-big-tear.peak .l2 { animation: none; transform: translateX(30px); }
+@keyframes wm-big-tear-top { 0%, 60% { transform: translateX(0); } 62%, 78% { transform: translateX(-30px); } 80%, 100% { transform: translateX(0); } }
+@keyframes wm-big-tear-bot { 0%, 60% { transform: translateX(0); } 62%, 78% { transform: translateX(30px); } 80%, 100% { transform: translateX(0); } }
+
+/* ===================================================================== */
+/* fx-smear-fill — port of lot-e v5. Same middle-band tear as quiet-tear,
+   but the gap it opens fills with a dim trailing smear. */
+/* ===================================================================== */
+
+.wm.fx-smear-fill.glitch .base,
+.wm.fx-smear-fill.peak .base {
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 34%, transparent 34%, transparent 68%, black 68%, black 100%);
+  mask-image: linear-gradient(to bottom, black 0%, black 34%, transparent 34%, transparent 68%, black 68%, black 100%);
+}
+.wm.fx-smear-fill.glitch .l1, .wm.fx-smear-fill.peak .l1 { clip-path: inset(34% 0 32% 0); opacity: 1; }
+.wm.fx-smear-fill.glitch .fr1, .wm.fx-smear-fill.peak .fr1 { clip-path: inset(34% 0 32% 0); color: var(--p-dim); }
+.wm.fx-smear-fill.glitch .l1 { animation: wm-smear-band 700ms ease 1; }
+.wm.fx-smear-fill.glitch .fr1 { animation: wm-smear-ghost 700ms ease-out 1; }
+.wm.fx-smear-fill.peak .l1 { animation: none; transform: translateX(14px); }
+.wm.fx-smear-fill.peak .fr1 { animation: none; opacity: 0.6; transform: translateX(2px); }
+@keyframes wm-smear-band { 0% { transform: translateX(0); } 15% { transform: translateX(14px); } 40% { transform: translateX(14px); } 55%, 100% { transform: translateX(0); } }
+@keyframes wm-smear-ghost { 0% { opacity: 0; transform: translateX(0); } 15% { opacity: 0.8; transform: translateX(0); } 40% { opacity: 0.35; transform: translateX(4px); } 70%, 100% { opacity: 0; transform: translateX(0); } }
+
+/* ===================================================================== */
+/* fx-hue-shift-tear — port of lot-e v8. Same middle-band tear again, but
+   the displaced band jumps to a guest hue for the instant it's out. */
+/* ===================================================================== */
+
+.wm.fx-hue-shift-tear.glitch .base,
+.wm.fx-hue-shift-tear.peak .base {
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 36%, transparent 36%, transparent 70%, black 70%, black 100%);
+  mask-image: linear-gradient(to bottom, black 0%, black 36%, transparent 36%, transparent 70%, black 70%, black 100%);
+}
+.wm.fx-hue-shift-tear.glitch .l1, .wm.fx-hue-shift-tear.peak .l1 { clip-path: inset(36% 0 30% 0); opacity: 1; }
+.wm.fx-hue-shift-tear.glitch .l1 { animation: wm-hue-tear 420ms ease 1; }
+.wm.fx-hue-shift-tear.peak .l1 { animation: none; transform: translateX(11px); color: var(--p-coral); text-shadow: none; }
+@keyframes wm-hue-tear {
+  0%   { transform: translateX(0); color: var(--p-amber); text-shadow: var(--bloom); }
+  35%  { transform: translateX(11px); color: var(--p-coral); text-shadow: none; }
+  70%  { transform: translateX(11px); color: var(--p-coral); text-shadow: none; }
+  100% { transform: translateX(0); color: var(--p-amber); text-shadow: var(--bloom); }
+}
+
+/* ===================================================================== */
+/* fx-band-split-guns — port of lot-h lh-v1. Three bands, three guns: coral
+   top, amber middle, cyan bottom, screen-blended over the whole word. */
+/* ===================================================================== */
+
+.wm.fx-band-split-guns.glitch .l1, .wm.fx-band-split-guns.peak .l1 { clip-path: inset(0% 0 66% 0); color: var(--p-coral); mix-blend-mode: screen; }
+.wm.fx-band-split-guns.glitch .l2, .wm.fx-band-split-guns.peak .l2 { clip-path: inset(33% 0 33% 0); color: var(--p-amber); mix-blend-mode: screen; }
+.wm.fx-band-split-guns.glitch .l3, .wm.fx-band-split-guns.peak .l3 { clip-path: inset(66% 0 0% 0); color: var(--p-cyan); mix-blend-mode: screen; }
+.wm.fx-band-split-guns.glitch .l1 { animation: wm-guns-top 620ms steps(1, end) 1; }
+.wm.fx-band-split-guns.glitch .l2 { animation: wm-guns-mid 620ms steps(1, end) 1; }
+.wm.fx-band-split-guns.glitch .l3 { animation: wm-guns-bot 620ms steps(1, end) 1; }
+.wm.fx-band-split-guns.peak .l1 { animation: none; opacity: 1; transform: translateX(-10px); }
+.wm.fx-band-split-guns.peak .l2 { animation: none; opacity: 0.55; transform: translateX(0); }
+.wm.fx-band-split-guns.peak .l3 { animation: none; opacity: 1; transform: translateX(9px); }
+@keyframes wm-guns-top { 0% { opacity: 0; transform: translateX(0); } 20% { opacity: 1; transform: translateX(-10px); } 60% { opacity: 1; transform: translateX(6px); } 80%, 100% { opacity: 0; transform: translateX(0); } }
+@keyframes wm-guns-mid { 0% { opacity: 0; } 20%, 70% { opacity: 0.55; } 85%, 100% { opacity: 0; } }
+@keyframes wm-guns-bot { 0% { opacity: 0; transform: translateX(0); } 20% { opacity: 1; transform: translateX(9px); } 60% { opacity: 1; transform: translateX(-7px); } 80%, 100% { opacity: 0; transform: translateX(0); } }
+
+/* ===================================================================== */
+/* fx-standing-fringe — port of lot-h lh-v2. The source keeps a permanent
+   faint mis-registration; rule 1 forbids that here, so this ports it as the
+   event instead — the fringe opens out of nothing and closes again, and it
+   opens slower than the other faults so it reads as convergence drifting,
+   not tearing. */
+/* ===================================================================== */
+
+.wm.fx-standing-fringe.glitch .fr1, .wm.fx-standing-fringe.peak .fr1 { color: var(--p-coral); mix-blend-mode: screen; }
+.wm.fx-standing-fringe.glitch .fr2, .wm.fx-standing-fringe.peak .fr2 { color: var(--p-cyan); mix-blend-mode: screen; }
+.wm.fx-standing-fringe.glitch .fr1 { animation: wm-fringe-cr 700ms ease-in-out 1; }
+.wm.fx-standing-fringe.glitch .fr2 { animation: wm-fringe-cy 700ms ease-in-out 1; }
+.wm.fx-standing-fringe.peak .fr1 { animation: none; opacity: 0.9; transform: translateX(11px); }
+.wm.fx-standing-fringe.peak .fr2 { animation: none; opacity: 0.9; transform: translateX(-12px); }
+@keyframes wm-fringe-cr { 0% { opacity: 0; transform: translateX(0); } 40% { opacity: 0.9; transform: translateX(11px); } 70% { opacity: 0.9; transform: translateX(9px); } 100% { opacity: 0; transform: translateX(1px); } }
+@keyframes wm-fringe-cy { 0% { opacity: 0; transform: translateX(0); } 40% { opacity: 0.9; transform: translateX(-12px); } 70% { opacity: 0.9; transform: translateX(-8px); } 100% { opacity: 0; transform: translateX(-1px); } }
+
+/* ===================================================================== */
+/* fx-damage-only-colour — port of lot-h lh-v3. Clean amber everywhere;
+   colour only shows up inside the torn band itself. */
+/* ===================================================================== */
+
+.wm.fx-damage-only-colour.glitch .base,
+.wm.fx-damage-only-colour.peak .base {
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 38%, transparent 38%, transparent 62%, black 62%, black 100%);
+  mask-image: linear-gradient(to bottom, black 0%, black 38%, transparent 38%, transparent 62%, black 62%, black 100%);
+}
+.wm.fx-damage-only-colour.glitch .fr1, .wm.fx-damage-only-colour.peak .fr1 { clip-path: inset(38% 0 38% 0); color: var(--p-coral); mix-blend-mode: screen; }
+.wm.fx-damage-only-colour.glitch .fr2, .wm.fx-damage-only-colour.peak .fr2 { clip-path: inset(38% 0 38% 0); color: var(--p-cyan); mix-blend-mode: screen; }
+.wm.fx-damage-only-colour.glitch .fr1 { animation: wm-damage-cr 520ms steps(1, end) 1; }
+.wm.fx-damage-only-colour.glitch .fr2 { animation: wm-damage-cy 520ms steps(1, end) 1; }
+.wm.fx-damage-only-colour.peak .fr1 { animation: none; opacity: 1; transform: translateX(-13px); }
+.wm.fx-damage-only-colour.peak .fr2 { animation: none; opacity: 1; transform: translateX(13px); }
+@keyframes wm-damage-cr { 0%, 30% { opacity: 0; transform: translateX(0); } 40% { opacity: 1; transform: translateX(-13px); } 85% { opacity: 1; transform: translateX(-13px); } 95%, 100% { opacity: 0; transform: translateX(0); } }
+@keyframes wm-damage-cy { 0%, 30% { opacity: 0; transform: translateX(0); } 40% { opacity: 1; transform: translateX(13px); } 85% { opacity: 1; transform: translateX(13px); } 95%, 100% { opacity: 0; transform: translateX(0); } }
+
+/* ===================================================================== */
+/* fx-crossed-axes — port of lot-h lh-v4. The tear splits the word up/down
+   while the colour separation runs sideways across the whole thing. */
+/* ===================================================================== */
+
+.wm.fx-crossed-axes.glitch .base,
+.wm.fx-crossed-axes.peak .base { opacity: 0; }
+.wm.fx-crossed-axes.glitch .l1, .wm.fx-crossed-axes.peak .l1 { clip-path: inset(0 50% 0 0); opacity: 1; }
+.wm.fx-crossed-axes.glitch .l2, .wm.fx-crossed-axes.peak .l2 { clip-path: inset(0 0 0 50%); opacity: 1; }
+.wm.fx-crossed-axes.glitch .fr1, .wm.fx-crossed-axes.peak .fr1 { color: var(--p-coral); mix-blend-mode: screen; }
+.wm.fx-crossed-axes.glitch .fr2, .wm.fx-crossed-axes.peak .fr2 { color: var(--p-cyan); mix-blend-mode: screen; }
+.wm.fx-crossed-axes.glitch .l1 { animation: wm-cross-left 620ms steps(1, end) 1; }
+.wm.fx-crossed-axes.glitch .l2 { animation: wm-cross-right 620ms steps(1, end) 1; }
+.wm.fx-crossed-axes.glitch .fr1 { animation: wm-cross-cr 620ms steps(1, end) 1; }
+.wm.fx-crossed-axes.glitch .fr2 { animation: wm-cross-cy 620ms steps(1, end) 1; }
+.wm.fx-crossed-axes.peak .l1 { animation: none; transform: translateY(-7px); }
+.wm.fx-crossed-axes.peak .l2 { animation: none; transform: translateY(7px); }
+.wm.fx-crossed-axes.peak .fr1 { animation: none; opacity: 0.85; transform: translateX(-8px); }
+.wm.fx-crossed-axes.peak .fr2 { animation: none; opacity: 0.85; transform: translateX(8px); }
+@keyframes wm-cross-left  { 0%, 55% { transform: translateY(0); } 65%, 80% { transform: translateY(-7px); } 90%, 100% { transform: translateY(0); } }
+@keyframes wm-cross-right { 0%, 55% { transform: translateY(0); } 65%, 80% { transform: translateY(7px); } 90%, 100% { transform: translateY(0); } }
+@keyframes wm-cross-cr { 0%, 55% { opacity: 0; transform: translateX(0); } 65%, 80% { opacity: 0.85; transform: translateX(-8px); } 90%, 100% { opacity: 0; transform: translateX(0); } }
+@keyframes wm-cross-cy { 0%, 55% { opacity: 0; transform: translateX(0); } 65%, 80% { opacity: 0.85; transform: translateX(8px); } 90%, 100% { opacity: 0; transform: translateX(0); } }
+
+/* ===================================================================== */
+/* fx-shredded — port of lot-h lh-v6. Eight thin bands, eight guest hues,
+   each kicking sideways by its own amount, screen-blended over the word. */
+/* ===================================================================== */
+
+.wm.fx-shredded.glitch .l1, .wm.fx-shredded.peak .l1 { clip-path: inset(0%     0 87.5%  0); color: var(--p-coral);  mix-blend-mode: screen; --dx: -13px; }
+.wm.fx-shredded.glitch .l2, .wm.fx-shredded.peak .l2 { clip-path: inset(12.5%  0 75%    0); color: var(--p-lime);   mix-blend-mode: screen; --dx: 9px; }
+.wm.fx-shredded.glitch .l3, .wm.fx-shredded.peak .l3 { clip-path: inset(25%    0 62.5%  0); color: var(--p-jade);   mix-blend-mode: screen; --dx: -6px; }
+.wm.fx-shredded.glitch .l4, .wm.fx-shredded.peak .l4 { clip-path: inset(37.5%  0 50%    0); color: var(--p-cyan);   mix-blend-mode: screen; --dx: 15px; }
+.wm.fx-shredded.glitch .l5, .wm.fx-shredded.peak .l5 { clip-path: inset(50%    0 37.5%  0); color: var(--p-violet); mix-blend-mode: screen; --dx: -11px; }
+.wm.fx-shredded.glitch .l6, .wm.fx-shredded.peak .l6 { clip-path: inset(62.5%  0 25%    0); color: var(--p-rose);   mix-blend-mode: screen; --dx: 7px; }
+.wm.fx-shredded.glitch .l7, .wm.fx-shredded.peak .l7 { clip-path: inset(75%    0 12.5%  0); color: var(--p-coral);  mix-blend-mode: screen; --dx: -16px; }
+.wm.fx-shredded.glitch .l8, .wm.fx-shredded.peak .l8 { clip-path: inset(87.5%  0 0%     0); color: var(--p-cyan);   mix-blend-mode: screen; --dx: 10px; }
+.wm.fx-shredded.glitch .l1, .wm.fx-shredded.glitch .l2, .wm.fx-shredded.glitch .l3, .wm.fx-shredded.glitch .l4,
+.wm.fx-shredded.glitch .l5, .wm.fx-shredded.glitch .l6, .wm.fx-shredded.glitch .l7, .wm.fx-shredded.glitch .l8 {
+  animation: wm-shred 700ms steps(1, end) 1;
+}
+.wm.fx-shredded.peak .l1, .wm.fx-shredded.peak .l2, .wm.fx-shredded.peak .l3, .wm.fx-shredded.peak .l4,
+.wm.fx-shredded.peak .l5, .wm.fx-shredded.peak .l6, .wm.fx-shredded.peak .l7, .wm.fx-shredded.peak .l8 {
+  animation: none; opacity: 0.95; transform: translateX(var(--dx));
+}
+@keyframes wm-shred {
+  0%, 55%  { opacity: 0; transform: translateX(0); }
+  65%      { opacity: 0.95; transform: translateX(var(--dx)); }
+  85%      { opacity: 0.95; transform: translateX(calc(var(--dx) * -0.4)); }
+  95%, 100% { opacity: 0; transform: translateX(0); }
+}
+
+/* ===================================================================== */
+/* fx-interlace — port of lot-f v-interlace. Alternate scanlines drop for a
+   frame, using the shared .scan overlay. */
+/* ===================================================================== */
+
+.wm.fx-interlace.glitch .scan,
+.wm.fx-interlace.peak .scan {
+  background: repeating-linear-gradient(to bottom, var(--p-panel) 0 1px, transparent 1px 3px);
+}
+.wm.fx-interlace.glitch .scan { animation: wm-interlace 520ms steps(1, end) 1; }
+.wm.fx-interlace.peak .scan { animation: none; opacity: 0.85; background-position: 0 2px; }
+@keyframes wm-interlace {
+  0%   { opacity: 0; background-position: 0 0; }
+  40%  { opacity: 0.85; background-position: 0 0; }
+  55%  { opacity: 0.85; background-position: 0 2px; }
+  80%  { opacity: 0.85; background-position: 0 0; }
+  100% { opacity: 0; background-position: 0 0; }
+}
+
+/* ===================================================================== */
+/* fx-dead-cells — port of lot-f v-deadpix. Two characters, picked
+   positionally since the markup carries no per-cell classes here: the 3rd
+   (C) goes dark, the 7th (the first 4) shows a wrong glyph over it, and
+   both heal before the window closes. */
+/* ===================================================================== */
+
+.wm.fx-dead-cells.glitch .ch:nth-child(3) { animation: wm-dead-blank 1100ms steps(1, end) 1; }
+.wm.fx-dead-cells.peak .ch:nth-child(3) { color: var(--p-panel); text-shadow: none; }
+@keyframes wm-dead-blank {
+  0%, 10%  { color: var(--p-amber); text-shadow: var(--bloom); }
+  20%, 65% { color: var(--p-panel); text-shadow: none; }
+  80%, 100% { color: var(--p-amber); text-shadow: var(--bloom); }
+}
+
+.wm.fx-dead-cells.glitch .ch:nth-child(7)::after,
+.wm.fx-dead-cells.peak .ch:nth-child(7)::after {
+  content: "X";
+  position: absolute;
+  inset: 0;
+  background: var(--p-panel);
+  color: var(--p-pale);
+  opacity: 0;
+}
+.wm.fx-dead-cells.glitch .ch:nth-child(7)::after { animation: wm-dead-wrong 1100ms steps(1, end) 1; }
+.wm.fx-dead-cells.peak .ch:nth-child(7)::after { opacity: 1; }
+@keyframes wm-dead-wrong {
+  0%, 30%  { opacity: 0; }
+  40%, 75% { opacity: 1; }
+  90%, 100% { opacity: 0; }
+}
