@@ -69,9 +69,9 @@ function wordmarkUpgrade(el) {
   el.classList.add("wm");
   // The visible word is now nine one-character spans, which a screen reader is
   // entitled to read out a letter at a time. So the mark announces itself as one
-  // thing: a picture of the name, which is what a stylised wordmark is. Inside a
-  // breadcrumb the label is what that link contributes to its own name, so the
-  // crumb still reads as the whole trail.
+  // thing: a picture of the name, which is what a stylised wordmark is. It sits
+  // inside the link home, and the label is what that link contributes to its own
+  // accessible name.
   el.setAttribute("role", "img");
   el.setAttribute("aria-label", text);
   el.dataset.wordmarkReady = "1";

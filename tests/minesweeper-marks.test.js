@@ -17,8 +17,9 @@ const { check, report } = makeChecks();
 
 // Where the glyphs this replaced lived - the clock and the gear as much as the
 // flag and the bomb. The floor is above the arrows and the dashes on purpose:
-// those are the site's own typography, still used in the breadcrumb every game
-// page carries, and a sweep that flags them is a sweep nobody will keep.
+// those are the site's own typography, used in prose across the site, and a
+// sweep that flags them is a sweep nobody will keep. (The breadcrumb this used
+// to name is gone; every game page wears the shared header instead.)
 //
 // The arrows are a separate problem with its own entry - design/TODO.md,
 // redesign-emoji-glyphs - because the typeface has no arrow either. When that

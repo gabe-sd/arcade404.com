@@ -24,9 +24,8 @@ const { check, report } = makeChecks();
 
 const NAME = "ARCADE404";
 
-// Every page carries the mark: the two that wear it large, and every game, which
-// wears it small inside the breadcrumb. Read the games from the folder rather
-// than a list, for the same reason contract.test.js does.
+// Every page carries the mark, at the same size on all eight. Read the games from
+// the folder rather than a list, for the same reason contract.test.js does.
 const games = fs
   .readdirSync(path.join(ROOT, "games"), { withFileTypes: true })
   .filter((e) => e.isDirectory())

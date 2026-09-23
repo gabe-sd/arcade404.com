@@ -263,9 +263,9 @@ button {
 /* ---------------------------------------------------------------------------
    The wordmark, and the faults it wears.
 
-   The name is on every page of the site - large as `.brand` on the hub and the
-   about page, small inside a game's breadcrumb - so it lives here rather than
-   in `hub.css` or `game.css`, which each own only one of those.
+   The name is on every page of the site, at the same size on all eight, so it
+   lives here rather than in `hub.css` or `game.css`, which each own only one
+   kind of page.
 
    The mark is plain text in the HTML and stays readable with no JavaScript at
    all. `wordmark.js` upgrades it in place: the word stays as `.base` in the
@@ -280,9 +280,11 @@ button {
    again; `.peak` freezes the worst frame and is only used by the previews and
    the tests. Nothing loops.
 
-   Offsets are in `em` on purpose. They were drawn against a 64px mark, and the
-   breadcrumb is a sixth of that - in px the same tear would cut that mark in
-   half. Anything a fault moves scales with whatever type size it is dropped on.
+   Offsets are in `em` on purpose. They were drawn against a 64px mark, and
+   nothing holds every page to that size - the header is 3.1rem and 2.4rem on a
+   narrow screen, and the mark was for a while a sixth of it inside a breadcrumb,
+   where the same tear in px cut the word in half. Anything a fault moves scales
+   with whatever type size it is dropped on.
 
    Shared trick throughout: a band that moves independently is drawn twice, once
    by `.base` and once by a copy clipped to that band, with a `mask-image` hole

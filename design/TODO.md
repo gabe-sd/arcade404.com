@@ -47,7 +47,7 @@ four framed but not restyled inside.
 **Flappy Bird's phase landed on 2026-09-10, Tic Tac Toe's on 2026-09-11 and
 Minesweeper's on 2026-09-15**, leaving Sudoku below.
 
-**The frame has landed** — breadcrumb, title, strap, scanlines, footer and the
+**The frame has landed** — header, title, strap, scanlines, footer and the
 shared `#instructions` panel are in place and covered by
 `tests/contract.test.js`. What is left is the inside of the board.
 
@@ -63,7 +63,6 @@ known about:
 
 | Game | Where | Glyphs |
 | --- | --- | --- |
-| **every game** | the breadcrumb | `←` ×6, one per game page |
 | pong | status line and the menu | `🎉` ×2 |
 | pong | Play button, panel, footer | `▶`, `↑`/`↓` ×2 |
 | sudoku | status line | `🎉` |
@@ -73,12 +72,12 @@ that game's own phase, and **Sudoku's `⌫` went with its own on 2026-09-15** �
 button carries a drawn glyph now and the panel line says "the erase key". The hub
 and the About page have none.
 
-**The breadcrumb `←` is the one to notice**, and it had never been counted: it is
-on six pages rather than one, it is the most-seen glyph in the set, and it is the
-*frame's* rather than any game's — so unlike everything else here it cannot be
-taken by a game's phase. It is a substituted face like the rest; `M`, `W` and `i`
-measure 8.8px in VT323 and `↑` measures 11px, and `←` is from the same block the
-typeface does not carry.
+**The breadcrumb `←` was the hardest of these and it is gone**, on 2026-09-22 —
+not by being reworded but because the breadcrumb itself went. Every game page
+wears the same header as the hub now, so the six most-seen substituted glyphs on
+the site left with it. Worth keeping as the pattern: the entry had it filed as a
+wording question, and the answer turned out to be that the element asking the
+question did not need to exist.
 
 **Two kinds of problem, and the table does not separate them.** The `🎉` are a tone
 choice; everything else is a glyph the typeface does not have — "The arrows and the
@@ -124,10 +123,9 @@ line needed words, and "the erase key" was enough. Two sets are left:
 
 - **Pong** says `W/S or ↑/↓` twice, which has no short rewrite. Its `▶` is on the
   Play button and is Sudoku's case exactly — draw it; the arrows in the sentence
-  are the part that needs wording.
-- **The breadcrumb `←`**, on all six game pages. Hardest despite being one
-  character: it is the frame's, it is decoration rather than an instruction, and
-  dropping it may simply be right where the sentence needs words.
+  are the part that needs wording. **This is the whole of what is left**: a sweep
+  by codepoint across every served file on 2026-09-22 found no other substituted
+  glyph anywhere.
 
 VT323 has no arrows: it is monospace, so every glyph it really has measures the same
 width, and measured on a served page at 22px on 2026-09-10, `M`, `W` and `i` are
