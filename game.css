@@ -35,18 +35,6 @@
   margin: 0;
 }
 
-/* The wash: a warm bloom off the top of the tube and a vignette into the
-   corners, so the page has a light source instead of being flat black. */
-.game-deco {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background:
-    radial-gradient(90% 55% at 50% 0%, rgba(255, 176, 0, 0.13), transparent 72%),
-    radial-gradient(120% 100% at 50% 45%, transparent 50%, rgba(0, 0, 0, 0.7));
-}
-
 /* Scanlines. 1px of near-black every 3px — enough to read as a tube at arm's
    length, faint enough not to fight text. It sits above the wash and below the
    board, which is what "chrome against screen" means in z-index terms. */

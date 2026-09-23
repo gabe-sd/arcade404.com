@@ -164,6 +164,28 @@ button {
 }
 
 
+
+/* ---------------------------------------------------------------------------
+   The wash behind every page: a bloom off the top of the tube, a second warm
+   glow off the bottom, and a vignette into the corners, so the page has a light
+   source instead of being flat black.
+
+   One definition for both frames on purpose. The hub and the game pages each
+   had their own, and the game one was missing the bottom glow - which read as
+   the footer sitting on black on a game page and on warm ground on the hub.
+   --------------------------------------------------------------------------- */
+.deco,
+.game-deco {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(85% 65% at 50% 2%, rgba(255, 176, 0, 0.16), transparent 74%),
+    radial-gradient(65% 50% at 50% 100%, rgba(255, 140, 0, 0.06), transparent 70%),
+    radial-gradient(125% 105% at 50% 45%, transparent 52%, rgba(0, 0, 0, 0.72));
+}
+
 /* ---------------------------------------------------------------------------
    The header every page wears: the wordmark on the left, and on a game page its
    own title on the right. It used to be the hub's alone and lived in `hub.css`;

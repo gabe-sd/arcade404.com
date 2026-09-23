@@ -437,7 +437,7 @@ stylesheet, so a game can override anything in it and
 | Element | Value |
 | --- | --- |
 | Frame | `.game-in`, max-width 1120px, padding `1.4rem 1.6rem 2rem` |
-| Wash | `.game-deco`, z-index 0 — amber bloom off the top, vignette into the corners |
+| Wash | `.game-deco`, z-index 0 — the same rule as the hub's `.deco`, defined once in `shared.css` |
 | Scanlines | `.game-crt`, z-index 6 — `rgba(0,0,0,.34)` 1px every 3px |
 | Header | `.top` from `shared.css` — the wordmark left, the game's own title right |
 | Title | `.game-title`, 2.1rem (1.7rem under 620px), `--p-hot`, `--bloom-lg`, letter-spacing 0.09em |
@@ -448,6 +448,10 @@ stylesheet, so a game can override anything in it and
 
 Three rules under it:
 
+- **The footer spans the page, not the board.** Pong and Flappy Bird each pulled
+  it into the court's centred column, which made those two pages disagree with
+  the other four. `tests/contract.test.js` holds every game page's footer to the
+  width of the header above it.
 - **Chrome against screen, in z-index terms.** The wash is 0, the scanlines are
   6, the board is 7 with its own opaque ground. A scanline over a chess hairline
   or a Sudoku digit is texture bought at the price of reading the game.

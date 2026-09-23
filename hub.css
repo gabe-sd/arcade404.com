@@ -11,20 +11,6 @@
    the chrome text alike — see design/DESIGN.md, "The hub", for the values
    and why they stay this faint: any stronger and the ground stops being
    black and starts being brown. */
-.deco {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background: radial-gradient(
-      85% 65% at 50% 2%,
-      rgba(255, 176, 0, 0.16),
-      transparent 74%
-    ),
-    radial-gradient(65% 50% at 50% 100%, rgba(255, 140, 0, 0.06), transparent 70%),
-    radial-gradient(125% 105% at 50% 45%, transparent 52%, rgba(0, 0, 0, 0.72));
-}
-
 /* The CRT texture. Sits over the whole page (chrome included) so the top nav
    and wordmark visibly carry it — that is the point. The grid gives itself
    an opaque background and rises above this layer, per "chrome against

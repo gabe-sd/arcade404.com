@@ -234,6 +234,20 @@ async function describe(button) {
       .map(([k]) => k);
     check(`${game}: wears the shared frame`, bare.length === 0,
       bare.length ? `missing: ${bare.join(", ")}` : JSON.stringify(frame));
+    // The footer is the page's, not the board's. Pong and Flappy Bird each pulled
+    // it into the court's own centred column, so those two pages had a centred
+    // footer while the other four had a full-width one - the kind of drift that
+    // only shows up when someone moves between two games.
+    const footAligned = await page.evaluate(() => {
+      const head = document.querySelector(".game-top");
+      const foot = document.querySelector(".game-foot");
+      if (!head || !foot) return null;
+      const h = head.getBoundingClientRect(), f = foot.getBoundingClientRect();
+      return { head: Math.round(h.x), foot: Math.round(f.x), width: Math.round(h.width - f.width) };
+    });
+    check(`${game}: the footer spans the page, like the header above it`,
+      footAligned && footAligned.head === footAligned.foot && footAligned.width === 0,
+      JSON.stringify(footAligned));
     check(`${game}: the wordmark is the link home`,
       frame.home === "../../", frame.home);
     // The mark has to sit inside that link rather than being it: role="img" on
