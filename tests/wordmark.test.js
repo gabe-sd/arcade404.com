@@ -41,10 +41,26 @@ const pages = ["/", "/about/"].concat(games.map((g) => `/games/${g}/`));
   for (const p of pages) {
     const page = await browser.newPage();
     await page.goto(url(p));
-    await page.waitForFunction(
-      () => document.querySelector("[data-wordmark]") &&
-            document.querySelector("[data-wordmark]").dataset.wordmarkReady === "1"
-    );
+    // Caught rather than awaited bare, and on a short timeout. A page that never
+    // upgrades is a real failure - most likely it does not link wordmark.js at
+    // all - and it has to report as one: bare, this threw a TimeoutError thirty
+    // seconds later that named no page and abandoned every check after it, so
+    // one unlinked script cost the run five other games and the reduced-motion
+    // case. The suite still went red, but red with nothing to read.
+    const upgraded = await page
+      .waitForFunction(
+        () => document.querySelector("[data-wordmark]") &&
+              document.querySelector("[data-wordmark]").dataset.wordmarkReady === "1",
+        null,
+        { timeout: 5000 }
+      )
+      .then(() => true, () => false);
+    if (!upgraded) {
+      check(`${p} — the mark upgrades itself`, false,
+        "no [data-wordmark] reached wordmark-ready in 5s — is wordmark.js linked on this page?");
+      await page.close();
+      continue;
+    }
     const state = await page.evaluate(() => {
       const el = document.querySelector("[data-wordmark]");
       const displaced = [...el.querySelectorAll(".layer, .fringe, .scan")];
