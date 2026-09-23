@@ -191,6 +191,18 @@ async function describe(button) {
     check(`${game}: links shared.css before its own`,
       shared !== -1 && own !== -1 && shared < own, sheets.join(" then "));
 
+    // The name is plain text in the HTML and only becomes the mark once
+    // wordmark.js has run, so a page that forgets the script still renders a
+    // name and still passes the eye. Without this check one *was* caught, but
+    // only sideways: the role=img assertion below fails, because the script is
+    // what sets that attribute. That catch would vanish the day the role moved
+    // into the HTML, and it never named the cause. This one does.
+    const scripts = await page.$$eval("script[src]", (ss) =>
+      ss.map((s) => s.getAttribute("src"))
+    );
+    check(`${game}: loads the shared wordmark script`,
+      scripts.includes("../../wordmark.js"), scripts.join(", ") || "no script[src]");
+
     const back = await page.$$eval("a[href]", (as) =>
       as.map((a) => a.getAttribute("href"))
     );

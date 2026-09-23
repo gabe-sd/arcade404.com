@@ -4,7 +4,7 @@
 #
 # Until this list grew past the repo's own plumbing, every doc, test and design
 # mockup was live at its own URL. What a visitor needs is the pages, the
-# stylesheets, hub.js and assets/; everything named below is machinery.
+# stylesheets, hub.js, wordmark.js and assets/; everything named below is machinery.
 
 .git
 .gitignore
