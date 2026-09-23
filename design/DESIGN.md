@@ -1076,7 +1076,8 @@ from a digit that is already placed. It still takes no digit.
 ## The wordmark, and the faults it wears
 
 The site's name is `ARCADE404`, tight caps, no gap and no tail — Gabriel's choice
-of 2026-09-22 from a sheet of seventy-five lockups. It is the `.brand` on the hub
+of 2026-09-22 from a sheet of seventy-five lockups, kept at
+`design/previews/wordmarks/`. It is the `.brand` on the hub
 and the about page, and the same again in every game page's header. It replaced
 `ARCADE`, which was a placeholder from before the site had a domain.
 
