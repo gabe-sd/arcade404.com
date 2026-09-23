@@ -1061,6 +1061,68 @@ from a digit that is already placed. It still takes no digit.
   the hub's 48 grid at the hub's weight — the same answer chess, Minesweeper and
   Flappy Bird reached for their own glyphs.
 
+## The wordmark, and the faults it wears
+
+The site's name is `ARCADE404`, tight caps, no gap and no tail — Gabriel's choice
+of 2026-09-22 from a sheet of seventy-five lockups. It is the `.brand` on the hub
+and the about page, and the first element of every game's breadcrumb. It replaced
+`ARCADE`, which was a placeholder from before the site had a domain.
+
+**The mark is a display that is not quite working**, and that is the whole idea:
+a site named after an error behaves like one. It sits perfectly still and clean
+almost all of the time, and every so often something goes briefly wrong with it.
+
+### The rules that keep it from becoming a nuisance
+
+- **Clean at rest is absolute.** With no fault running the mark is one amber word
+  and nothing else — no fringe, no offset, no overlay. Every effect is checked
+  against that in `tests/wordmark.test.js`, pixel for pixel.
+- **A fault is an event, not a loop.** Nothing animates on its own timing.
+  `wordmark.js` picks one, runs it once, and takes it away. The timings live in
+  that file as named constants; this doc does not repeat them.
+- **The name is in the document once.** Only `.base` is real text; every copy an
+  effect displaces is an empty element drawing itself from `data-text` through
+  generated content. The mark then carries `role="img"` with the name as its
+  label, because the visible word is one-character spans and a screen reader is
+  otherwise entitled to spell it out.
+- **It works with the script absent.** The name is plain text in all eight pages'
+  HTML. `wordmark.js` only ever adds to it, so a blocked or failed script costs
+  the site its glitch, not its name.
+- **Reduced motion skips the upgrade entirely.** Not a quieter version: the mark
+  stays the plain text the HTML carries.
+- **Offsets are in `em`.** They were drawn against a 64px mark and the breadcrumb
+  is about a sixth of that, where the same tear in px would cut the mark in half.
+
+### The twelve faults
+
+Named in `wordmark.js` and built in `shared.css`, where each is `.wm.fx-<name>`.
+They came from three of the ten exploration lots — the torn-signal family, the
+tear-and-misconvergence hybrids, and two display faults — and Gabriel picked them
+off a sheet rather than from a description.
+
+Six of them put a guest hue into the chrome, which is the one place the palette
+otherwise forbids colour. **That is a deliberate exception and it is narrow: the
+colour only exists inside the damage, for a few hundred milliseconds.** A fault
+is the display failing, not the chrome changing its mind — see "chrome against
+screen" above, which is the rule this bends rather than breaks.
+
+### Rejected, with the reason
+
+- **Eased timing.** Every effect was originally written with `ease`, which draws
+  every intermediate position, so the band *travelled* to where it was going and
+  back. That reads as motion rather than malfunction. They run on `steps(1, end)`
+  now: each keyframe holds until the next and nothing between them is ever drawn.
+  Measured rather than judged — the four worst offenders visited 7 to 28 distinct
+  positions eased, and 3 to 4 stepped.
+- **A permanently mis-registered mark.** The standing-fringe effect originally
+  kept a faint colour fringe at rest and merely widened it. Clean at rest won:
+  the fringe now opens from nothing. This is the one effect that is not quite the
+  thing it was chosen as.
+- **An ambient loop.** The first build had each effect looping on its own
+  keyframe timing, faking rarity with `0%, 96% { calm }`. A scheduler that fires
+  one fault and removes it is both simpler and the only version that can pick at
+  random.
+
 ## How the tokens are layered
 
 `shared.css` already owns nine token names — `--bg`, `--fg`, `--card-bg`,

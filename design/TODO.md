@@ -181,39 +181,32 @@ Close this entry by writing the answer into `design/DESIGN.md`, whichever way it
 
 Filed by Gabriel on 2026-09-15, cut from `main`.
 
-### hub-arcade404-theme — The site's name, and the home page around it
+### hub-arcade404-theme — The home page around the name
 
-Two asks of his, filed as two entries and merged into one on his instruction the same
-day, because **they are the same element**. The wordmark reads `ARCADE`, a placeholder
-from before the site had a domain: "since the redesign the site was moved to a real
-custom domain and now has a proper name. arcade is a placeholder." It is `.brand` on
-the hub and About, and the `ARCADE` in every game page's breadcrumb — that is what
-"the main title on every page" means. Renaming it and making it the way home touch the
-same markup on the same eight pages, so they go together.
+**The name itself is settled and built.** Gabriel chose `ARCADE404` — tight caps,
+no gap, no tail — on 2026-09-22, from a sheet of seventy-five lockups kept at
+`design/previews/wordmarks/`. It is live on all eight pages and it glitches; see
+`design/DESIGN.md`, "The wordmark, and the faults it wears". What that closes is
+the naming half of this entry. Three things it does not close:
 
-**The name.** His words: "i want it to say arcade 404 // error game not found or
-something like that. at the very least it should say the sites name. arcade404 (not
-sure about casing and spacing)." So the name is settled and its typesetting is not —
-`ARCADE 404 // ERROR GAME NOT FOUND` is his example rather than his specification, and
-casing, spacing and whether the tail rides along are all open. **Build the candidates
-on a served page and let him pick**, which is how every look decision here has been
-taken.
-
-**The link.** His words: "title text should be clickable button to go to home page."
-On a game page the breadcrumb is already the link home, so this is about what carries
-the link rather than adding one; on the hub and About the `.brand` has somewhere to
-point for the first time. It keeps the page contract's "links back to `../../`" —
-`tests/contract.test.js` checks the link exists, not which element carries it. Read
-that check before moving the link rather than after.
+**The link.** His words: "title text should be clickable button to go to home
+page." On a game page the breadcrumb already is the link home, so this is about
+what carries the link rather than adding one; on the hub and about page the
+wordmark has somewhere to point for the first time. It keeps the page contract's
+"links back to `../../`" — `tests/contract.test.js` checks the link exists, not
+which element carries it. Read that check before moving the link rather than
+after. **Note what the wordmark has become since this was filed**: it is now a
+labelled image with a dozen layers inside it, so making it a link is a question
+about where the anchor goes around that, not about wrapping a word.
 
 **The hub around it.** The first phase put the hub on the CRT-phosphor palette and
 that stays; what it never had was a name to build a page around. The 404 joke is a
-composition the hub can lean into, not only a string in a header.
+composition the hub can lean into, not only a string in a header — and now that
+the mark itself carries the joke in how it behaves, there is a real question about
+whether the page should say anything more at all.
 
-**Two stale strings go with it**, statements of fact rather than prose: the hub's
-`<title>` is `Arcade` and About's is `About — Gabe-SD Arcade`, naming a repo that has
-moved. Every game page's is `<Game> · Game Arcade`.
+**Two stale strings.** Statements of fact rather than prose: the hub's `<title>`
+is `Arcade` and the about page's is `About — Gabe-SD Arcade`, naming a repo that
+has moved. Every game page's is `<Game> · Game Arcade`. All of them now disagree
+with the name in the page itself.
 
-**Take this before the emoji entry.** Its hardest open item is the breadcrumb `←`, and
-if the wordmark carries the link home, dropping the `←` stops being a wording question
-and may simply be right.

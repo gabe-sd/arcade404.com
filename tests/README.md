@@ -63,6 +63,15 @@ about themselves.
   contract and never how a game plays. What it covers is found by reading `games/`
   and each game's own `script.js` — which games exist, which are key-driven — so a
   new game is covered the day its folder exists.
+- **wordmark.test.js** — the glitching wordmark, on all eight pages. Two traps
+  worth knowing before editing it. **`textContent` is not the accessible name**:
+  an earlier version asserted on it, saw thirteen copies of ARCADE404 and called
+  it an accessibility failure, when what a screen reader computes was fine — the
+  duplication was a real but much smaller problem, and the right check is
+  `page.accessibility.snapshot()`. And **that snapshot needs
+  `interestingOnly: false`**: the mark is a labelled image that is not focusable,
+  which Playwright's "interesting" filter drops, so the default leaves it out of
+  the tree entirely and a present name reads as a missing one.
 - **chording.test.js** — the middle-click chord. **Case 2 must not be deleted:**
   it moves the pointer while the button is held. That bug reached `main` twice
   because synthetic clicks never move, so a still-pointer test passes against code

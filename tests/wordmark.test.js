@@ -128,15 +128,21 @@ const pages = ["/", "/about/"].concat(games.map((g) => `/games/${g}/`));
     const page = await browser.newPage();
     const opened = Date.now();
     await page.goto(url("/"));
-    await page.waitForSelector("[data-wordmark].glitch", { timeout: 4000 });
+    // Caught rather than awaited bare: a scheduler that never runs is exactly
+    // what this case exists to notice, and an uncaught timeout would abandon
+    // every check after it instead of reporting one failure.
+    const fired = await page
+      .waitForSelector("[data-wordmark].glitch", { timeout: 4000 })
+      .then(() => true, () => false);
     const firedAt = Date.now() - opened;
     const fx = await page.evaluate(() =>
       (document.querySelector("[data-wordmark]").className.match(/fx-[\w-]+/) || [])[0]);
-    check("a fault fires on its own, without being asked", !!fx, fx);
+    check("a fault fires on its own, without being asked", fired && !!fx,
+      fired ? fx : "nothing fired within 4s");
     // Generous at both ends: `opened` includes the navigation itself, and the
     // longest fault is 1.1s, so this is a sanity bound rather than a stopwatch.
     check("it fires a couple of seconds in, not immediately and not late",
-      firedAt > 1500 && firedAt < 4500, `${firedAt}ms`);
+      fired && firedAt > 1500 && firedAt < 4500, `${firedAt}ms`);
     await page.waitForSelector("[data-wordmark].glitch", { state: "detached", timeout: 3000 })
       .catch(() => {});
     const settled = await page.evaluate(() =>
