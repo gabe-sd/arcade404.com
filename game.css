@@ -1,9 +1,11 @@
 /* The frame every game page sits in: the machine around the screen.
  *
  * hub.css does this for the root page; this is its counterpart for a game, and
- * the two are deliberately the same machine one size down — the same breadcrumb
- * hue, the same bloom on the title, the same scanlines, the same hairline rules.
- * A visitor moving from the hub into a game should not feel they changed sites.
+ * the two are deliberately the same machine one size down — the same header from
+ * shared.css, the same bloom on the title, the same scanlines, the same hairline
+ * rules. A visitor moving from the hub into a game should not feel they changed
+ * sites, which is why the wordmark and nav are now literally the same element
+ * here as on the hub rather than a breadcrumb standing in for them.
  *
  * It is loaded *between* shared.css and the game's own style.css:
  *
@@ -33,18 +35,6 @@
   margin: 0;
 }
 
-/* The wash: a warm bloom off the top of the tube and a vignette into the
-   corners, so the page has a light source instead of being flat black. */
-.game-deco {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background:
-    radial-gradient(90% 55% at 50% 0%, rgba(255, 176, 0, 0.13), transparent 72%),
-    radial-gradient(120% 100% at 50% 45%, transparent 50%, rgba(0, 0, 0, 0.7));
-}
-
 /* Scanlines. 1px of near-black every 3px — enough to read as a tube at arm's
    length, faint enough not to fight text. It sits above the wash and below the
    board, which is what "chrome against screen" means in z-index terms. */
@@ -60,47 +50,27 @@
   );
 }
 
+/* Deliberately the hub's `.screen` geometry, to the pixel: same max-width, same
+   horizontal padding, same padding-top. The wordmark sits in the top-left corner
+   of both, and if these two disagree it visibly jumps as you move between them.
+   Change one and change the other. */
 .game-in {
   position: relative;
-  max-width: 1120px;
+  max-width: 1080px;
   margin: 0 auto;
-  padding: 1.4rem 1.6rem 2rem;
+  padding: 2.6rem 1.8rem 2rem;
 }
 
 /* ---------- the head ---------- */
 
+/* Holds the shared header. It used to be a row of its own - breadcrumb on one
+   side, title on the other - and carried the hairline under the head of the
+   page; the header brings both now. */
 .game-top {
   display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 1rem;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 1.1rem;
   padding-bottom: 0.55rem;
-  border-bottom: 1px solid var(--p-hairline);
-}
-
-/* A breadcrumb rather than a back-link: it says where you are as well as where
-   you can go, and the game's own name in it is what stops the title reading as
-   the only label on the page. Still `../../index.html` — the contract's link
-   home is this element. */
-.crumb {
-  color: var(--p-dim);
-  font-size: 1.02rem;
-  letter-spacing: 0.08em;
-  text-decoration: none;
-}
-
-.crumb b {
-  color: var(--p-pale);
-  font-weight: 400;
-}
-
-.crumb:hover {
-  color: var(--p-pale);
-}
-
-.crumb:hover b {
-  color: var(--p-hot);
 }
 
 .game-title {
@@ -283,11 +253,16 @@
   font-weight: 400;
 }
 
-@media (max-width: 620px) {
+/* The hub narrows at 760px, so this does too and at the same values - see
+   `.game-in` above, and `.screen` in hub.css. A different breakpoint here would
+   put the wordmark in two different places between 620px and 760px. */
+@media (max-width: 760px) {
   .game-in {
-    padding: 1.1rem 1rem 1.6rem;
+    padding: 1.8rem 1.1rem 2.6rem;
   }
+}
 
+@media (max-width: 620px) {
   .game-title {
     font-size: 1.7rem;
   }

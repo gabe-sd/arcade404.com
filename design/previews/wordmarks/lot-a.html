@@ -1,0 +1,169 @@
+<style>
+.lot-a .stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 120px;
+  padding: 28px 20px;
+  background: var(--p-ground);
+  font-family: "VT323", monospace;
+  line-height: 1;
+}
+
+/* 1: tight all-caps, single amber, no gap */
+.lot-a .v-tight {
+  font-size: 56px;
+  letter-spacing: 0;
+  color: var(--p-amber);
+  text-shadow: var(--bloom);
+}
+
+/* 2: wide-tracked lowercase, whole thing dim except it breathes */
+.lot-a .v-wide {
+  font-size: 40px;
+  letter-spacing: 0.35em;
+  color: var(--p-soft);
+  text-transform: lowercase;
+  padding-left: 0.35em; /* compensate trailing tracking for optical centering */
+}
+
+/* 3: ARCADE dim, 404 hot — the digits are the point */
+.lot-a .v-split-hot {
+  font-size: 56px;
+  letter-spacing: 0.05em;
+  display: inline-flex;
+  align-items: baseline;
+}
+.lot-a .v-split-hot .word { color: var(--p-dim); }
+.lot-a .v-split-hot .num {
+  color: var(--p-hot);
+  text-shadow: var(--bloom-lg);
+  margin-left: 0.06em;
+}
+
+/* 4: stacked, ARCADE small over a big 404 slab */
+.lot-a .v-stack-slab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.05em;
+}
+.lot-a .v-stack-slab .word {
+  font-size: 22px;
+  letter-spacing: 0.6em;
+  padding-left: 0.6em;
+  color: var(--p-dim);
+}
+.lot-a .v-stack-slab .num {
+  font-size: 84px;
+  letter-spacing: 0.02em;
+  color: var(--p-amber);
+  text-shadow: var(--bloom-lg);
+}
+
+/* 5: Arcade404 mixed case, 404 as superscript-ish trailing mark */
+.lot-a .v-super {
+  font-size: 50px;
+  letter-spacing: 0.02em;
+  color: var(--p-amber);
+  text-shadow: var(--bloom);
+  display: inline-flex;
+  align-items: flex-start;
+}
+.lot-a .v-super .num {
+  font-size: 26px;
+  margin-left: 0.08em;
+  margin-top: 0.1em;
+  color: var(--p-pale);
+}
+
+/* 6: stacked ARCADE over 404, both large, rule between, one hue */
+.lot-a .v-stack-line {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.lot-a .v-stack-line .word {
+  font-size: 46px;
+  letter-spacing: 0.18em;
+  padding-left: 0.18em;
+  color: var(--p-amber);
+  text-shadow: var(--bloom);
+}
+.lot-a .v-stack-line .rule {
+  width: 100%;
+  max-width: 220px;
+  height: 1px;
+  background: var(--p-rule);
+  margin: 6px 0;
+}
+.lot-a .v-stack-line .num {
+  font-size: 46px;
+  letter-spacing: 0.1em;
+  color: var(--p-dim);
+}
+
+/* 7: domain form, .com dimmed away, 404 styled distinct from ARCADE via a thin gap */
+.lot-a .v-domain {
+  font-size: 46px;
+  letter-spacing: 0.03em;
+  display: inline-flex;
+  align-items: baseline;
+}
+.lot-a .v-domain .word { color: var(--p-amber); text-shadow: var(--bloom); }
+.lot-a .v-domain .num {
+  color: var(--p-amber);
+  text-shadow: var(--bloom);
+  margin-left: 0.14em; /* thin gap: digits read as part of the name, not glued */
+}
+.lot-a .v-domain .tld { color: var(--p-hairline); margin-left: 0.02em; }
+</style>
+
+<article class="card lot-a">
+  <h2 class="cap">Tight caps, one amber — no gap, no ceremony</h2>
+  <div class="stage">
+    <span class="v-tight">ARCADE404</span>
+  </div>
+</article>
+
+<article class="card lot-a">
+  <h2 class="cap">Wide-tracked lowercase — quiet, terminal-prompt feel</h2>
+  <div class="stage">
+    <span class="v-wide">arcade404</span>
+  </div>
+</article>
+
+<article class="card lot-a">
+  <h2 class="cap">ARCADE dim, 404 hot — the error code is the mark</h2>
+  <div class="stage">
+    <span class="v-split-hot"><span class="word">ARCADE</span><span class="num">404</span></span>
+  </div>
+</article>
+
+<article class="card lot-a">
+  <h2 class="cap">404 as a slab, ARCADE a small tracked label above it</h2>
+  <div class="stage">
+    <span class="v-stack-slab"><span class="word">ARCADE</span><span class="num">404</span></span>
+  </div>
+</article>
+
+<article class="card lot-a">
+  <h2 class="cap">Mixed case, 404 riding high like a superscript</h2>
+  <div class="stage">
+    <span class="v-super">Arcade<span class="num">404</span></span>
+  </div>
+</article>
+
+<article class="card lot-a">
+  <h2 class="cap">Stacked two lines, one hairline rule, 404 dimmer than ARCADE</h2>
+  <div class="stage">
+    <span class="v-stack-line"><span class="word">ARCADE</span><span class="rule"></span><span class="num">404</span></span>
+  </div>
+</article>
+
+<article class="card lot-a">
+  <h2 class="cap">Domain form — arcade404 lit, .com fades into the ground</h2>
+  <div class="stage">
+    <span class="v-domain"><span class="word">ARCADE</span><span class="num">404</span><span class="tld">.com</span></span>
+  </div>
+</article>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wordmark cycle — every fault frozen</title>
+<link rel="stylesheet" href="../../../shared.css">
+<link rel="stylesheet" href="cycle-fx.css">
+<style>
+  body { margin: 0; background: var(--p-ground); color: var(--p-soft); font-family: "VT323", monospace; font-size: 18px; }
+  .sheet { max-width: 1320px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+  h1 { margin: 0 0 0.2rem; font-size: 2rem; font-weight: 400; letter-spacing: 0.08em; color: var(--p-amber); text-shadow: var(--bloom); }
+  .lede { margin: 0 0 1.6rem; color: var(--p-desc); font-size: 1.1rem; max-width: 66ch; }
+  .grid { display: grid; gap: 1.2rem; grid-template-columns: repeat(auto-fill, minmax(420px, 1fr)); }
+  figure { margin: 0; border: 1px solid var(--p-hairline); background: var(--p-panel); }
+  figcaption { padding: 0.4rem 0.7rem; border-bottom: 1px solid var(--p-hairline); background: var(--p-ground); color: var(--p-dim); font-size: 1.05rem; }
+  .cell { display: flex; align-items: center; justify-content: center; padding: 2.4rem 1rem; min-height: 150px; overflow: hidden; }
+  .wm { font-size: 46px; }
+</style>
+</head>
+<body>
+<div class="sheet">
+  <h1>every fault, frozen</h1>
+  <p class="lede">The same twelve effects as the cycle page, each held at its worst
+     frame so a still shows what a moving one cannot. The mark underneath is
+     identical in every cell — only the class differs.</p>
+  <div class="grid" id="grid"></div>
+</div>
+<script>
+  // Same markup as the cycle page, repeated once per effect.
+  const FX = [
+    ['quiet-tear', 'quiet tear'], ['six-thin-slices', 'six thin slices'],
+    ['big-tear', 'big tear'], ['smear-fill', 'smear fill'],
+    ['hue-shift-tear', 'hue shift tear'], ['band-split-guns', 'band split guns'],
+    ['standing-fringe', 'standing fringe'], ['damage-only-colour', 'damage only colour'],
+    ['crossed-axes', 'crossed axes'], ['shredded', 'shredded'],
+    ['interlace', 'interlace flicker'], ['dead-cells', 'dead cells'],
+  ];
+  const mark = (fx) => `<div class="wm fx-${fx} peak">`
+    + '<span class="base" aria-hidden="true">' + [...'ARCADE404'].map(c => `<span class="ch">${c}</span>`).join('') + '</span>'
+    + [1,2,3,4,5,6,7,8].map(n => `<span class="layer l${n}" aria-hidden="true">ARCADE404</span>`).join('')
+    + [1,2,3].map(n => `<span class="fringe fr${n}" aria-hidden="true">ARCADE404</span>`).join('')
+    + '<span class="scan" aria-hidden="true"></span><span class="sr">arcade404</span></div>';
+  document.getElementById('grid').innerHTML = FX.map(([fx, label]) =>
+    `<figure><figcaption>${label}</figcaption><div class="cell">${mark(fx)}</div></figure>`).join('');
+</script>
+</body>
+</html>

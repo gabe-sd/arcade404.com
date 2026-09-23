@@ -1,0 +1,313 @@
+<style>
+/* shared scaffolding for every torn-signal variant in this lot */
+.lot-e .stage {
+  padding: 48px 20px;
+  background: var(--p-ground);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.lot-e .wordmark {
+  position: relative;
+  display: inline-block;
+  font-family: "VT323", monospace;
+  font-size: 56px;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  color: var(--p-amber);
+  text-shadow: var(--bloom);
+  white-space: nowrap;
+  user-select: none;
+}
+.lot-e .wordmark::before {
+  /* A static copy nobody sees: every visible layer is absolutely positioned,
+     so without this the box collapses to nothing and the mark vanishes. */
+  content: "arcade404";
+  visibility: hidden;
+  display: block;
+}
+.lot-e .wordmark .band {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  color: inherit;
+  will-change: transform;
+}
+.lot-e .wordmark .ghost {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  color: var(--p-dim);
+  opacity: 0;
+}
+
+/* ============ v1: quiet-tear (the "usually readable" one) ============ */
+.lot-e .v1 .band { clip-path: inset(0 0 0 0); }
+.lot-e .v1 .band-top { clip-path: inset(0 0 62% 0); }
+.lot-e .v1 .band-mid { clip-path: inset(38% 0 24% 0); }
+.lot-e .v1 .band-bot { clip-path: inset(76% 0 0 0); }
+@media (prefers-reduced-motion: no-preference) {
+  .lot-e .v1 .band-mid { animation: lot-e-v1-tear 8s steps(1, end) infinite; }
+}
+@keyframes lot-e-v1-tear {
+  0%, 96% { transform: translateX(0); }
+  96.5%, 97.5% { transform: translateX(9px); }
+  98% { transform: translateX(-6px); }
+  98.5%, 100% { transform: translateX(0); }
+}
+.lot-e .v1.peak .band-mid { animation: none; transform: translateX(9px); }
+
+/* ============ v2: six-thin-slices, burst of three ============ */
+.lot-e .v2 .band { clip-path: inset(0 0 0 0); }
+.lot-e .v2 .b1 { clip-path: inset(0%    0 83.3% 0); }
+.lot-e .v2 .b2 { clip-path: inset(16.6% 0 66.6% 0); }
+.lot-e .v2 .b3 { clip-path: inset(33.3% 0 50%   0); }
+.lot-e .v2 .b4 { clip-path: inset(50%   0 33.3% 0); }
+.lot-e .v2 .b5 { clip-path: inset(66.6% 0 16.6% 0); }
+.lot-e .v2 .b6 { clip-path: inset(83.3% 0 0%    0); }
+@media (prefers-reduced-motion: no-preference) {
+  .lot-e .v2 .b1 { animation: lot-e-v2-a 9s steps(1, end) infinite; }
+  .lot-e .v2 .b3 { animation: lot-e-v2-b 9s steps(1, end) infinite; }
+  .lot-e .v2 .b4 { animation: lot-e-v2-c 9s steps(1, end) infinite; }
+  .lot-e .v2 .b6 { animation: lot-e-v2-a 9s steps(1, end) infinite reverse; }
+}
+@keyframes lot-e-v2-a {
+  0%, 88% { transform: translateX(0); }
+  88.4%, 89% { transform: translateX(7px); }
+  89.4%, 100% { transform: translateX(0); }
+}
+@keyframes lot-e-v2-b {
+  0%, 89% { transform: translateX(0); }
+  89.4%, 90% { transform: translateX(-10px); }
+  90.4%, 100% { transform: translateX(0); }
+}
+@keyframes lot-e-v2-c {
+  0%, 90% { transform: translateX(0); }
+  90.4%, 91% { transform: translateX(6px); }
+  91.4%, 100% { transform: translateX(0); }
+}
+.lot-e .v2.peak .b1 { animation: none; transform: translateX(7px); }
+.lot-e .v2.peak .b3 { animation: none; transform: translateX(-10px); }
+.lot-e .v2.peak .b4 { animation: none; transform: translateX(6px); }
+.lot-e .v2.peak .b6 { animation: none; transform: translateX(-7px); }
+
+/* v3 draws only one band, so unlike its siblings it needs the base copy
+   visible underneath — the hairline is a slip within a whole word. */
+.lot-e .v3::before { visibility: visible; }
+
+/* ============ v3: hairline-slip, 2px creeping drift ============ */
+.lot-e .v3 .band { clip-path: inset(0 0 0 0); }
+.lot-e .v3 .band-hair { clip-path: inset(47% 0 47% 0); }
+@media (prefers-reduced-motion: no-preference) {
+  .lot-e .v3 .band-hair { animation: lot-e-v3-drift 9s linear infinite; }
+}
+@keyframes lot-e-v3-drift {
+  0%   { transform: translateX(0); }
+  40%  { transform: translateX(1px); }
+  70%  { transform: translateX(2px); }
+  86%  { transform: translateX(2px); }
+  88%  { transform: translateX(-1px); }
+  90%  { transform: translateX(0); }
+  100% { transform: translateX(0); }
+}
+.lot-e .v3.peak .band-hair { animation: none; transform: translateX(2px); }
+
+/* ============ v4: big-tear, two fat bands, 30px, word briefly destroyed ============ */
+.lot-e .v4 .band { clip-path: inset(0 0 0 0); }
+.lot-e .v4 .band-top { clip-path: inset(0 0 50% 0); }
+.lot-e .v4 .band-bot { clip-path: inset(50% 0 0 0); }
+@media (prefers-reduced-motion: no-preference) {
+  .lot-e .v4 .band-top { animation: lot-e-v4-top 8s steps(1, end) infinite; }
+  .lot-e .v4 .band-bot { animation: lot-e-v4-bot 8s steps(1, end) infinite; }
+}
+@keyframes lot-e-v4-top {
+  0%, 97% { transform: translateX(0); }
+  97.2%, 98.2% { transform: translateX(-30px); }
+  98.4%, 100% { transform: translateX(0); }
+}
+@keyframes lot-e-v4-bot {
+  0%, 97% { transform: translateX(0); }
+  97.2%, 98.2% { transform: translateX(30px); }
+  98.4%, 100% { transform: translateX(0); }
+}
+.lot-e .v4.peak .band-top { animation: none; transform: translateX(-30px); }
+.lot-e .v4.peak .band-bot { animation: none; transform: translateX(30px); }
+
+/* ============ v5: smear-fill, dimmer amber trail in the gap ============ */
+.lot-e .v5 .band { clip-path: inset(0 0 0 0); }
+.lot-e .v5 .band-top { clip-path: inset(0 0 60% 0); }
+.lot-e .v5 .band-mid { clip-path: inset(34% 0 32% 0); z-index: 2; }
+.lot-e .v5 .smear { clip-path: inset(34% 0 32% 0); color: var(--p-dim); opacity: 0; z-index: 1; }
+.lot-e .v5 .band-bot { clip-path: inset(68% 0 0 0); }
+@media (prefers-reduced-motion: no-preference) {
+  .lot-e .v5 .band-mid { animation: lot-e-v5-mid 8.5s steps(1, end) infinite; }
+  .lot-e .v5 .smear { animation: lot-e-v5-smear 8.5s ease-out infinite; }
+}
+@keyframes lot-e-v5-mid {
+  0%, 95% { transform: translateX(0); }
+  95.3%, 97% { transform: translateX(14px); }
+  97.3%, 100% { transform: translateX(0); }
+}
+@keyframes lot-e-v5-smear {
+  0%, 95% { opacity: 0; transform: translateX(0); }
+  95.3% { opacity: 0.8; transform: translateX(0); }
+  97% { opacity: 0.35; transform: translateX(4px); }
+  99% { opacity: 0; transform: translateX(0); }
+  100% { opacity: 0; }
+}
+.lot-e .v5.peak .band-mid { animation: none; transform: translateX(14px); }
+.lot-e .v5.peak .smear { animation: none; opacity: 0.6; transform: translateX(2px); }
+
+/* ============ v6: echo-duplicate, gap fills with the band above it ============ */
+.lot-e .v6 .band { clip-path: inset(0 0 0 0); }
+.lot-e .v6 .band-top { clip-path: inset(0 0 66% 0); z-index: 2; }
+.lot-e .v6 .band-mid { clip-path: inset(33% 0 33% 0); z-index: 3; }
+.lot-e .v6 .echo { clip-path: inset(33% 0 33% 0); color: var(--p-dim); opacity: 0; z-index: 1; }
+.lot-e .v6 .band-bot { clip-path: inset(66% 0 0 0); z-index: 2; }
+@media (prefers-reduced-motion: no-preference) {
+  .lot-e .v6 .band-mid { animation: lot-e-v6-mid 7.5s steps(1, end) infinite; }
+  .lot-e .v6 .echo { animation: lot-e-v6-echo 7.5s steps(1, end) infinite; }
+}
+@keyframes lot-e-v6-mid {
+  0%, 94% { transform: translateX(0); }
+  94.3%, 96% { transform: translateX(20px); }
+  96.3%, 100% { transform: translateX(0); }
+}
+@keyframes lot-e-v6-echo {
+  0%, 94% { opacity: 0; transform: translateX(0); }
+  94.3%, 96% { opacity: 1; transform: translateX(0); }
+  96.3%, 100% { opacity: 0; transform: translateX(0); }
+}
+.lot-e .v6.peak .band-mid { animation: none; transform: translateX(20px); }
+.lot-e .v6.peak .echo { animation: none; opacity: 1; transform: translateX(0); }
+
+/* ============ v7: vertical-columns, tear runs the other way ============ */
+.lot-e .v7 .band { clip-path: inset(0 0 0 0); }
+.lot-e .v7 .col-a { clip-path: inset(0 66.6% 0 0); }
+.lot-e .v7 .col-b { clip-path: inset(0 33.3% 0 33.3%); }
+.lot-e .v7 .col-c { clip-path: inset(0 0 0 66.6%); }
+@media (prefers-reduced-motion: no-preference) {
+  .lot-e .v7 .col-a { animation: lot-e-v7-up 8s steps(1, end) infinite; }
+  .lot-e .v7 .col-b { animation: lot-e-v7-down 8s steps(1, end) infinite; }
+  .lot-e .v7 .col-c { animation: lot-e-v7-up 8s steps(1, end) infinite reverse; }
+}
+@keyframes lot-e-v7-up {
+  0%, 95% { transform: translateY(0); }
+  95.4%, 96.6% { transform: translateY(-14px); }
+  97%, 100% { transform: translateY(0); }
+}
+@keyframes lot-e-v7-down {
+  0%, 95% { transform: translateY(0); }
+  95.4%, 96.6% { transform: translateY(14px); }
+  97%, 100% { transform: translateY(0); }
+}
+.lot-e .v7.peak .col-a { animation: none; transform: translateY(-14px); }
+.lot-e .v7.peak .col-b { animation: none; transform: translateY(14px); }
+.lot-e .v7.peak .col-c { animation: none; transform: translateY(14px); }
+
+/* ============ v8: hue-shift-tear, colour jumps to a guest hue mid-tear ============ */
+.lot-e .v8 .band { clip-path: inset(0 0 0 0); }
+.lot-e .v8 .band-top { clip-path: inset(0 0 58% 0); }
+.lot-e .v8 .band-mid { clip-path: inset(36% 0 30% 0); }
+.lot-e .v8 .band-bot { clip-path: inset(70% 0 0 0); }
+@media (prefers-reduced-motion: no-preference) {
+  .lot-e .v8 .band-mid { animation: lot-e-v8-tear 9s steps(1, end) infinite; }
+}
+@keyframes lot-e-v8-tear {
+  0%, 93% { transform: translateX(0); color: var(--p-amber); text-shadow: var(--bloom); }
+  93.4%, 95% { transform: translateX(11px); color: var(--p-coral); text-shadow: none; }
+  95.4%, 100% { transform: translateX(0); color: var(--p-amber); text-shadow: var(--bloom); }
+}
+.lot-e .v8.peak .band-mid { animation: none; transform: translateX(11px); color: var(--p-coral); text-shadow: none; }
+</style>
+
+<article class="card lot-e">
+  <h2 class="cap">quiet-tear — reads clean; three thin bands, one rare 8s pulse pulls the middle band sideways then snaps back. This is the "usually readable, occasionally glitches out" mark.</h2>
+  <div class="stage">
+    <div class="wordmark v1">
+      <span class="band band-top">arcade404</span>
+      <span class="band band-mid">arcade404</span>
+      <span class="band band-bot">arcade404</span>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-e">
+  <h2 class="cap">six-thin-slices — six hairline bands, a burst of three quick tears fires within one cycle, then a long calm.</h2>
+  <div class="stage">
+    <div class="wordmark v2">
+      <span class="band b1">arcade404</span>
+      <span class="band b2">arcade404</span>
+      <span class="band b3">arcade404</span>
+      <span class="band b4">arcade404</span>
+      <span class="band b5">arcade404</span>
+      <span class="band b6">arcade404</span>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-e">
+  <h2 class="cap">hairline-slip — one thin band, a 2px drift that creeps up then eases back; never fully tears, just wobbles.</h2>
+  <div class="stage">
+    <div class="wordmark v3">
+      <span class="band band-hair">arcade404</span>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-e">
+  <h2 class="cap">big-tear — two fat bands split the word in half; every 8s a 30px hard displacement briefly destroys it entirely.</h2>
+  <div class="stage">
+    <div class="wordmark v4">
+      <span class="band band-top">arcade404</span>
+      <span class="band band-bot">arcade404</span>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-e">
+  <h2 class="cap">smear-fill — the gap left by the tear fills with a dimmer amber smear that fades out after the band snaps home.</h2>
+  <div class="stage">
+    <div class="wordmark v5">
+      <span class="band band-top">arcade404</span>
+      <span class="ghost smear">arcade404</span>
+      <span class="band band-mid">arcade404</span>
+      <span class="band band-bot">arcade404</span>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-e">
+  <h2 class="cap">echo-duplicate — the tear leaves behind a dim duplicate of the band, like a held afterimage, instead of an empty gap.</h2>
+  <div class="stage">
+    <div class="wordmark v6">
+      <span class="band band-top">arcade404</span>
+      <span class="ghost echo">arcade404</span>
+      <span class="band band-mid">arcade404</span>
+      <span class="band band-bot">arcade404</span>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-e">
+  <h2 class="cap">vertical-columns — the tear runs the other way: three columns slip up and down instead of bands slipping sideways.</h2>
+  <div class="stage">
+    <div class="wordmark v7">
+      <span class="band col-a">arcade404</span>
+      <span class="band col-b">arcade404</span>
+      <span class="band col-c">arcade404</span>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-e">
+  <h2 class="cap">hue-shift-tear — amber at rest; for the instant of the tear the displaced band jumps to coral, a guest hue borrowed from the game screens.</h2>
+  <div class="stage">
+    <div class="wordmark v8">
+      <span class="band band-top">arcade404</span>
+      <span class="band band-mid">arcade404</span>
+      <span class="band band-bot">arcade404</span>
+    </div>
+  </div>
+</article>

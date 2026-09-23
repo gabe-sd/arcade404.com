@@ -437,22 +437,34 @@ stylesheet, so a game can override anything in it and
 | Element | Value |
 | --- | --- |
 | Frame | `.game-in`, max-width 1120px, padding `1.4rem 1.6rem 2rem` |
-| Wash | `.game-deco`, z-index 0 — amber bloom off the top, vignette into the corners |
+| Wash | `.game-deco`, z-index 0 — the same rule as the hub's `.deco`, defined once in `shared.css` |
 | Scanlines | `.game-crt`, z-index 6 — `rgba(0,0,0,.34)` 1px every 3px |
-| Breadcrumb | `.crumb`, 1.02rem, `--p-dim`, letter-spacing 0.08em; the game's name in it is `--p-pale` |
+| Header | `.top` from `shared.css` — the wordmark left, the game's own title right |
 | Title | `.game-title`, 2.1rem (1.7rem under 620px), `--p-hot`, `--bloom-lg`, letter-spacing 0.09em |
 | Head rule | 1px `--p-hairline` under the top row |
 | Status strap | `.game-strap`, 1.22rem, `--p-pale`, with the hub's fading block cursor |
 | Stage | `.game-stage`, z-index 7 — the board, lifted clear of the scanlines |
-| Foot | `.game-foot`, 1rem, `--p-dim`, 1px `--p-hairline` above, two columns that stack under 620px |
+| Foot | `.game-foot`, 1rem, `--p-dim`, 1px `--p-hairline` above, two columns that stack under 620px, with `.site-nav` on a row of its own beneath them |
 
 Three rules under it:
 
+- **The footer spans the page, not the board.** Pong and Flappy Bird each pulled
+  it into the court's centred column, which made those two pages disagree with
+  the other four. `tests/contract.test.js` holds every game page's footer to the
+  width of the header above it.
 - **Chrome against screen, in z-index terms.** The wash is 0, the scanlines are
   6, the board is 7 with its own opaque ground. A scanline over a chess hairline
   or a Sudoku digit is texture bought at the price of reading the game.
-- **The breadcrumb is the contract's link home.** It replaces `.back-link`, and
-  it says where you are as well as where you can go.
+- **There is no nav in the header, and no Home link anywhere.** About and GitHub
+  sit in the footer of all eight pages, on a line of their own; Home was a second
+  copy of what the wordmark already does. Gabriel's call of 2026-09-22, which is
+  also what freed the top row for the game's title.
+- **The wordmark is the contract's link home**, on every page that has one. A
+  game page used to carry a breadcrumb here instead — `← ARCADE / GAME NAME` —
+  which said where you were as well as where you could go, but meant that moving
+  from the hub into a game changed the furniture as well as the content.
+  Gabriel's call of 2026-09-22: the header is the same everywhere, and the game's
+  own title sits under it rather than beside a trail.
 - **Standing instructions go in the foot, never in `#status`.** The contract
   keeps the status line for game state, and a hint that never changes is not
   state.
@@ -671,7 +683,7 @@ column. All three of the mockup's changes landed together.
 The strap, scorebar, court, buttons and footer are `min(100%, calc(var(--court)
 + 28px))` and centre: the 600px court, plus the canvas's own 1px border, plus
 12px of bezel padding, plus the bezel's own 1px border, each doubled. The
-breadcrumb and title above them still span the page. Nothing resizes — the column
+header and title above them still span the page. Nothing resizes — the column
 simply stops where the court stops, which is what puts `you` and `ai` over the
 paddles they label instead of hundreds of pixels away on a wide monitor.
 
@@ -1060,6 +1072,74 @@ from a digit that is already placed. It still takes no digit.
   through to the reader's OS font at 3.5x the width of a digit. Drawn instead, on
   the hub's 48 grid at the hub's weight — the same answer chess, Minesweeper and
   Flappy Bird reached for their own glyphs.
+
+## The wordmark, and the faults it wears
+
+The site's name is `ARCADE404`, tight caps, no gap and no tail — Gabriel's choice
+of 2026-09-22 from a sheet of seventy-five lockups. It is the `.brand` on the hub
+and the about page, and the same again in every game page's header. It replaced
+`ARCADE`, which was a placeholder from before the site had a domain.
+
+**The mark is the link home on every page.** Clicking it goes to `../../`, or
+whatever the page's own way home is. The anchor carries the href and the mark
+sits inside it: `role="img"` on the anchor itself would replace the link's own
+role, and the way home would stop announcing itself as a link.
+
+**The mark is a display that is not quite working**, and that is the whole idea:
+a site named after an error behaves like one. It sits perfectly still and clean
+almost all of the time, and every so often something goes briefly wrong with it.
+
+### The rules that keep it from becoming a nuisance
+
+- **Clean at rest is absolute.** With no fault running the mark is one amber word
+  and nothing else — no fringe, no offset, no overlay. Every effect is checked
+  against that in `tests/wordmark.test.js`, pixel for pixel.
+- **A fault is an event, not a loop.** Nothing animates on its own timing.
+  `wordmark.js` picks one, runs it once, and takes it away. The timings live in
+  that file as named constants; this doc does not repeat them.
+- **The name is in the document once.** Only `.base` is real text; every copy an
+  effect displaces is an empty element drawing itself from `data-text` through
+  generated content. The mark then carries `role="img"` with the name as its
+  label, because the visible word is one-character spans and a screen reader is
+  otherwise entitled to spell it out.
+- **It works with the script absent.** The name is plain text in all eight pages'
+  HTML. `wordmark.js` only ever adds to it, so a blocked or failed script costs
+  the site its glitch, not its name.
+- **Reduced motion skips the upgrade entirely.** Not a quieter version: the mark
+  stays the plain text the HTML carries.
+- **Offsets are in `em`.** They were drawn against a 64px mark, and nothing
+  guarantees every page will wear it at that size — the header is 3.1rem now and
+  2.4rem on a narrow screen. In px the same tear would cut a small mark in half.
+
+### The twelve faults
+
+Named in `wordmark.js` and built in `shared.css`, where each is `.wm.fx-<name>`.
+They came from three of the ten exploration lots — the torn-signal family, the
+tear-and-misconvergence hybrids, and two display faults — and Gabriel picked them
+off a sheet rather than from a description.
+
+Six of them put a guest hue into the chrome, which is the one place the palette
+otherwise forbids colour. **That is a deliberate exception and it is narrow: the
+colour only exists inside the damage, for a few hundred milliseconds.** A fault
+is the display failing, not the chrome changing its mind — see "chrome against
+screen" above, which is the rule this bends rather than breaks.
+
+### Rejected, with the reason
+
+- **Eased timing.** Every effect was originally written with `ease`, which draws
+  every intermediate position, so the band *travelled* to where it was going and
+  back. That reads as motion rather than malfunction. They run on `steps(1, end)`
+  now: each keyframe holds until the next and nothing between them is ever drawn.
+  Measured rather than judged — the four worst offenders visited 7 to 28 distinct
+  positions eased, and 3 to 4 stepped.
+- **A permanently mis-registered mark.** The standing-fringe effect originally
+  kept a faint colour fringe at rest and merely widened it. Clean at rest won:
+  the fringe now opens from nothing. This is the one effect that is not quite the
+  thing it was chosen as.
+- **An ambient loop.** The first build had each effect looping on its own
+  keyframe timing, faking rarity with `0%, 96% { calm }`. A scheduler that fires
+  one fault and removes it is both simpler and the only version that can pick at
+  random.
 
 ## How the tokens are layered
 

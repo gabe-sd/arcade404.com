@@ -11,20 +11,6 @@
    the chrome text alike — see design/DESIGN.md, "The hub", for the values
    and why they stay this faint: any stronger and the ground stops being
    black and starts being brown. */
-.deco {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background: radial-gradient(
-      85% 65% at 50% 2%,
-      rgba(255, 176, 0, 0.16),
-      transparent 74%
-    ),
-    radial-gradient(65% 50% at 50% 100%, rgba(255, 140, 0, 0.06), transparent 70%),
-    radial-gradient(125% 105% at 50% 45%, transparent 52%, rgba(0, 0, 0, 0.72));
-}
-
 /* The CRT texture. Sits over the whole page (chrome included) so the top nav
    and wordmark visibly carry it — that is the point. The grid gives itself
    an opaque background and rises above this layer, per "chrome against
@@ -49,50 +35,6 @@
   margin: 0 auto;
   padding: 2.6rem 1.8rem 3.6rem;
   position: relative;
-}
-
-.top {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 1rem;
-  flex-wrap: wrap;
-  padding-bottom: 0.9rem;
-  border-bottom: 1px solid var(--p-hairline);
-}
-
-.brand {
-  font-size: 3.1rem;
-  line-height: 1;
-  letter-spacing: 0.1em;
-  color: var(--p-hot);
-  text-shadow: var(--bloom-lg);
-}
-
-.nav {
-  display: flex;
-  gap: 1.6rem;
-}
-
-.nav a {
-  color: var(--p-dim);
-  font-size: 1.15rem;
-  letter-spacing: 0.06em;
-  text-decoration: none;
-  padding-bottom: 0.15rem;
-  border-bottom: 1px solid transparent;
-}
-
-.nav a:hover,
-.nav a:focus-visible {
-  color: var(--p-pale);
-  outline: none;
-}
-
-.nav a.active {
-  color: var(--p-amber);
-  border-bottom-color: var(--p-amber);
-  text-shadow: var(--bloom);
 }
 
 .hub .status {
@@ -316,6 +258,8 @@
 }
 
 .foot {
+  display: flex;
+  flex-wrap: wrap;
   margin-top: 3.2rem;
   padding-top: 1rem;
   border-top: 1px solid var(--p-hairline);
@@ -327,8 +271,5 @@
 @media (max-width: 760px) {
   .screen {
     padding: 1.8rem 1.1rem 2.6rem;
-  }
-  .brand {
-    font-size: 2.4rem;
   }
 }

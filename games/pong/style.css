@@ -7,8 +7,7 @@
    number and nothing else drifts out of line:
    court + the canvas's own 1px border + 12px of bezel padding + the bezel's
    own 1px border, each doubled. */
-.cabinet,
-.game-page .game-foot {
+.cabinet {
   --court: 600px;
   width: min(100%, calc(var(--court) + 28px));
   margin-inline: auto;

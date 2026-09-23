@@ -1,0 +1,378 @@
+<style>
+/* lot-c: the name as a piece of hardware */
+
+.lot-c .stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+  background: var(--p-ground);
+  font-family: "VT323", monospace;
+}
+
+/* ---------- 1. MARQUEE ---------- */
+
+.lot-c .marquee-bezel {
+  position: relative;
+  padding: 6px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #2a1c0a, #140d05);
+  box-shadow:
+    0 0 0 1px var(--p-hairline),
+    inset 0 1px 0 rgba(255, 214, 148, 0.08);
+}
+
+.lot-c .marquee-panel {
+  position: relative;
+  border-radius: 9px;
+  padding: 22px 34px;
+  background: radial-gradient(120% 160% at 50% -20%, var(--p-panel-lit), var(--p-panel) 70%);
+  border: 1px solid var(--p-rule);
+  overflow: visible;
+}
+
+.lot-c .marquee-name {
+  margin: 0;
+  font-size: 42px;
+  letter-spacing: 0.08em;
+  color: var(--p-amber);
+  text-shadow: var(--bloom-lg);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.lot-c .marquee-panel::after {
+  content: "";
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: -26px;
+  height: 30px;
+  background: radial-gradient(60% 100% at 50% 0%, rgba(255, 176, 0, 0.28), transparent 75%);
+  filter: blur(2px);
+  pointer-events: none;
+}
+
+/* ---------- 2. NAMEPLATE (engraved) ---------- */
+
+.lot-c .nameplate {
+  padding: 30px 40px;
+  background: var(--p-panel-lit);
+  border-radius: 4px;
+  box-shadow:
+    inset 0 2px 4px rgba(0, 0, 0, 0.7),
+    inset 0 -1px 0 rgba(255, 214, 148, 0.05),
+    0 1px 0 rgba(255, 214, 148, 0.04);
+}
+
+.lot-c .nameplate-name {
+  margin: 0;
+  font-size: 38px;
+  letter-spacing: 0.12em;
+  text-align: center;
+  color: #3a2a12;
+  text-shadow:
+    -1px -1px 1px rgba(0, 0, 0, 0.95),
+    1px 1px 0 rgba(255, 214, 148, 0.30);
+}
+
+.lot-c .nameplate-tail {
+  margin: 8px 0 0;
+  text-align: center;
+  font-size: 13px;
+  letter-spacing: 0.2em;
+  color: #33240f;
+  text-shadow:
+    -1px -1px 1px rgba(0, 0, 0, 0.9),
+    1px 1px 0 rgba(255, 214, 148, 0.22);
+}
+
+/* ---------- 3. BADGE / PLATE ---------- */
+
+.lot-c .badge {
+  padding: 18px 30px;
+  text-align: center;
+}
+
+.lot-c .badge-rule {
+  border: none;
+  border-top: 1px solid var(--p-rule);
+  margin: 0;
+}
+
+.lot-c .badge-name {
+  margin: 10px 0;
+  font-size: 34px;
+  letter-spacing: 0.35em;
+  color: var(--p-soft);
+  padding-left: 0.35em; /* optical correction for tracking */
+}
+
+.lot-c .badge-model {
+  margin: 10px 0 0;
+  font-size: 13px;
+  letter-spacing: 0.15em;
+  color: var(--p-dim);
+}
+
+/* ---------- 4. SEVEN-SEGMENT 404 ---------- */
+
+.lot-c .sevenseg-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.lot-c .digit {
+  position: relative;
+  width: 34px;
+  height: 58px;
+  flex: none;
+}
+
+.lot-c .seg {
+  position: absolute;
+  background: var(--p-hairline);
+  border-radius: 2px;
+}
+
+.lot-c .seg.on {
+  background: var(--p-amber);
+  box-shadow: var(--bloom);
+}
+
+.lot-c .seg-a { top: 0;    left: 5px;  width: 24px; height: 5px; }
+.lot-c .seg-g { top: 26.5px; left: 5px; width: 24px; height: 5px; }
+.lot-c .seg-d { top: 53px;  left: 5px;  width: 24px; height: 5px; }
+.lot-c .seg-f { top: 4px;   left: 0;    width: 5px;  height: 24px; }
+.lot-c .seg-b { top: 4px;   right: 0;   width: 5px;  height: 24px; }
+.lot-c .seg-e { top: 30px;  left: 0;    width: 5px;  height: 24px; }
+.lot-c .seg-c { top: 30px;  right: 0;   width: 5px;  height: 24px; }
+
+.lot-c .sevenseg-word {
+  font-size: 34px;
+  letter-spacing: 0.14em;
+  color: var(--p-soft);
+}
+
+/* ---------- 5. BEZEL / CRT SCREEN ---------- */
+
+.lot-c .crt {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  padding: 34px 20px;
+  border-radius: 34px / 26px;
+  background: radial-gradient(120% 140% at 50% 40%, #17100a 0%, #0c0803 78%);
+  box-shadow:
+    inset 0 0 40px rgba(0, 0, 0, 0.85),
+    inset 0 0 0 2px var(--p-hairline);
+  overflow: hidden;
+  text-align: center;
+}
+
+.lot-c .crt::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 214, 148, 0.05) 0px,
+    rgba(255, 214, 148, 0.05) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  pointer-events: none;
+}
+
+.lot-c .crt-name {
+  position: relative;
+  margin: 0;
+  font-size: 36px;
+  letter-spacing: 0.1em;
+  color: var(--p-amber);
+  text-shadow: var(--bloom);
+}
+
+/* ---------- 6. POWER / BOOT ---------- */
+
+.lot-c .power-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.lot-c .lamp {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  flex: none;
+  background: radial-gradient(circle at 35% 30%, var(--p-hot), var(--p-amber) 55%, #7a3f00 100%);
+  box-shadow: 0 0 8px 2px rgba(255, 176, 0, 0.55);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .lot-c .lamp {
+    animation: lot-c-blink 2.6s ease-in-out infinite;
+  }
+}
+
+@keyframes lot-c-blink {
+  0%, 82%, 100% { opacity: 1; }
+  90% { opacity: 0.45; }
+}
+
+.lot-c .power-name {
+  margin: 0;
+  font-size: 36px;
+  letter-spacing: 0.08em;
+  color: var(--p-soft);
+}
+
+.lot-c .power-sub {
+  margin: 2px 0 0 30px;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  color: var(--p-dim);
+}
+
+/* ---------- 7. COIN SLOT PLATE ---------- */
+
+.lot-c .coin-plate {
+  width: 100%;
+  max-width: 380px;
+  padding: 20px 24px 24px;
+  background: linear-gradient(180deg, var(--p-panel-lit), var(--p-panel));
+  border: 1px solid var(--p-hairline);
+  border-radius: 6px;
+  text-align: center;
+}
+
+.lot-c .coin-insert {
+  margin: 0 0 14px;
+  font-size: 13px;
+  letter-spacing: 0.3em;
+  color: var(--p-dim);
+}
+
+.lot-c .coin-slot-shape {
+  width: 46px;
+  height: 12px;
+  margin: 0 auto 16px;
+  border-radius: 6px;
+  background: #060301;
+  box-shadow:
+    inset 0 2px 3px rgba(0, 0, 0, 0.9),
+    0 1px 0 rgba(255, 214, 148, 0.06);
+}
+
+.lot-c .coin-name {
+  margin: 0;
+  font-size: 38px;
+  letter-spacing: 0.1em;
+  color: var(--p-amber);
+  text-shadow: var(--bloom);
+}
+</style>
+
+<article class="card lot-c">
+  <h2 class="cap">Marquee — lit cabinet panel, glow spilling down</h2>
+  <div class="stage">
+    <div class="marquee-bezel">
+      <div class="marquee-panel">
+        <p class="marquee-name">ARCADE404</p>
+      </div>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-c">
+  <h2 class="cap">Nameplate — engraved into a dark panel, recessed not lit</h2>
+  <div class="stage">
+    <div class="nameplate">
+      <p class="nameplate-name">ARCADE 404</p>
+      <p class="nameplate-tail">// ERROR GAME NOT FOUND</p>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-c">
+  <h2 class="cap">Badge — rule above and below, sparse spec text</h2>
+  <div class="stage">
+    <div class="badge">
+      <hr class="badge-rule" />
+      <p class="badge-name">ARCADE404</p>
+      <hr class="badge-rule" />
+      <p class="badge-model">MDL 404 &middot; REV 1</p>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-c">
+  <h2 class="cap">Seven-segment — 404 as lit segments, ARCADE set beside it</h2>
+  <div class="stage">
+    <div class="sevenseg-row">
+      <span class="sevenseg-word">ARCADE</span>
+      <div class="digit">
+        <span class="seg seg-f on"></span>
+        <span class="seg seg-b on"></span>
+        <span class="seg seg-g on"></span>
+        <span class="seg seg-c on"></span>
+        <span class="seg seg-a"></span>
+        <span class="seg seg-d"></span>
+        <span class="seg seg-e"></span>
+      </div>
+      <div class="digit">
+        <span class="seg seg-a on"></span>
+        <span class="seg seg-b on"></span>
+        <span class="seg seg-c on"></span>
+        <span class="seg seg-d on"></span>
+        <span class="seg seg-e on"></span>
+        <span class="seg seg-f on"></span>
+        <span class="seg seg-g"></span>
+      </div>
+      <div class="digit">
+        <span class="seg seg-f on"></span>
+        <span class="seg seg-b on"></span>
+        <span class="seg seg-g on"></span>
+        <span class="seg seg-c on"></span>
+        <span class="seg seg-a"></span>
+        <span class="seg seg-d"></span>
+        <span class="seg seg-e"></span>
+      </div>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-c">
+  <h2 class="cap">Bezel / CRT — name inside a rounded screen, scanlines and vignette</h2>
+  <div class="stage">
+    <div class="crt">
+      <p class="crt-name">ARCADE404</p>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-c">
+  <h2 class="cap">Power / boot — indicator lamp beside the name</h2>
+  <div class="stage">
+    <div>
+      <div class="power-row">
+        <span class="lamp"></span>
+        <p class="power-name">ARCADE404</p>
+      </div>
+      <p class="power-sub">READY</p>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-c">
+  <h2 class="cap">Coin slot plate — INSERT COIN register, name still dominant</h2>
+  <div class="stage">
+    <div class="coin-plate">
+      <p class="coin-insert">INSERT COIN</p>
+      <div class="coin-slot-shape"></div>
+      <p class="coin-name">ARCADE404</p>
+    </div>
+  </div>
+</article>

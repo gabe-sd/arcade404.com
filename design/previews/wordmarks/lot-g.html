@@ -1,0 +1,232 @@
+<style>
+/* lot-g: the error as MEANING, not visual damage — every selector scoped
+   under .lot-g, every keyframe prefixed lg- to avoid cross-lot collision. */
+
+.lot-g { font-family: "VT323", monospace; }
+.lot-g .stage {
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  background: var(--p-ground);
+}
+.lot-g .mark {
+  font-size: 2.6rem;
+  line-height: 1;
+  color: var(--p-amber);
+  text-shadow: var(--bloom);
+  letter-spacing: 0.02em;
+  white-space: pre;
+}
+.lot-g .sub {
+  font-size: 1.05rem;
+  color: var(--p-dim);
+  letter-spacing: 0.04em;
+}
+
+/* ---------- v1: load fault — 404 occasionally fails to render ---------- */
+.lot-g.v1 .mark { position: relative; }
+.lot-g.v1 .tail { position: relative; display: inline-block; }
+.lot-g.v1 .digits { }
+.lot-g.v1 .box {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  border: 2px solid var(--p-dim);
+  border-radius: 2px;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .lot-g.v1 .digits { animation: lg-v1-digits 7s steps(1) infinite; }
+  .lot-g.v1 .box { animation: lg-v1-box 7s steps(1) infinite; }
+}
+@keyframes lg-v1-digits {
+  0%, 91% { opacity: 1; }
+  92%, 96% { opacity: 0; }
+  97%, 100% { opacity: 1; }
+}
+@keyframes lg-v1-box {
+  0%, 91% { opacity: 0; }
+  92%, 96% { opacity: 1; }
+  97%, 100% { opacity: 0; }
+}
+.lot-g.v1.peak .digits { opacity: 0; animation: none; }
+.lot-g.v1.peak .box { opacity: 1; animation: none; }
+
+/* ---------- v2: checksum / hex dump ---------- */
+.lot-g.v2 .hexrow { font-size: 1rem; color: var(--p-dim); letter-spacing: 0.05em; }
+.lot-g.v2 .hexrow .byte { display: inline-block; }
+@media (prefers-reduced-motion: no-preference) {
+  .lot-g.v2 .byte.b3 { animation: lg-v2-flicker 8s steps(1) infinite; }
+}
+@keyframes lg-v2-flicker {
+  0%, 93% { opacity: 1; }
+  94%, 97% { opacity: 0.15; }
+  98%, 100% { opacity: 1; }
+}
+.lot-g.v2.peak .byte.b3 { opacity: 0.15; animation: none; }
+
+/* ---------- v3: stack trace ---------- */
+.lot-g.v3 .trace { font-size: 0.95rem; color: var(--p-dim); line-height: 1.5; }
+.lot-g.v3 .trace .frame.dim2 { color: var(--p-rule); }
+.lot-g.v3 .cursor {
+  display: inline-block;
+  width: 0.55em;
+  height: 1em;
+  background: var(--p-dim);
+  vertical-align: text-bottom;
+  margin-left: 2px;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .lot-g.v3 .cursor { animation: lg-v3-blink 1.1s steps(1) infinite; }
+}
+@keyframes lg-v3-blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+.lot-g.v3.peak .cursor { opacity: 1; animation: none; }
+
+/* ---------- v4: retry / reconnect ---------- */
+.lot-g.v4 .sub.retry { opacity: 0; }
+@media (prefers-reduced-motion: no-preference) {
+  .lot-g.v4 .sub.retry { animation: lg-v4-retry 6s steps(1) infinite; }
+}
+@keyframes lg-v4-retry {
+  0%, 89% { opacity: 0; }
+  90%, 96% { opacity: 1; }
+  97%, 100% { opacity: 0; }
+}
+.lot-g.v4.peak .sub.retry { opacity: 1; animation: none; }
+
+/* ---------- v5: the socket that empties ---------- */
+.lot-g.v5 .socket { position: relative; display: inline-block; }
+.lot-g.v5 .socket .fill { }
+@media (prefers-reduced-motion: no-preference) {
+  .lot-g.v5 .socket .fill { animation: lg-v5-drop 9s steps(1) infinite; }
+}
+@keyframes lg-v5-drop {
+  0%, 92% { opacity: 1; }
+  93%, 95% { opacity: 0; }
+  96%, 100% { opacity: 1; }
+}
+.lot-g.v5.peak .socket .fill { opacity: 0; animation: none; }
+
+/* ---------- v6: diagnostic table (static) ---------- */
+.lot-g.v6 table.diag { border-collapse: collapse; font-size: 1.1rem; }
+.lot-g.v6 table.diag td {
+  padding: 2px 14px 2px 0;
+  color: var(--p-dim);
+  border-bottom: 1px solid var(--p-hairline);
+}
+.lot-g.v6 table.diag td.val { color: var(--p-pale); }
+.lot-g.v6 table.diag tr:last-child td { border-bottom: none; }
+
+/* ---------- v7: scrambling decode ---------- */
+/* The resting digit stays in the flow and sizes the reel; only the wrong
+   digit is absolute. A reel of purely absolute children collapses onto the
+   baseline and draws the tail below the word. */
+.lot-g.v7 .reel { position: relative; display: inline-block; }
+.lot-g.v7 .reel span { position: absolute; left: 0; top: 0; opacity: 0; }
+.lot-g.v7 .reel span.at-rest { position: static; opacity: 1; }
+@media (prefers-reduced-motion: no-preference) {
+  .lot-g.v7 .reel.r1 span { animation: lg-v7-r1 8s steps(1) infinite; }
+  .lot-g.v7 .reel.r2 span { animation: lg-v7-r2 8s steps(1) infinite; }
+  .lot-g.v7 .reel.r3 span { animation: lg-v7-r3 8s steps(1) infinite; }
+}
+@keyframes lg-v7-r1 {
+  0%, 93% { opacity: 0; } 93.1%, 100% { opacity: 0; }
+}
+.lot-g.v7 .reel.r1 span.at-rest { animation-name: lg-v7-r1-rest !important; }
+.lot-g.v7 .reel.r2 span.at-rest { animation-name: lg-v7-r2-rest !important; }
+.lot-g.v7 .reel.r3 span.at-rest { animation-name: lg-v7-r3-rest !important; }
+.lot-g.v7 .reel.r1 span.s1 { animation-name: lg-v7-r1-s1 !important; }
+.lot-g.v7 .reel.r2 span.s1 { animation-name: lg-v7-r2-s1 !important; }
+.lot-g.v7 .reel.r3 span.s1 { animation-name: lg-v7-r3-s1 !important; }
+@keyframes lg-v7-r1-rest { 0%, 92% { opacity: 1; } 93%, 97% { opacity: 0; } 98%, 100% { opacity: 1; } }
+@keyframes lg-v7-r1-s1   { 0%, 92% { opacity: 0; } 93%, 97% { opacity: 1; } 98%, 100% { opacity: 0; } }
+@keyframes lg-v7-r2-rest { 0%, 93% { opacity: 1; } 94%, 96% { opacity: 0; } 97%, 100% { opacity: 1; } }
+@keyframes lg-v7-r2-s1   { 0%, 93% { opacity: 0; } 94%, 96% { opacity: 1; } 97%, 100% { opacity: 0; } }
+@keyframes lg-v7-r3-rest { 0%, 94% { opacity: 1; } 95%, 96% { opacity: 0; } 97%, 100% { opacity: 1; } }
+@keyframes lg-v7-r3-s1   { 0%, 94% { opacity: 0; } 95%, 96% { opacity: 1; } 97%, 100% { opacity: 0; } }
+.lot-g.v7.peak .reel span.at-rest { opacity: 0; animation: none; }
+.lot-g.v7.peak .reel span.s1 { opacity: 1; animation: none; }
+
+/* ---------- v8: cursor waiting forever ---------- */
+.lot-g.v8 .prompt { color: var(--p-dim); }
+.lot-g.v8 .block-cursor {
+  display: inline-block;
+  width: 0.55em;
+  height: 1em;
+  background: var(--p-amber);
+  box-shadow: var(--bloom);
+  vertical-align: text-bottom;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .lot-g.v8 .block-cursor { animation: lg-v8-blink 1s steps(1) infinite; }
+}
+@keyframes lg-v8-blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+.lot-g.v8.peak .block-cursor { opacity: 1; animation: none; }
+</style>
+
+<article class="card lot-g v1">
+  <h2 class="cap">Load fault — the tail occasionally fails to render</h2>
+  <div class="stage">
+    <div class="mark">ARCADE<span class="tail"><span class="digits">404</span><span class="box" aria-hidden="true"></span></span></div>
+  </div>
+</article>
+
+<article class="card lot-g v2">
+  <h2 class="cap">Checksum — the name beside a hex dump of itself</h2>
+  <div class="stage">
+    <div class="mark">ARCADE404</div>
+    <div class="hexrow">0x01<span class="byte b3">94</span> &nbsp; 01000001 01110010</div>
+  </div>
+</article>
+
+<article class="card lot-g v3">
+  <h2 class="cap">Stack trace — the name as the top frame</h2>
+  <div class="stage">
+    <div class="mark">arcade404</div>
+    <div class="trace">
+      <div class="frame">at game.load (arcade404:404)<span class="cursor"></span></div>
+      <div class="frame dim2">at boot.init (arcade404:1)</div>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-g v4">
+  <h2 class="cap">Retry / reconnect — a machine that keeps trying</h2>
+  <div class="stage">
+    <div class="mark">ARCADE404</div>
+    <div class="sub retry">RETRY 1 OF 3</div>
+  </div>
+</article>
+
+<article class="card lot-g v5">
+  <h2 class="cap">The socket — a slot that occasionally empties</h2>
+  <div class="stage">
+    <div class="mark">ARCADE [<span class="socket"><span class="fill">404</span></span>]</div>
+  </div>
+</article>
+
+<article class="card lot-g v6">
+  <h2 class="cap">Self-test — a diagnostic readout under the name</h2>
+  <div class="stage">
+    <div class="mark">ARCADE404</div>
+    <table class="diag">
+      <tr><td>GAME</td><td class="val">NOT FOUND</td></tr>
+      <tr><td>CODE</td><td class="val">404</td></tr>
+    </table>
+  </div>
+</article>
+
+<article class="card lot-g v7">
+  <h2 class="cap">Decode — the tail briefly loses sync, then relands</h2>
+  <div class="stage">
+    <div class="mark">ARCADE<span class="reel r1"><span class="at-rest">4</span><span class="s1">8</span></span><span class="reel r2"><span class="at-rest">0</span><span class="s1">5</span></span><span class="reel r3"><span class="at-rest">4</span><span class="s1">9</span></span></div>
+  </div>
+</article>
+
+<article class="card lot-g v8">
+  <h2 class="cap">Waiting — typed at a prompt, the error never comes</h2>
+  <div class="stage">
+    <div class="mark"><span class="prompt">&gt;</span> arcade404<span class="block-cursor" aria-hidden="true"></span></div>
+  </div>
+</article>

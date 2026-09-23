@@ -47,7 +47,7 @@ four framed but not restyled inside.
 **Flappy Bird's phase landed on 2026-09-10, Tic Tac Toe's on 2026-09-11 and
 Minesweeper's on 2026-09-15**, leaving Sudoku below.
 
-**The frame has landed** — breadcrumb, title, strap, scanlines, footer and the
+**The frame has landed** — header, title, strap, scanlines, footer and the
 shared `#instructions` panel are in place and covered by
 `tests/contract.test.js`. What is left is the inside of the board.
 
@@ -63,7 +63,6 @@ known about:
 
 | Game | Where | Glyphs |
 | --- | --- | --- |
-| **every game** | the breadcrumb | `←` ×6, one per game page |
 | pong | status line and the menu | `🎉` ×2 |
 | pong | Play button, panel, footer | `▶`, `↑`/`↓` ×2 |
 | sudoku | status line | `🎉` |
@@ -73,12 +72,12 @@ that game's own phase, and **Sudoku's `⌫` went with its own on 2026-09-15** �
 button carries a drawn glyph now and the panel line says "the erase key". The hub
 and the About page have none.
 
-**The breadcrumb `←` is the one to notice**, and it had never been counted: it is
-on six pages rather than one, it is the most-seen glyph in the set, and it is the
-*frame's* rather than any game's — so unlike everything else here it cannot be
-taken by a game's phase. It is a substituted face like the rest; `M`, `W` and `i`
-measure 8.8px in VT323 and `↑` measures 11px, and `←` is from the same block the
-typeface does not carry.
+**The breadcrumb `←` was the hardest of these and it is gone**, on 2026-09-22 —
+not by being reworded but because the breadcrumb itself went. Every game page
+wears the same header as the hub now, so the six most-seen substituted glyphs on
+the site left with it. Worth keeping as the pattern: the entry had it filed as a
+wording question, and the answer turned out to be that the element asking the
+question did not need to exist.
 
 **Two kinds of problem, and the table does not separate them.** The `🎉` are a tone
 choice; everything else is a glyph the typeface does not have — "The arrows and the
@@ -124,10 +123,9 @@ line needed words, and "the erase key" was enough. Two sets are left:
 
 - **Pong** says `W/S or ↑/↓` twice, which has no short rewrite. Its `▶` is on the
   Play button and is Sudoku's case exactly — draw it; the arrows in the sentence
-  are the part that needs wording.
-- **The breadcrumb `←`**, on all six game pages. Hardest despite being one
-  character: it is the frame's, it is decoration rather than an instruction, and
-  dropping it may simply be right where the sentence needs words.
+  are the part that needs wording. **This is the whole of what is left**: a sweep
+  by codepoint across every served file on 2026-09-22 found no other substituted
+  glyph anywhere.
 
 VT323 has no arrows: it is monospace, so every glyph it really has measures the same
 width, and measured on a served page at 22px on 2026-09-10, `M`, `W` and `i` are
@@ -181,39 +179,30 @@ Close this entry by writing the answer into `design/DESIGN.md`, whichever way it
 
 Filed by Gabriel on 2026-09-15, cut from `main`.
 
-### hub-arcade404-theme — The site's name, and the home page around it
+### hub-arcade404-theme — The home page around the name
 
-Two asks of his, filed as two entries and merged into one on his instruction the same
-day, because **they are the same element**. The wordmark reads `ARCADE`, a placeholder
-from before the site had a domain: "since the redesign the site was moved to a real
-custom domain and now has a proper name. arcade is a placeholder." It is `.brand` on
-the hub and About, and the `ARCADE` in every game page's breadcrumb — that is what
-"the main title on every page" means. Renaming it and making it the way home touch the
-same markup on the same eight pages, so they go together.
+**The name itself is settled and built.** Gabriel chose `ARCADE404` — tight caps,
+no gap, no tail — on 2026-09-22, from a sheet of seventy-five lockups kept at
+`design/previews/wordmarks/`. It is live on all eight pages and it glitches; see
+`design/DESIGN.md`, "The wordmark, and the faults it wears". What that closes is
+the naming half of this entry. What is left is the page around it:
 
-**The name.** His words: "i want it to say arcade 404 // error game not found or
-something like that. at the very least it should say the sites name. arcade404 (not
-sure about casing and spacing)." So the name is settled and its typesetting is not —
-`ARCADE 404 // ERROR GAME NOT FOUND` is his example rather than his specification, and
-casing, spacing and whether the tail rides along are all open. **Build the candidates
-on a served page and let him pick**, which is how every look decision here has been
-taken.
-
-**The link.** His words: "title text should be clickable button to go to home page."
-On a game page the breadcrumb is already the link home, so this is about what carries
-the link rather than adding one; on the hub and About the `.brand` has somewhere to
-point for the first time. It keeps the page contract's "links back to `../../`" —
-`tests/contract.test.js` checks the link exists, not which element carries it. Read
-that check before moving the link rather than after.
+**The link is built too**, on 2026-09-22: the wordmark is the way home on all
+eight pages. Two claims this entry made about it were wrong and are worth
+correcting rather than deleting, because both would mislead the next reader:
+`tests/contract.test.js` did *not* check only that a link home exists — it named
+`.crumb` specifically — and the breadcrumb it named no longer exists. The check
+now asks that `a.brand` points home and that the mark sits inside that anchor
+rather than being it.
 
 **The hub around it.** The first phase put the hub on the CRT-phosphor palette and
 that stays; what it never had was a name to build a page around. The 404 joke is a
-composition the hub can lean into, not only a string in a header.
+composition the hub can lean into, not only a string in a header — and now that
+the mark itself carries the joke in how it behaves, there is a real question about
+whether the page should say anything more at all.
 
-**Two stale strings go with it**, statements of fact rather than prose: the hub's
-`<title>` is `Arcade` and About's is `About — Gabe-SD Arcade`, naming a repo that has
-moved. Every game page's is `<Game> · Game Arcade`.
+**Two stale strings.** Statements of fact rather than prose: the hub's `<title>`
+is `Arcade` and the about page's is `About — Gabe-SD Arcade`, naming a repo that
+has moved. Every game page's is `<Game> · Game Arcade`. All of them now disagree
+with the name in the page itself.
 
-**Take this before the emoji entry.** Its hardest open item is the breadcrumb `←`, and
-if the wordmark carries the link home, dropping the `←` stops being a wording question
-and may simply be right.

@@ -1,0 +1,107 @@
+/* The wordmark sheet. Exploration only — none of this is the site.
+   Layout chrome for the lots; each lot styles its own stage. */
+
+body {
+  margin: 0;
+  background: var(--p-ground);
+  color: var(--p-soft);
+  font-family: "VT323", monospace;
+  font-size: 18px;
+}
+
+.sheet {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 2.4rem 1.6rem 6rem;
+}
+
+.sheet > header {
+  border-bottom: 1px solid var(--p-hairline);
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+}
+
+.sheet > header h1 {
+  margin: 0;
+  font-size: 2.4rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: var(--p-amber);
+  text-shadow: var(--bloom);
+}
+
+.sheet > header p {
+  margin: 0.4rem 0 0;
+  color: var(--p-desc);
+  font-size: 1.15rem;
+  max-width: 60ch;
+}
+
+.lot {
+  margin: 3rem 0 0;
+}
+
+.lot > h2 {
+  margin: 0 0 1.2rem;
+  font-size: 1.5rem;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--p-rule);
+  border-bottom: 1px solid var(--p-hairline);
+  padding-bottom: 0.4rem;
+}
+
+.lots {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(560px, 1fr));
+  gap: 1.4rem;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--p-hairline);
+  background: var(--p-panel);
+  padding: 0;
+  overflow: hidden;
+}
+
+.card .cap {
+  margin: 0;
+  padding: 0.5rem 0.8rem;
+  font-size: 1.05rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--p-dim);
+  border-bottom: 1px solid var(--p-hairline);
+  background: var(--p-ground);
+}
+
+.card .stage {
+  flex: 1;
+  min-height: 190px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.4rem;
+  background: var(--p-ground);
+}
+
+#freeze {
+  font-family: inherit;
+  font-size: 1.05rem;
+  letter-spacing: 0.08em;
+  color: var(--p-amber);
+  background: var(--p-panel-lit);
+  border: 1px solid var(--p-rule);
+  padding: 0.3rem 0.9rem;
+  cursor: pointer;
+}
+
+#freeze:hover,
+#freeze:focus-visible {
+  color: var(--p-hot);
+  border-color: var(--p-amber);
+  outline: none;
+}

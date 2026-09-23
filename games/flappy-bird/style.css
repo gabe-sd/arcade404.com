@@ -7,8 +7,7 @@
 /* Derived from --court exactly as Pong's is: board + the canvas's own 1px
    border + 12px of bezel padding + the bezel's own 1px border, each doubled.
    Change the board size and nothing drifts out of line. */
-.cabinet,
-.game-page .game-foot {
+.cabinet {
   --court: 400px;
   width: min(100%, calc(var(--court) + 28px));
   margin-inline: auto;

@@ -1,0 +1,2808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wordmark sheet — arcade404</title>
+<link rel="stylesheet" href="../../../shared.css">
+<link rel="stylesheet" href="gallery.css">
+</head>
+<body>
+<div class="sheet">
+<header>
+  <h1>arcade404 — wordmark sheet</h1>
+  <p>Branding only: the name set many ways, nothing else about the page.
+     Lots A-D are round one. Lots E-H are the glitch round: every one of those is
+     clean at rest and comes apart only briefly, so watch them for a few seconds
+     rather than judging the still.</p>
+  <p><button type="button" id="freeze" aria-pressed="false">Freeze the glitch</button></p>
+</header>
+<section class="lot">
+<h2>Lot A — the name alone: casing, spacing, how 404 meets ARCADE</h2>
+<div class="lots">
+<style>
+.lot-a .stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 120px;
+  padding: 28px 20px;
+  background: var(--p-ground);
+  font-family: "VT323", monospace;
+  line-height: 1;
+}
+
+/* 1: tight all-caps, single amber, no gap */
+.lot-a .v-tight {
+  font-size: 56px;
+  letter-spacing: 0;
+  color: var(--p-amber);
+  text-shadow: var(--bloom);
+}
+
+/* 2: wide-tracked lowercase, whole thing dim except it breathes */
+.lot-a .v-wide {
+  font-size: 40px;
+  letter-spacing: 0.35em;
+  color: var(--p-soft);
+  text-transform: lowercase;
+  padding-left: 0.35em; /* compensate trailing tracking for optical centering */
+}
+
+/* 3: ARCADE dim, 404 hot — the digits are the point */
+.lot-a .v-split-hot {
+  font-size: 56px;
+  letter-spacing: 0.05em;
+  display: inline-flex;
+  align-items: baseline;
+}
+.lot-a .v-split-hot .word { color: var(--p-dim); }
+.lot-a .v-split-hot .num {
+  color: var(--p-hot);
+  text-shadow: var(--bloom-lg);
+  margin-left: 0.06em;
+}
+
+/* 4: stacked, ARCADE small over a big 404 slab */
+.lot-a .v-stack-slab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.05em;
+}
+.lot-a .v-stack-slab .word {
+  font-size: 22px;
+  letter-spacing: 0.6em;
+  padding-left: 0.6em;
+  color: var(--p-dim);
+}
+.lot-a .v-stack-slab .num {
+  font-size: 84px;
+  letter-spacing: 0.02em;
+  color: var(--p-amber);
+  text-shadow: var(--bloom-lg);
+}
+
+/* 5: Arcade404 mixed case, 404 as superscript-ish trailing mark */
+.lot-a .v-super {
+  font-size: 50px;
+  letter-spacing: 0.02em;
+  color: var(--p-amber);
+  text-shadow: var(--bloom);
+  display: inline-flex;
+  align-items: flex-start;
+}
+.lot-a .v-super .num {
+  font-size: 26px;
+  margin-left: 0.08em;
+  margin-top: 0.1em;
+  color: var(--p-pale);
+}
+
+/* 6: stacked ARCADE over 404, both large, rule between, one hue */
+.lot-a .v-stack-line {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.lot-a .v-stack-line .word {
+  font-size: 46px;
+  letter-spacing: 0.18em;
+  padding-left: 0.18em;
+  color: var(--p-amber);
+  text-shadow: var(--bloom);
+}
+.lot-a .v-stack-line .rule {
+  width: 100%;
+  max-width: 220px;
+  height: 1px;
+  background: var(--p-rule);
+  margin: 6px 0;
+}
+.lot-a .v-stack-line .num {
+  font-size: 46px;
+  letter-spacing: 0.1em;
+  color: var(--p-dim);
+}
+
+/* 7: domain form, .com dimmed away, 404 styled distinct from ARCADE via a thin gap */
+.lot-a .v-domain {
+  font-size: 46px;
+  letter-spacing: 0.03em;
+  display: inline-flex;
+  align-items: baseline;
+}
+.lot-a .v-domain .word { color: var(--p-amber); text-shadow: var(--bloom); }
+.lot-a .v-domain .num {
+  color: var(--p-amber);
+  text-shadow: var(--bloom);
+  margin-left: 0.14em; /* thin gap: digits read as part of the name, not glued */
+}
+.lot-a .v-domain .tld { color: var(--p-hairline); margin-left: 0.02em; }
+</style>
+
+<article class="card lot-a">
+  <h2 class="cap">Tight caps, one amber — no gap, no ceremony</h2>
+  <div class="stage">
+    <span class="v-tight">ARCADE404</span>
+  </div>
+</article>
+
+<article class="card lot-a">
+  <h2 class="cap">Wide-tracked lowercase — quiet, terminal-prompt feel</h2>
+  <div class="stage">
+    <span class="v-wide">arcade404</span>
+  </div>
+</article>
+
+<article class="card lot-a">
+  <h2 class="cap">ARCADE dim, 404 hot — the error code is the mark</h2>
+  <div class="stage">
+    <span class="v-split-hot"><span class="word">ARCADE</span><span class="num">404</span></span>
+  </div>
+</article>
+
+<article class="card lot-a">
+  <h2 class="cap">404 as a slab, ARCADE a small tracked label above it</h2>
+  <div class="stage">
+    <span class="v-stack-slab"><span class="word">ARCADE</span><span class="num">404</span></span>
+  </div>
+</article>
+
+<article class="card lot-a">
+  <h2 class="cap">Mixed case, 404 riding high like a superscript</h2>
+  <div class="stage">
+    <span class="v-super">Arcade<span class="num">404</span></span>
+  </div>
+</article>
+
+<article class="card lot-a">
+  <h2 class="cap">Stacked two lines, one hairline rule, 404 dimmer than ARCADE</h2>
+  <div class="stage">
+    <span class="v-stack-line"><span class="word">ARCADE</span><span class="rule"></span><span class="num">404</span></span>
+  </div>
+</article>
+
+<article class="card lot-a">
+  <h2 class="cap">Domain form — arcade404 lit, .com fades into the ground</h2>
+  <div class="stage">
+    <span class="v-domain"><span class="word">ARCADE</span><span class="num">404</span><span class="tld">.com</span></span>
+  </div>
+</article>
+
+</div>
+</section>
+
+<section class="lot">
+<h2>Lot B — the 404 joke attached to the name</h2>
+<div class="lots">
+<style>
+.lot-b .stage {
+  font-family: "VT323", monospace;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4em;
+  padding: 2.2em 1em;
+  background: var(--p-ground);
+  color: var(--p-amber);
+}
+.lot-b .stage * { font-family: inherit; }
+
+/* shared name treatment */
+.lot-b .name {
+  font-size: 3rem;
+  letter-spacing: 0.04em;
+  color: var(--p-amber);
+  text-shadow: var(--bloom);
+  line-height: 1;
+}
+
+/* 1: inline comment tail, one line */
+.lot-b .v-inline .name {
+  font-size: 2.2rem;
+}
+.lot-b .v-inline .lockup {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.35em;
+  text-align: center;
+}
+.lot-b .v-inline .tail {
+  font-size: 1.15rem;
+  color: var(--p-dim);
+  letter-spacing: 0.03em;
+}
+
+/* 2: subtitle underneath, dim */
+.lot-b .v-subtitle .lockup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25em;
+}
+.lot-b .v-subtitle .tail {
+  font-size: 1.05rem;
+  color: var(--p-dim);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* 3: http status framing */
+.lot-b .v-http .lockup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5em;
+}
+.lot-b .v-http .status-line {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5em;
+  padding: 0.3em 0.9em;
+  border: 1px solid var(--p-rule);
+  background: var(--p-panel);
+}
+.lot-b .v-http .code {
+  font-size: 1.6rem;
+  color: var(--p-pale);
+  text-shadow: var(--bloom);
+}
+.lot-b .v-http .reason {
+  font-size: 1.15rem;
+  color: var(--p-soft);
+  letter-spacing: 0.06em;
+}
+
+/* 4: terminal transcript */
+.lot-b .v-term .lockup {
+  width: 100%;
+  max-width: 22em;
+  text-align: left;
+  background: var(--p-panel);
+  border: 1px solid var(--p-hairline);
+  padding: 0.9em 1em;
+}
+.lot-b .v-term .line {
+  display: flex;
+  gap: 0.5em;
+  font-size: 1.2rem;
+  line-height: 1.5;
+}
+.lot-b .v-term .prompt { color: var(--p-rule); }
+.lot-b .v-term .typed { color: var(--p-amber); }
+.lot-b .v-term .err { color: var(--p-dim); padding-left: 1.7em; }
+.lot-b .v-term .cursor {
+  display: inline-block;
+  width: 0.55em;
+  height: 1em;
+  background: var(--p-amber);
+  margin-left: 0.15em;
+  vertical-align: -0.15em;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .lot-b .v-term .cursor { animation: lot-b-blink 1s steps(1) infinite; }
+}
+@keyframes lot-b-blink { 50% { opacity: 0; } }
+
+/* 5: url / path form */
+.lot-b .v-path .lockup {
+  font-size: 1.5rem;
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+.lot-b .v-path .host { color: var(--p-amber); text-shadow: var(--bloom); }
+.lot-b .v-path .slash { color: var(--p-rule); }
+.lot-b .v-path .code { color: var(--p-pale); }
+.lot-b .v-path .seg { color: var(--p-dim); }
+
+/* 6: inverted, error is the big element */
+.lot-b .v-invert .lockup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15em;
+}
+.lot-b .v-invert .big404 {
+  font-size: 4.2rem;
+  color: var(--p-pale);
+  text-shadow: var(--bloom-lg);
+  line-height: 0.9;
+  letter-spacing: 0.02em;
+}
+.lot-b .v-invert .small-name {
+  font-size: 1.1rem;
+  color: var(--p-dim);
+  letter-spacing: 0.1em;
+}
+.lot-b .v-invert .small-tail {
+  font-size: 0.95rem;
+  color: var(--p-dim);
+  opacity: 0.8;
+  letter-spacing: 0.06em;
+}
+
+/* 7: status readout, label/value */
+.lot-b .v-readout .lockup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6em;
+}
+.lot-b .v-readout .readout {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6em;
+  padding: 0.25em 0.9em;
+  border-top: 1px solid var(--p-hairline);
+  border-bottom: 1px solid var(--p-hairline);
+}
+.lot-b .v-readout .label {
+  font-size: 1rem;
+  color: var(--p-rule);
+  letter-spacing: 0.12em;
+}
+.lot-b .v-readout .value {
+  font-size: 1.15rem;
+  color: var(--p-soft);
+  letter-spacing: 0.08em;
+}
+</style>
+
+<article class="card lot-b">
+  <h2 class="cap">Inline comment — the owner's line, set as one row</h2>
+  <div class="stage v-inline">
+    <div class="lockup">
+      <span class="name">ARCADE404</span>
+      <span class="tail">// ERROR GAME NOT FOUND</span>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-b">
+  <h2 class="cap">Subtitle — name carries it, tail rides dim underneath</h2>
+  <div class="stage v-subtitle">
+    <div class="lockup">
+      <span class="name">ARCADE404</span>
+      <span class="tail">error game not found</span>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-b">
+  <h2 class="cap">HTTP framing — name above a server-response line</h2>
+  <div class="stage v-http">
+    <div class="lockup">
+      <span class="name">ARCADE404</span>
+      <div class="status-line">
+        <span class="code">404</span>
+        <span class="reason">GAME NOT FOUND</span>
+      </div>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-b">
+  <h2 class="cap">Terminal transcript — typed, then the error returns</h2>
+  <div class="stage v-term">
+    <div class="lockup">
+      <div class="line">
+        <span class="prompt">&gt;</span>
+        <span class="typed">arcade404<span class="cursor"></span></span>
+      </div>
+      <div class="err">error: game not found</div>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-b">
+  <h2 class="cap">Path form — the domain resolving to its own error</h2>
+  <div class="stage v-path">
+    <div class="lockup">
+      <span class="host">arcade404.com</span><span class="slash">/</span><span class="seg">play</span><span class="slash">/</span><span class="code">404</span>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-b">
+  <h2 class="cap">Inverted — the error is loud, the name rides small</h2>
+  <div class="stage v-invert">
+    <div class="lockup">
+      <span class="big404">404</span>
+      <span class="small-name">ARCADE404</span>
+      <span class="small-tail">game not found</span>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-b">
+  <h2 class="cap">Status readout — label/value, like a diagnostic line</h2>
+  <div class="stage v-readout">
+    <div class="lockup">
+      <span class="name" style="font-size:2.4rem;">ARCADE404</span>
+      <div class="readout">
+        <span class="label">STATUS:</span>
+        <span class="value">GAME NOT FOUND</span>
+      </div>
+    </div>
+  </div>
+</article>
+
+</div>
+</section>
+
+<section class="lot">
+<h2>Lot C — the name as a piece of hardware</h2>
+<div class="lots">
+<style>
+/* lot-c: the name as a piece of hardware */
+
+.lot-c .stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+  background: var(--p-ground);
+  font-family: "VT323", monospace;
+}
+
+/* ---------- 1. MARQUEE ---------- */
+
+.lot-c .marquee-bezel {
+  position: relative;
+  padding: 6px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #2a1c0a, #140d05);
+  box-shadow:
+    0 0 0 1px var(--p-hairline),
+    inset 0 1px 0 rgba(255, 214, 148, 0.08);
+}
+
+.lot-c .marquee-panel {
+  position: relative;
+  border-radius: 9px;
+  padding: 22px 34px;
+  background: radial-gradient(120% 160% at 50% -20%, var(--p-panel-lit), var(--p-panel) 70%);
+  border: 1px solid var(--p-rule);
+  overflow: visible;
+}
+
+.lot-c .marquee-name {
+  margin: 0;
+  font-size: 42px;
+  letter-spacing: 0.08em;
+  color: var(--p-amber);
+  text-shadow: var(--bloom-lg);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.lot-c .marquee-panel::after {
+  content: "";
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: -26px;
+  height: 30px;
+  background: radial-gradient(60% 100% at 50% 0%, rgba(255, 176, 0, 0.28), transparent 75%);
+  filter: blur(2px);
+  pointer-events: none;
+}
+
+/* ---------- 2. NAMEPLATE (engraved) ---------- */
+
+.lot-c .nameplate {
+  padding: 30px 40px;
+  background: var(--p-panel-lit);
+  border-radius: 4px;
+  box-shadow:
+    inset 0 2px 4px rgba(0, 0, 0, 0.7),
+    inset 0 -1px 0 rgba(255, 214, 148, 0.05),
+    0 1px 0 rgba(255, 214, 148, 0.04);
+}
+
+.lot-c .nameplate-name {
+  margin: 0;
+  font-size: 38px;
+  letter-spacing: 0.12em;
+  text-align: center;
+  color: #3a2a12;
+  text-shadow:
+    -1px -1px 1px rgba(0, 0, 0, 0.95),
+    1px 1px 0 rgba(255, 214, 148, 0.30);
+}
+
+.lot-c .nameplate-tail {
+  margin: 8px 0 0;
+  text-align: center;
+  font-size: 13px;
+  letter-spacing: 0.2em;
+  color: #33240f;
+  text-shadow:
+    -1px -1px 1px rgba(0, 0, 0, 0.9),
+    1px 1px 0 rgba(255, 214, 148, 0.22);
+}
+
+/* ---------- 3. BADGE / PLATE ---------- */
+
+.lot-c .badge {
+  padding: 18px 30px;
+  text-align: center;
+}
+
+.lot-c .badge-rule {
+  border: none;
+  border-top: 1px solid var(--p-rule);
+  margin: 0;
+}
+
+.lot-c .badge-name {
+  margin: 10px 0;
+  font-size: 34px;
+  letter-spacing: 0.35em;
+  color: var(--p-soft);
+  padding-left: 0.35em; /* optical correction for tracking */
+}
+
+.lot-c .badge-model {
+  margin: 10px 0 0;
+  font-size: 13px;
+  letter-spacing: 0.15em;
+  color: var(--p-dim);
+}
+
+/* ---------- 4. SEVEN-SEGMENT 404 ---------- */
+
+.lot-c .sevenseg-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.lot-c .digit {
+  position: relative;
+  width: 34px;
+  height: 58px;
+  flex: none;
+}
+
+.lot-c .seg {
+  position: absolute;
+  background: var(--p-hairline);
+  border-radius: 2px;
+}
+
+.lot-c .seg.on {
+  background: var(--p-amber);
+  box-shadow: var(--bloom);
+}
+
+.lot-c .seg-a { top: 0;    left: 5px;  width: 24px; height: 5px; }
+.lot-c .seg-g { top: 26.5px; left: 5px; width: 24px; height: 5px; }
+.lot-c .seg-d { top: 53px;  left: 5px;  width: 24px; height: 5px; }
+.lot-c .seg-f { top: 4px;   left: 0;    width: 5px;  height: 24px; }
+.lot-c .seg-b { top: 4px;   right: 0;   width: 5px;  height: 24px; }
+.lot-c .seg-e { top: 30px;  left: 0;    width: 5px;  height: 24px; }
+.lot-c .seg-c { top: 30px;  right: 0;   width: 5px;  height: 24px; }
+
+.lot-c .sevenseg-word {
+  font-size: 34px;
+  letter-spacing: 0.14em;
+  color: var(--p-soft);
+}
+
+/* ---------- 5. BEZEL / CRT SCREEN ---------- */
+
+.lot-c .crt {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  padding: 34px 20px;
+  border-radius: 34px / 26px;
+  background: radial-gradient(120% 140% at 50% 40%, #17100a 0%, #0c0803 78%);
+  box-shadow:
+    inset 0 0 40px rgba(0, 0, 0, 0.85),
+    inset 0 0 0 2px var(--p-hairline);
+  overflow: hidden;
+  text-align: center;
+}
+
+.lot-c .crt::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 214, 148, 0.05) 0px,
+    rgba(255, 214, 148, 0.05) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  pointer-events: none;
+}
+
+.lot-c .crt-name {
+  position: relative;
+  margin: 0;
+  font-size: 36px;
+  letter-spacing: 0.1em;
+  color: var(--p-amber);
+  text-shadow: var(--bloom);
+}
+
+/* ---------- 6. POWER / BOOT ---------- */
+
+.lot-c .power-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.lot-c .lamp {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  flex: none;
+  background: radial-gradient(circle at 35% 30%, var(--p-hot), var(--p-amber) 55%, #7a3f00 100%);
+  box-shadow: 0 0 8px 2px rgba(255, 176, 0, 0.55);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .lot-c .lamp {
+    animation: lot-c-blink 2.6s ease-in-out infinite;
+  }
+}
+
+@keyframes lot-c-blink {
+  0%, 82%, 100% { opacity: 1; }
+  90% { opacity: 0.45; }
+}
+
+.lot-c .power-name {
+  margin: 0;
+  font-size: 36px;
+  letter-spacing: 0.08em;
+  color: var(--p-soft);
+}
+
+.lot-c .power-sub {
+  margin: 2px 0 0 30px;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  color: var(--p-dim);
+}
+
+/* ---------- 7. COIN SLOT PLATE ---------- */
+
+.lot-c .coin-plate {
+  width: 100%;
+  max-width: 380px;
+  padding: 20px 24px 24px;
+  background: linear-gradient(180deg, var(--p-panel-lit), var(--p-panel));
+  border: 1px solid var(--p-hairline);
+  border-radius: 6px;
+  text-align: center;
+}
+
+.lot-c .coin-insert {
+  margin: 0 0 14px;
+  font-size: 13px;
+  letter-spacing: 0.3em;
+  color: var(--p-dim);
+}
+
+.lot-c .coin-slot-shape {
+  width: 46px;
+  height: 12px;
+  margin: 0 auto 16px;
+  border-radius: 6px;
+  background: #060301;
+  box-shadow:
+    inset 0 2px 3px rgba(0, 0, 0, 0.9),
+    0 1px 0 rgba(255, 214, 148, 0.06);
+}
+
+.lot-c .coin-name {
+  margin: 0;
+  font-size: 38px;
+  letter-spacing: 0.1em;
+  color: var(--p-amber);
+  text-shadow: var(--bloom);
+}
+</style>
+
+<article class="card lot-c">
+  <h2 class="cap">Marquee — lit cabinet panel, glow spilling down</h2>
+  <div class="stage">
+    <div class="marquee-bezel">
+      <div class="marquee-panel">
+        <p class="marquee-name">ARCADE404</p>
+      </div>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-c">
+  <h2 class="cap">Nameplate — engraved into a dark panel, recessed not lit</h2>
+  <div class="stage">
+    <div class="nameplate">
+      <p class="nameplate-name">ARCADE 404</p>
+      <p class="nameplate-tail">// ERROR GAME NOT FOUND</p>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-c">
+  <h2 class="cap">Badge — rule above and below, sparse spec text</h2>
+  <div class="stage">
+    <div class="badge">
+      <hr class="badge-rule" />
+      <p class="badge-name">ARCADE404</p>
+      <hr class="badge-rule" />
+      <p class="badge-model">MDL 404 &middot; REV 1</p>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-c">
+  <h2 class="cap">Seven-segment — 404 as lit segments, ARCADE set beside it</h2>
+  <div class="stage">
+    <div class="sevenseg-row">
+      <span class="sevenseg-word">ARCADE</span>
+      <div class="digit">
+        <span class="seg seg-f on"></span>
+        <span class="seg seg-b on"></span>
+        <span class="seg seg-g on"></span>
+        <span class="seg seg-c on"></span>
+        <span class="seg seg-a"></span>
+        <span class="seg seg-d"></span>
+        <span class="seg seg-e"></span>
+      </div>
+      <div class="digit">
+        <span class="seg seg-a on"></span>
+        <span class="seg seg-b on"></span>
+        <span class="seg seg-c on"></span>
+        <span class="seg seg-d on"></span>
+        <span class="seg seg-e on"></span>
+        <span class="seg seg-f on"></span>
+        <span class="seg seg-g"></span>
+      </div>
+      <div class="digit">
+        <span class="seg seg-f on"></span>
+        <span class="seg seg-b on"></span>
+        <span class="seg seg-g on"></span>
+        <span class="seg seg-c on"></span>
+        <span class="seg seg-a"></span>
+        <span class="seg seg-d"></span>
+        <span class="seg seg-e"></span>
+      </div>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-c">
+  <h2 class="cap">Bezel / CRT — name inside a rounded screen, scanlines and vignette</h2>
+  <div class="stage">
+    <div class="crt">
+      <p class="crt-name">ARCADE404</p>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-c">
+  <h2 class="cap">Power / boot — indicator lamp beside the name</h2>
+  <div class="stage">
+    <div>
+      <div class="power-row">
+        <span class="lamp"></span>
+        <p class="power-name">ARCADE404</p>
+      </div>
+      <p class="power-sub">READY</p>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-c">
+  <h2 class="cap">Coin slot plate — INSERT COIN register, name still dominant</h2>
+  <div class="stage">
+    <div class="coin-plate">
+      <p class="coin-insert">INSERT COIN</p>
+      <div class="coin-slot-shape"></div>
+      <p class="coin-name">ARCADE404</p>
+    </div>
+  </div>
+</article>
+
+</div>
+</section>
+
+<section class="lot">
+<h2>Lot D — wild cards: each one breaks a rule, and says which</h2>
+<div class="lots">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
+
+.lot-d .stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 140px;
+  padding: 28px 16px;
+  background: var(--p-ground);
+  font-family: "VT323", monospace;
+}
+
+/* 1: guest hue infiltration */
+.lot-d .v1-mark {
+  font-size: 56px;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  text-shadow: var(--bloom);
+}
+.lot-d .v1-mark .arcade { color: var(--p-amber); }
+.lot-d .v1-mark .num { color: var(--p-cyan); }
+
+/* 2: misconverged tube */
+.lot-d .v2-wrap {
+  position: relative;
+  font-size: 52px;
+  letter-spacing: 0.05em;
+  line-height: 1;
+}
+.lot-d .v2-wrap span {
+  display: block;
+  position: absolute;
+  top: 0; left: 0;
+  white-space: nowrap;
+}
+.lot-d .v2-r { color: var(--p-coral); mix-blend-mode: screen; transform: translate(-2.5px, 0); }
+.lot-d .v2-g { color: var(--p-jade); mix-blend-mode: screen; transform: translate(2px, 1px); }
+.lot-d .v2-b { color: var(--p-cyan); mix-blend-mode: screen; transform: translate(0.5px, -1.5px); }
+.lot-d .v2-base { position: relative; color: var(--p-pale); }
+@media (prefers-reduced-motion: no-preference) {
+  .lot-d .v2-r { animation: lot-d-jitr 2.6s steps(1) infinite; }
+  .lot-d .v2-g { animation: lot-d-jitg 3.1s steps(1) infinite; }
+  .lot-d .v2-b { animation: lot-d-jitb 2.3s steps(1) infinite; }
+}
+@keyframes lot-d-jitr {
+  0%, 40% { transform: translate(-2.5px, 0); }
+  50% { transform: translate(-4px, 0.5px); }
+  100% { transform: translate(-2.5px, 0); }
+}
+@keyframes lot-d-jitg {
+  0%, 60% { transform: translate(2px, 1px); }
+  70% { transform: translate(3.5px, -0.5px); }
+  100% { transform: translate(2px, 1px); }
+}
+@keyframes lot-d-jitb {
+  0%, 50% { transform: translate(0.5px, -1.5px); }
+  55% { transform: translate(-1px, -2.5px); }
+  100% { transform: translate(0.5px, -1.5px); }
+}
+
+/* 3: heavy display import */
+.lot-d .v3-mark {
+  font-family: "Bungee", "Arial Black", sans-serif;
+  font-size: 30px;
+  letter-spacing: 0.02em;
+  line-height: 1.3;
+  color: var(--p-amber);
+  text-shadow: var(--bloom);
+  text-align: center;
+}
+.lot-d .v3-mark small {
+  display: block;
+  margin-top: 6px;
+  font-family: "VT323", monospace;
+  font-size: 18px;
+  letter-spacing: 0.3em;
+  color: var(--p-dim);
+}
+
+/* 4: drawn, not typed */
+.lot-d .v4-row {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+.lot-d .v4-digit {
+  position: relative;
+  width: 40px;
+  height: 60px;
+  flex: 0 0 auto;
+}
+.lot-d .v4-px {
+  position: absolute;
+  top: 0; left: 0;
+  width: 8px;
+  height: 8px;
+  background: transparent;
+}
+.lot-d .v4-px.p4 { box-shadow:
+  30px 0px 0 var(--p-amber),
+  20px 10px 0 var(--p-amber), 30px 10px 0 var(--p-amber),
+  10px 20px 0 var(--p-amber), 30px 20px 0 var(--p-amber),
+  0px 30px 0 var(--p-amber), 30px 30px 0 var(--p-amber),
+  0px 40px 0 var(--p-amber), 10px 40px 0 var(--p-amber), 20px 40px 0 var(--p-amber), 30px 40px 0 var(--p-amber), 40px 40px 0 var(--p-amber),
+  30px 50px 0 var(--p-amber),
+  30px 60px 0 var(--p-amber);
+}
+.lot-d .v4-px.p0 { box-shadow:
+  10px 0px 0 var(--p-amber), 20px 0px 0 var(--p-amber), 30px 0px 0 var(--p-amber),
+  0px 10px 0 var(--p-amber), 40px 10px 0 var(--p-amber),
+  0px 20px 0 var(--p-amber), 30px 20px 0 var(--p-amber), 40px 20px 0 var(--p-amber),
+  0px 30px 0 var(--p-amber), 20px 30px 0 var(--p-amber), 40px 30px 0 var(--p-amber),
+  0px 40px 0 var(--p-amber), 10px 40px 0 var(--p-amber), 40px 40px 0 var(--p-amber),
+  0px 50px 0 var(--p-amber), 40px 50px 0 var(--p-amber),
+  10px 60px 0 var(--p-amber), 20px 60px 0 var(--p-amber), 30px 60px 0 var(--p-amber);
+}
+.lot-d .v4-cap { margin-top: 10px; font-size: 15px; letter-spacing: 0.2em; color: var(--p-dim); text-align: center; }
+
+/* 5: torn signal */
+.lot-d .v5-wrap {
+  position: relative;
+  width: 340px;
+  height: 58px;
+  font-size: 54px;
+  letter-spacing: 0.04em;
+  line-height: 58px;
+  color: var(--p-amber);
+  text-shadow: var(--bloom);
+}
+.lot-d .v5-slice {
+  position: absolute;
+  inset: 0;
+  white-space: nowrap;
+}
+.lot-d .v5-s1 { clip-path: inset(0 0 66% 0); transform: translateX(8px); }
+.lot-d .v5-s2 { clip-path: inset(34% 0 34% 0); transform: translateX(-10px); }
+.lot-d .v5-s3 { clip-path: inset(66% 0 0 0); transform: translateX(4px); }
+@media (prefers-reduced-motion: no-preference) {
+  .lot-d .v5-s1 { animation: lot-d-tear1 4s steps(1) infinite; }
+  .lot-d .v5-s2 { animation: lot-d-tear2 4s steps(1) infinite; }
+}
+@keyframes lot-d-tear1 {
+  0%, 92% { transform: translateX(8px); }
+  94% { transform: translateX(20px); }
+  96%, 100% { transform: translateX(8px); }
+}
+@keyframes lot-d-tear2 {
+  0%, 90% { transform: translateX(-10px); }
+  93% { transform: translateX(-24px); }
+  95%, 100% { transform: translateX(-10px); }
+}
+
+/* 6: negative image */
+.lot-d .v6-block {
+  background: var(--p-amber);
+  padding: 22px 30px;
+  border-radius: 2px;
+}
+.lot-d .v6-mark {
+  font-size: 50px;
+  letter-spacing: 0.03em;
+  line-height: 1;
+  color: var(--p-ground);
+  mix-blend-mode: normal;
+}
+</style>
+
+<article class="card lot-d">
+  <h2 class="cap">Guest hue infiltration — breaks: admits cyan into the chrome (404 set in --p-cyan, a screen-only colour, beside amber ARCADE)</h2>
+  <div class="stage">
+    <div class="v1-mark"><span class="arcade">ARCADE</span><span class="num">404</span></div>
+  </div>
+</article>
+
+<article class="card lot-d">
+  <h2 class="cap">Misconverged tube — breaks: the wordmark is drawn three times in offset guest hues (coral/jade/cyan) like a mis-registered CRT, not one solid amber mark</h2>
+  <div class="stage">
+    <div class="v2-wrap">
+      <span class="v2-r">ARCADE404</span>
+      <span class="v2-g">ARCADE404</span>
+      <span class="v2-b">ARCADE404</span>
+      <span class="v2-base">ARCADE404</span>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-d">
+  <h2 class="cap">Heavy display import — breaks: swaps VT323 for Bungee (Google Fonts) in the mark itself, the one thing the system says stays VT323</h2>
+  <div class="stage">
+    <div class="v3-mark">ARCADE404<small>// ERROR GAME NOT FOUND</small></div>
+  </div>
+</article>
+
+<article class="card lot-d">
+  <h2 class="cap">Drawn, not typed — breaks: 404 is not set in any typeface at all, it's built pixel-by-pixel from CSS box-shadow squares</h2>
+  <div class="stage">
+    <div>
+      <div class="v4-row">
+        <div class="v4-digit"><div class="v4-px p4"></div></div>
+        <div class="v4-digit"><div class="v4-px p0"></div></div>
+        <div class="v4-digit"><div class="v4-px p4"></div></div>
+      </div>
+      <div class="v4-cap">ARCADE</div>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-d">
+  <h2 class="cap">Torn signal — breaks: the mark is sliced into three misaligned bands, refusing to sit as one continuous line of type</h2>
+  <div class="stage">
+    <div class="v5-wrap">
+      <div class="v5-slice v5-s1">ARCADE404</div>
+      <div class="v5-slice v5-s2">ARCADE404</div>
+      <div class="v5-slice v5-s3">ARCADE404</div>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-d">
+  <h2 class="cap">Negative image — breaks: inverts the ground/figure contract — a solid amber field in the chrome, with the name knocked out in page-black instead of amber text on dark</h2>
+  <div class="stage">
+    <div class="v6-block"><div class="v6-mark">ARCADE404</div></div>
+  </div>
+</article>
+
+</div>
+</section>
+
+<section class="lot">
+<h2>Lot E — the torn-signal family: clean at rest, briefly destroyed</h2>
+<div class="lots">
+<style>
+/* shared scaffolding for every torn-signal variant in this lot */
+.lot-e .stage {
+  padding: 48px 20px;
+  background: var(--p-ground);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.lot-e .wordmark {
+  position: relative;
+  display: inline-block;
+  font-family: "VT323", monospace;
+  font-size: 56px;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  color: var(--p-amber);
+  text-shadow: var(--bloom);
+  white-space: nowrap;
+  user-select: none;
+}
+.lot-e .wordmark::before {
+  /* A static copy nobody sees: every visible layer is absolutely positioned,
+     so without this the box collapses to nothing and the mark vanishes. */
+  content: "arcade404";
+  visibility: hidden;
+  display: block;
+}
+.lot-e .wordmark .band {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  color: inherit;
+  will-change: transform;
+}
+.lot-e .wordmark .ghost {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  color: var(--p-dim);
+  opacity: 0;
+}
+
+/* ============ v1: quiet-tear (the "usually readable" one) ============ */
+.lot-e .v1 .band { clip-path: inset(0 0 0 0); }
+.lot-e .v1 .band-top { clip-path: inset(0 0 62% 0); }
+.lot-e .v1 .band-mid { clip-path: inset(38% 0 24% 0); }
+.lot-e .v1 .band-bot { clip-path: inset(76% 0 0 0); }
+@media (prefers-reduced-motion: no-preference) {
+  .lot-e .v1 .band-mid { animation: lot-e-v1-tear 8s steps(1, end) infinite; }
+}
+@keyframes lot-e-v1-tear {
+  0%, 96% { transform: translateX(0); }
+  96.5%, 97.5% { transform: translateX(9px); }
+  98% { transform: translateX(-6px); }
+  98.5%, 100% { transform: translateX(0); }
+}
+.lot-e .v1.peak .band-mid { animation: none; transform: translateX(9px); }
+
+/* ============ v2: six-thin-slices, burst of three ============ */
+.lot-e .v2 .band { clip-path: inset(0 0 0 0); }
+.lot-e .v2 .b1 { clip-path: inset(0%    0 83.3% 0); }
+.lot-e .v2 .b2 { clip-path: inset(16.6% 0 66.6% 0); }
+.lot-e .v2 .b3 { clip-path: inset(33.3% 0 50%   0); }
+.lot-e .v2 .b4 { clip-path: inset(50%   0 33.3% 0); }
+.lot-e .v2 .b5 { clip-path: inset(66.6% 0 16.6% 0); }
+.lot-e .v2 .b6 { clip-path: inset(83.3% 0 0%    0); }
+@media (prefers-reduced-motion: no-preference) {
+  .lot-e .v2 .b1 { animation: lot-e-v2-a 9s steps(1, end) infinite; }
+  .lot-e .v2 .b3 { animation: lot-e-v2-b 9s steps(1, end) infinite; }
+  .lot-e .v2 .b4 { animation: lot-e-v2-c 9s steps(1, end) infinite; }
+  .lot-e .v2 .b6 { animation: lot-e-v2-a 9s steps(1, end) infinite reverse; }
+}
+@keyframes lot-e-v2-a {
+  0%, 88% { transform: translateX(0); }
+  88.4%, 89% { transform: translateX(7px); }
+  89.4%, 100% { transform: translateX(0); }
+}
+@keyframes lot-e-v2-b {
+  0%, 89% { transform: translateX(0); }
+  89.4%, 90% { transform: translateX(-10px); }
+  90.4%, 100% { transform: translateX(0); }
+}
+@keyframes lot-e-v2-c {
+  0%, 90% { transform: translateX(0); }
+  90.4%, 91% { transform: translateX(6px); }
+  91.4%, 100% { transform: translateX(0); }
+}
+.lot-e .v2.peak .b1 { animation: none; transform: translateX(7px); }
+.lot-e .v2.peak .b3 { animation: none; transform: translateX(-10px); }
+.lot-e .v2.peak .b4 { animation: none; transform: translateX(6px); }
+.lot-e .v2.peak .b6 { animation: none; transform: translateX(-7px); }
+
+/* v3 draws only one band, so unlike its siblings it needs the base copy
+   visible underneath — the hairline is a slip within a whole word. */
+.lot-e .v3::before { visibility: visible; }
+
+/* ============ v3: hairline-slip, 2px creeping drift ============ */
+.lot-e .v3 .band { clip-path: inset(0 0 0 0); }
+.lot-e .v3 .band-hair { clip-path: inset(47% 0 47% 0); }
+@media (prefers-reduced-motion: no-preference) {
+  .lot-e .v3 .band-hair { animation: lot-e-v3-drift 9s linear infinite; }
+}
+@keyframes lot-e-v3-drift {
+  0%   { transform: translateX(0); }
+  40%  { transform: translateX(1px); }
+  70%  { transform: translateX(2px); }
+  86%  { transform: translateX(2px); }
+  88%  { transform: translateX(-1px); }
+  90%  { transform: translateX(0); }
+  100% { transform: translateX(0); }
+}
+.lot-e .v3.peak .band-hair { animation: none; transform: translateX(2px); }
+
+/* ============ v4: big-tear, two fat bands, 30px, word briefly destroyed ============ */
+.lot-e .v4 .band { clip-path: inset(0 0 0 0); }
+.lot-e .v4 .band-top { clip-path: inset(0 0 50% 0); }
+.lot-e .v4 .band-bot { clip-path: inset(50% 0 0 0); }
+@media (prefers-reduced-motion: no-preference) {
+  .lot-e .v4 .band-top { animation: lot-e-v4-top 8s steps(1, end) infinite; }
+  .lot-e .v4 .band-bot { animation: lot-e-v4-bot 8s steps(1, end) infinite; }
+}
+@keyframes lot-e-v4-top {
+  0%, 97% { transform: translateX(0); }
+  97.2%, 98.2% { transform: translateX(-30px); }
+  98.4%, 100% { transform: translateX(0); }
+}
+@keyframes lot-e-v4-bot {
+  0%, 97% { transform: translateX(0); }
+  97.2%, 98.2% { transform: translateX(30px); }
+  98.4%, 100% { transform: translateX(0); }
+}
+.lot-e .v4.peak .band-top { animation: none; transform: translateX(-30px); }
+.lot-e .v4.peak .band-bot { animation: none; transform: translateX(30px); }
+
+/* ============ v5: smear-fill, dimmer amber trail in the gap ============ */
+.lot-e .v5 .band { clip-path: inset(0 0 0 0); }
+.lot-e .v5 .band-top { clip-path: inset(0 0 60% 0); }
+.lot-e .v5 .band-mid { clip-path: inset(34% 0 32% 0); z-index: 2; }
+.lot-e .v5 .smear { clip-path: inset(34% 0 32% 0); color: var(--p-dim); opacity: 0; z-index: 1; }
+.lot-e .v5 .band-bot { clip-path: inset(68% 0 0 0); }
+@media (prefers-reduced-motion: no-preference) {
+  .lot-e .v5 .band-mid { animation: lot-e-v5-mid 8.5s steps(1, end) infinite; }
+  .lot-e .v5 .smear { animation: lot-e-v5-smear 8.5s ease-out infinite; }
+}
+@keyframes lot-e-v5-mid {
+  0%, 95% { transform: translateX(0); }
+  95.3%, 97% { transform: translateX(14px); }
+  97.3%, 100% { transform: translateX(0); }
+}
+@keyframes lot-e-v5-smear {
+  0%, 95% { opacity: 0; transform: translateX(0); }
+  95.3% { opacity: 0.8; transform: translateX(0); }
+  97% { opacity: 0.35; transform: translateX(4px); }
+  99% { opacity: 0; transform: translateX(0); }
+  100% { opacity: 0; }
+}
+.lot-e .v5.peak .band-mid { animation: none; transform: translateX(14px); }
+.lot-e .v5.peak .smear { animation: none; opacity: 0.6; transform: translateX(2px); }
+
+/* ============ v6: echo-duplicate, gap fills with the band above it ============ */
+.lot-e .v6 .band { clip-path: inset(0 0 0 0); }
+.lot-e .v6 .band-top { clip-path: inset(0 0 66% 0); z-index: 2; }
+.lot-e .v6 .band-mid { clip-path: inset(33% 0 33% 0); z-index: 3; }
+.lot-e .v6 .echo { clip-path: inset(33% 0 33% 0); color: var(--p-dim); opacity: 0; z-index: 1; }
+.lot-e .v6 .band-bot { clip-path: inset(66% 0 0 0); z-index: 2; }
+@media (prefers-reduced-motion: no-preference) {
+  .lot-e .v6 .band-mid { animation: lot-e-v6-mid 7.5s steps(1, end) infinite; }
+  .lot-e .v6 .echo { animation: lot-e-v6-echo 7.5s steps(1, end) infinite; }
+}
+@keyframes lot-e-v6-mid {
+  0%, 94% { transform: translateX(0); }
+  94.3%, 96% { transform: translateX(20px); }
+  96.3%, 100% { transform: translateX(0); }
+}
+@keyframes lot-e-v6-echo {
+  0%, 94% { opacity: 0; transform: translateX(0); }
+  94.3%, 96% { opacity: 1; transform: translateX(0); }
+  96.3%, 100% { opacity: 0; transform: translateX(0); }
+}
+.lot-e .v6.peak .band-mid { animation: none; transform: translateX(20px); }
+.lot-e .v6.peak .echo { animation: none; opacity: 1; transform: translateX(0); }
+
+/* ============ v7: vertical-columns, tear runs the other way ============ */
+.lot-e .v7 .band { clip-path: inset(0 0 0 0); }
+.lot-e .v7 .col-a { clip-path: inset(0 66.6% 0 0); }
+.lot-e .v7 .col-b { clip-path: inset(0 33.3% 0 33.3%); }
+.lot-e .v7 .col-c { clip-path: inset(0 0 0 66.6%); }
+@media (prefers-reduced-motion: no-preference) {
+  .lot-e .v7 .col-a { animation: lot-e-v7-up 8s steps(1, end) infinite; }
+  .lot-e .v7 .col-b { animation: lot-e-v7-down 8s steps(1, end) infinite; }
+  .lot-e .v7 .col-c { animation: lot-e-v7-up 8s steps(1, end) infinite reverse; }
+}
+@keyframes lot-e-v7-up {
+  0%, 95% { transform: translateY(0); }
+  95.4%, 96.6% { transform: translateY(-14px); }
+  97%, 100% { transform: translateY(0); }
+}
+@keyframes lot-e-v7-down {
+  0%, 95% { transform: translateY(0); }
+  95.4%, 96.6% { transform: translateY(14px); }
+  97%, 100% { transform: translateY(0); }
+}
+.lot-e .v7.peak .col-a { animation: none; transform: translateY(-14px); }
+.lot-e .v7.peak .col-b { animation: none; transform: translateY(14px); }
+.lot-e .v7.peak .col-c { animation: none; transform: translateY(14px); }
+
+/* ============ v8: hue-shift-tear, colour jumps to a guest hue mid-tear ============ */
+.lot-e .v8 .band { clip-path: inset(0 0 0 0); }
+.lot-e .v8 .band-top { clip-path: inset(0 0 58% 0); }
+.lot-e .v8 .band-mid { clip-path: inset(36% 0 30% 0); }
+.lot-e .v8 .band-bot { clip-path: inset(70% 0 0 0); }
+@media (prefers-reduced-motion: no-preference) {
+  .lot-e .v8 .band-mid { animation: lot-e-v8-tear 9s steps(1, end) infinite; }
+}
+@keyframes lot-e-v8-tear {
+  0%, 93% { transform: translateX(0); color: var(--p-amber); text-shadow: var(--bloom); }
+  93.4%, 95% { transform: translateX(11px); color: var(--p-coral); text-shadow: none; }
+  95.4%, 100% { transform: translateX(0); color: var(--p-amber); text-shadow: var(--bloom); }
+}
+.lot-e .v8.peak .band-mid { animation: none; transform: translateX(11px); color: var(--p-coral); text-shadow: none; }
+</style>
+
+<article class="card lot-e">
+  <h2 class="cap">quiet-tear — reads clean; three thin bands, one rare 8s pulse pulls the middle band sideways then snaps back. This is the "usually readable, occasionally glitches out" mark.</h2>
+  <div class="stage">
+    <div class="wordmark v1">
+      <span class="band band-top">arcade404</span>
+      <span class="band band-mid">arcade404</span>
+      <span class="band band-bot">arcade404</span>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-e">
+  <h2 class="cap">six-thin-slices — six hairline bands, a burst of three quick tears fires within one cycle, then a long calm.</h2>
+  <div class="stage">
+    <div class="wordmark v2">
+      <span class="band b1">arcade404</span>
+      <span class="band b2">arcade404</span>
+      <span class="band b3">arcade404</span>
+      <span class="band b4">arcade404</span>
+      <span class="band b5">arcade404</span>
+      <span class="band b6">arcade404</span>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-e">
+  <h2 class="cap">hairline-slip — one thin band, a 2px drift that creeps up then eases back; never fully tears, just wobbles.</h2>
+  <div class="stage">
+    <div class="wordmark v3">
+      <span class="band band-hair">arcade404</span>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-e">
+  <h2 class="cap">big-tear — two fat bands split the word in half; every 8s a 30px hard displacement briefly destroys it entirely.</h2>
+  <div class="stage">
+    <div class="wordmark v4">
+      <span class="band band-top">arcade404</span>
+      <span class="band band-bot">arcade404</span>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-e">
+  <h2 class="cap">smear-fill — the gap left by the tear fills with a dimmer amber smear that fades out after the band snaps home.</h2>
+  <div class="stage">
+    <div class="wordmark v5">
+      <span class="band band-top">arcade404</span>
+      <span class="ghost smear">arcade404</span>
+      <span class="band band-mid">arcade404</span>
+      <span class="band band-bot">arcade404</span>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-e">
+  <h2 class="cap">echo-duplicate — the tear leaves behind a dim duplicate of the band, like a held afterimage, instead of an empty gap.</h2>
+  <div class="stage">
+    <div class="wordmark v6">
+      <span class="band band-top">arcade404</span>
+      <span class="ghost echo">arcade404</span>
+      <span class="band band-mid">arcade404</span>
+      <span class="band band-bot">arcade404</span>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-e">
+  <h2 class="cap">vertical-columns — the tear runs the other way: three columns slip up and down instead of bands slipping sideways.</h2>
+  <div class="stage">
+    <div class="wordmark v7">
+      <span class="band col-a">arcade404</span>
+      <span class="band col-b">arcade404</span>
+      <span class="band col-c">arcade404</span>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-e">
+  <h2 class="cap">hue-shift-tear — amber at rest; for the instant of the tear the displaced band jumps to coral, a guest hue borrowed from the game screens.</h2>
+  <div class="stage">
+    <div class="wordmark v8">
+      <span class="band band-top">arcade404</span>
+      <span class="band band-mid">arcade404</span>
+      <span class="band band-bot">arcade404</span>
+    </div>
+  </div>
+</article>
+
+</div>
+</section>
+
+<section class="lot">
+<h2>Lot H — hybrids: the tear and the misconverged tube together</h2>
+<div class="lots">
+<style>
+/* ===== shared scaffolding for lot-h, all rules namespaced under .lot-h ===== */
+.lot-h .stage {
+  background: var(--p-ground);
+  padding: 56px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.lot-h .rig {
+  position: relative;
+  display: inline-block;
+  font-family: "VT323", monospace;
+  font-size: 64px;
+  line-height: 1;
+  letter-spacing: 2px;
+  white-space: nowrap;
+}
+.lot-h .name {
+  display: block;
+  color: var(--p-amber);
+  text-shadow: var(--bloom);
+}
+.lot-h .layer {
+  position: absolute;
+  inset: 0;
+  display: block;
+  pointer-events: none;
+}
+
+/* ===================================================================== */
+/* v1 — each torn band gets its own gun: coral top / amber mid / cyan low */
+/* ===================================================================== */
+.lot-h.lh-v1 .rig { color: var(--p-amber); }
+.lot-h.lh-v1 .band {
+  color: currentColor;
+  mix-blend-mode: screen;
+  opacity: 0;
+  transform: translateX(0);
+}
+.lot-h.lh-v1 .band-top    { clip-path: inset(0% 0% 66% 0%); color: var(--p-coral); }
+.lot-h.lh-v1 .band-mid    { clip-path: inset(33% 0% 33% 0%); color: var(--p-amber); }
+.lot-h.lh-v1 .band-bottom { clip-path: inset(66% 0% 0% 0%);  color: var(--p-cyan); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .lot-h.lh-v1 .band-top    { animation: lh-v1-top 7s steps(1) infinite; }
+  .lot-h.lh-v1 .band-mid    { animation: lh-v1-mid 7s steps(1) infinite; }
+  .lot-h.lh-v1 .band-bottom { animation: lh-v1-bot 7s steps(1) infinite; }
+  @keyframes lh-v1-top {
+    0%, 93% { opacity: 0; transform: translateX(0); }
+    93.5%   { opacity: 1; transform: translateX(-10px); }
+    96%     { opacity: 1; transform: translateX(6px); }
+    97%, 100% { opacity: 0; transform: translateX(0); }
+  }
+  @keyframes lh-v1-mid {
+    0%, 93% { opacity: 0; transform: translateX(0); }
+    93.5%, 97% { opacity: .55; transform: translateX(0); }
+    97.5%, 100% { opacity: 0; transform: translateX(0); }
+  }
+  @keyframes lh-v1-bot {
+    0%, 93% { opacity: 0; transform: translateX(0); }
+    93.5%   { opacity: 1; transform: translateX(9px); }
+    96%     { opacity: 1; transform: translateX(-7px); }
+    97%, 100% { opacity: 0; transform: translateX(0); }
+  }
+}
+.lot-h.lh-v1.peak .band-top    { animation: none; opacity: 1; transform: translateX(-10px); }
+.lot-h.lh-v1.peak .band-mid    { animation: none; opacity: .55; transform: translateX(0); }
+.lot-h.lh-v1.peak .band-bottom { animation: none; opacity: 1; transform: translateX(9px); }
+
+/* ===================================================================== */
+/* v2 — always a faint fringe; the tear is what briefly widens it        */
+/* ===================================================================== */
+.lot-h.lh-v2 .rig { color: var(--p-amber); }
+.lot-h.lh-v2 .ghost {
+  color: var(--p-coral);
+  mix-blend-mode: screen;
+  opacity: .35;
+  transform: translateX(1px);
+}
+.lot-h.lh-v2 .ghost.cy {
+  color: var(--p-cyan);
+  transform: translateX(-1px);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .lot-h.lh-v2 .ghost      { animation: lh-v2-cr 6s steps(2, end) infinite; }
+  .lot-h.lh-v2 .ghost.cy   { animation: lh-v2-cy 6s steps(2, end) infinite; }
+  @keyframes lh-v2-cr {
+    0%, 90% { opacity: .35; transform: translateX(1px); }
+    91%     { opacity: .9; transform: translateX(11px); }
+    93.5%   { opacity: .9; transform: translateX(9px); }
+    95%, 100% { opacity: .35; transform: translateX(1px); }
+  }
+  @keyframes lh-v2-cy {
+    0%, 90% { opacity: .35; transform: translateX(-1px); }
+    91%     { opacity: .9; transform: translateX(-12px); }
+    93.5%   { opacity: .9; transform: translateX(-8px); }
+    95%, 100% { opacity: .35; transform: translateX(-1px); }
+  }
+}
+.lot-h.lh-v2.peak .ghost    { animation: none; opacity: .9; transform: translateX(11px); }
+.lot-h.lh-v2.peak .ghost.cy { animation: none; opacity: .9; transform: translateX(-12px); }
+
+/* ===================================================================== */
+/* v3 — clean amber at rest; colour appears only inside the torn band    */
+/* ===================================================================== */
+.lot-h.lh-v3 .rig { color: var(--p-amber); }
+.lot-h.lh-v3 .damage {
+  clip-path: inset(38% 0% 38% 0%);
+  opacity: 0;
+}
+.lot-h.lh-v3 .damage.cr { color: var(--p-coral); mix-blend-mode: screen; transform: translateX(0); }
+.lot-h.lh-v3 .damage.cy { color: var(--p-cyan);  mix-blend-mode: screen; transform: translateX(0); }
+.lot-h.lh-v3 .cut {
+  clip-path: inset(38% 0% 38% 0%);
+  color: var(--p-ground);
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .lot-h.lh-v3 .cut       { animation: lh-v3-cut 8s steps(1) infinite; }
+  .lot-h.lh-v3 .damage.cr { animation: lh-v3-cr 8s steps(1) infinite; }
+  .lot-h.lh-v3 .damage.cy { animation: lh-v3-cy 8s steps(1) infinite; }
+  @keyframes lh-v3-cut {
+    0%, 95% { opacity: 0; }
+    95.5%, 97% { opacity: 1; }
+    97.5%, 100% { opacity: 0; }
+  }
+  @keyframes lh-v3-cr {
+    0%, 95% { opacity: 0; transform: translateX(0); }
+    95.5%   { opacity: 1; transform: translateX(-13px); }
+    97%     { opacity: 1; transform: translateX(-13px); }
+    97.5%, 100% { opacity: 0; transform: translateX(0); }
+  }
+  @keyframes lh-v3-cy {
+    0%, 95% { opacity: 0; transform: translateX(0); }
+    95.5%   { opacity: 1; transform: translateX(13px); }
+    97%     { opacity: 1; transform: translateX(13px); }
+    97.5%, 100% { opacity: 0; transform: translateX(0); }
+  }
+}
+.lot-h.lh-v3.peak .cut       { animation: none; opacity: 1; }
+.lot-h.lh-v3.peak .damage.cr { animation: none; opacity: 1; transform: translateX(-13px); }
+.lot-h.lh-v3.peak .damage.cy { animation: none; opacity: 1; transform: translateX(13px); }
+
+/* ===================================================================== */
+/* v4 — colour separation runs horizontal, the tear line runs vertical   */
+/* ===================================================================== */
+.lot-h.lh-v4 .rig { color: var(--p-amber); }
+.lot-h.lh-v4 .half {
+  clip-path: inset(0 50% 0 0);
+  transform: translateY(0);
+}
+.lot-h.lh-v4 .half.right {
+  clip-path: inset(0 0 0 50%);
+}
+.lot-h.lh-v4 .gun {
+  opacity: 0;
+  mix-blend-mode: screen;
+  transform: translateX(0);
+}
+.lot-h.lh-v4 .gun.cr { color: var(--p-coral); }
+.lot-h.lh-v4 .gun.cy { color: var(--p-cyan); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .lot-h.lh-v4 .half.left  { animation: lh-v4-up 6.5s steps(1) infinite; }
+  .lot-h.lh-v4 .half.right { animation: lh-v4-down 6.5s steps(1) infinite; }
+  .lot-h.lh-v4 .gun.cr     { animation: lh-v4-cr 6.5s steps(1) infinite; }
+  .lot-h.lh-v4 .gun.cy     { animation: lh-v4-cy 6.5s steps(1) infinite; }
+  @keyframes lh-v4-up {
+    0%, 92% { transform: translateY(0); }
+    92.5%, 95% { transform: translateY(-7px); }
+    95.5%, 100% { transform: translateY(0); }
+  }
+  @keyframes lh-v4-down {
+    0%, 92% { transform: translateY(0); }
+    92.5%, 95% { transform: translateY(7px); }
+    95.5%, 100% { transform: translateY(0); }
+  }
+  @keyframes lh-v4-cr {
+    0%, 92% { opacity: 0; transform: translateX(0); }
+    92.5%, 95% { opacity: .85; transform: translateX(-8px); }
+    95.5%, 100% { opacity: 0; transform: translateX(0); }
+  }
+  @keyframes lh-v4-cy {
+    0%, 92% { opacity: 0; transform: translateX(0); }
+    92.5%, 95% { opacity: .85; transform: translateX(8px); }
+    95.5%, 100% { opacity: 0; transform: translateX(0); }
+  }
+}
+.lot-h.lh-v4.peak .half.left  { animation: none; transform: translateY(-7px); }
+.lot-h.lh-v4.peak .half.right { animation: none; transform: translateY(7px); }
+.lot-h.lh-v4.peak .gun.cr     { animation: none; opacity: .85; transform: translateX(-8px); }
+.lot-h.lh-v4.peak .gun.cy     { animation: none; opacity: .85; transform: translateX(8px); }
+
+/* ===================================================================== */
+/* v5 — bands snap back instantly, the colour fringe takes half a second */
+/* ===================================================================== */
+.lot-h.lh-v5 .rig { color: var(--p-amber); }
+.lot-h.lh-v5 .snap {
+  clip-path: inset(30% 0% 30% 0%);
+  transform: translateX(0);
+}
+.lot-h.lh-v5 .fringe {
+  clip-path: inset(30% 0% 30% 0%);
+  opacity: 0;
+  mix-blend-mode: screen;
+}
+.lot-h.lh-v5 .fringe.cr { color: var(--p-coral); transform: translateX(0); }
+.lot-h.lh-v5 .fringe.cy { color: var(--p-cyan);  transform: translateX(0); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .lot-h.lh-v5 .snap {
+    animation: lh-v5-snap 9s steps(1, end) infinite;
+  }
+  .lot-h.lh-v5 .fringe.cr {
+    animation: lh-v5-fringe-cr 9s infinite;
+  }
+  .lot-h.lh-v5 .fringe.cy {
+    animation: lh-v5-fringe-cy 9s infinite;
+  }
+  /* the band itself: displaced for one instant, then gone — no easing */
+  @keyframes lh-v5-snap {
+    0%, 90% { transform: translateX(0); }
+    90.2%   { transform: translateX(14px); }
+    91%, 100% { transform: translateX(0); }
+  }
+  /* the colour fringe: appears with the snap, but eases closed over ~0.5s */
+  @keyframes lh-v5-fringe-cr {
+    0%, 90% { opacity: 0; transform: translateX(0); }
+    90.2%   { opacity: .9; transform: translateX(16px); }
+    96%     { opacity: 0; transform: translateX(1px); }
+    100%    { opacity: 0; transform: translateX(0); }
+  }
+  @keyframes lh-v5-fringe-cy {
+    0%, 90% { opacity: 0; transform: translateX(0); }
+    90.2%   { opacity: .9; transform: translateX(-16px); }
+    96%     { opacity: 0; transform: translateX(-1px); }
+    100%    { opacity: 0; transform: translateX(0); }
+  }
+}
+.lot-h.lh-v5.peak .snap      { animation: none; transform: translateX(0); }
+.lot-h.lh-v5.peak .fringe.cr { animation: none; opacity: .9; transform: translateX(16px); }
+.lot-h.lh-v5.peak .fringe.cy { animation: none; opacity: .9; transform: translateX(-16px); }
+
+/* ===================================================================== */
+/* v6 — heavy: many thin bands, each its own hue, clean amber at rest    */
+/* ===================================================================== */
+.lot-h.lh-v6 .rig { color: var(--p-amber); }
+.lot-h.lh-v6 .th {
+  opacity: 0;
+  mix-blend-mode: screen;
+  transform: translateX(0);
+}
+.lot-h.lh-v6 .th1 { clip-path: inset(0%   0% 87.5% 0%); color: var(--p-coral); }
+.lot-h.lh-v6 .th2 { clip-path: inset(12.5% 0% 75%  0%); color: var(--p-lime);  }
+.lot-h.lh-v6 .th3 { clip-path: inset(25%  0% 62.5% 0%); color: var(--p-jade);  }
+.lot-h.lh-v6 .th4 { clip-path: inset(37.5% 0% 50%  0%); color: var(--p-cyan);  }
+.lot-h.lh-v6 .th5 { clip-path: inset(50%  0% 37.5% 0%); color: var(--p-violet); }
+.lot-h.lh-v6 .th6 { clip-path: inset(62.5% 0% 25%  0%); color: var(--p-rose);  }
+.lot-h.lh-v6 .th7 { clip-path: inset(75%  0% 12.5% 0%); color: var(--p-coral); }
+.lot-h.lh-v6 .th8 { clip-path: inset(87.5% 0% 0%   0%); color: var(--p-cyan);  }
+
+@media (prefers-reduced-motion: no-preference) {
+  .lot-h.lh-v6 .th { animation: lh-v6-shred 7.5s steps(1) infinite; }
+  .lot-h.lh-v6 .th1 { animation-delay: 0s;    --dx: -13px; }
+  .lot-h.lh-v6 .th2 { animation-delay: 0s;    --dx: 9px; }
+  .lot-h.lh-v6 .th3 { animation-delay: 0s;    --dx: -6px; }
+  .lot-h.lh-v6 .th4 { animation-delay: 0s;    --dx: 15px; }
+  .lot-h.lh-v6 .th5 { animation-delay: 0s;    --dx: -11px; }
+  .lot-h.lh-v6 .th6 { animation-delay: 0s;    --dx: 7px; }
+  .lot-h.lh-v6 .th7 { animation-delay: 0s;    --dx: -16px; }
+  .lot-h.lh-v6 .th8 { animation-delay: 0s;    --dx: 10px; }
+  @keyframes lh-v6-shred {
+    0%, 94% { opacity: 0; transform: translateX(0); }
+    94.5%   { opacity: .95; transform: translateX(var(--dx)); }
+    97%     { opacity: .95; transform: translateX(calc(var(--dx) * -0.4)); }
+    97.5%, 100% { opacity: 0; transform: translateX(0); }
+  }
+}
+.lot-h.lh-v6.peak .th { animation: none; opacity: .95; }
+.lot-h.lh-v6.peak .th1 { transform: translateX(-13px); }
+.lot-h.lh-v6.peak .th2 { transform: translateX(9px); }
+.lot-h.lh-v6.peak .th3 { transform: translateX(-6px); }
+.lot-h.lh-v6.peak .th4 { transform: translateX(15px); }
+.lot-h.lh-v6.peak .th5 { transform: translateX(-11px); }
+.lot-h.lh-v6.peak .th6 { transform: translateX(7px); }
+.lot-h.lh-v6.peak .th7 { transform: translateX(-16px); }
+.lot-h.lh-v6.peak .th8 { transform: translateX(10px); }
+</style>
+
+<article class="card lot-h lh-v1">
+  <h2 class="cap">Band-split guns — top drifts coral, middle stays amber, bottom drifts cyan</h2>
+  <div class="stage">
+    <div class="rig">
+      <span class="name">ARCADE404</span>
+      <span class="layer band band-top">ARCADE404</span>
+      <span class="layer band band-mid">ARCADE404</span>
+      <span class="layer band band-bottom">ARCADE404</span>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-h lh-v2">
+  <h2 class="cap">Standing fringe — a faint permanent mis-registration, and the tear briefly widens it</h2>
+  <div class="stage">
+    <div class="rig">
+      <span class="layer ghost">ARCADE404</span>
+      <span class="layer ghost cy">ARCADE404</span>
+      <span class="name">ARCADE404</span>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-h lh-v3">
+  <h2 class="cap">Damage-only colour — clean amber everywhere except inside the torn band</h2>
+  <div class="stage">
+    <div class="rig">
+      <span class="name">ARCADE404</span>
+      <span class="layer cut">ARCADE404</span>
+      <span class="layer damage cr">ARCADE404</span>
+      <span class="layer damage cy">ARCADE404</span>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-h lh-v4">
+  <h2 class="cap">Crossed axes — colour separates sideways while the tear splits up and down</h2>
+  <div class="stage">
+    <div class="rig">
+      <span class="layer half left">ARCADE404</span>
+      <span class="layer half right">ARCADE404</span>
+      <span class="layer gun cr">ARCADE404</span>
+      <span class="layer gun cy">ARCADE404</span>
+      <span class="name" style="opacity:.001">ARCADE404</span>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-h lh-v5">
+  <h2 class="cap">Mismatched recovery — the band snaps back instantly, the colour takes half a second to close</h2>
+  <div class="stage">
+    <div class="rig">
+      <span class="name">ARCADE404</span>
+      <span class="layer snap" style="color:var(--p-amber)">ARCADE404</span>
+      <span class="layer fringe cr">ARCADE404</span>
+      <span class="layer fringe cy">ARCADE404</span>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-h lh-v6">
+  <h2 class="cap">Shredded — eight thin bands, eight guest hues, clean amber at rest</h2>
+  <div class="stage">
+    <div class="rig">
+      <span class="name">ARCADE404</span>
+      <span class="layer th th1">ARCADE404</span>
+      <span class="layer th th2">ARCADE404</span>
+      <span class="layer th th3">ARCADE404</span>
+      <span class="layer th th4">ARCADE404</span>
+      <span class="layer th th5">ARCADE404</span>
+      <span class="layer th th6">ARCADE404</span>
+      <span class="layer th th7">ARCADE404</span>
+      <span class="layer th th8">ARCADE404</span>
+    </div>
+  </div>
+</article>
+
+</div>
+</section>
+
+<section class="lot">
+<h2>Lot F — the display failing: ten kinds of fault, none of them a tear</h2>
+<div class="lots">
+<style>
+.lot-f .stage {
+  background: var(--p-panel);
+  border: 1px solid var(--p-hairline);
+  border-radius: 3px;
+  padding: 52px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+.lot-f .mark {
+  font-family: "VT323", monospace;
+  font-size: 52px;
+  letter-spacing: 0.08em;
+  color: var(--p-amber);
+  text-shadow: var(--bloom);
+  white-space: nowrap;
+  line-height: 1;
+}
+
+/* ---------- 1. vertical roll ---------- */
+.lot-f .vroll-stage { height: 68px; align-items: flex-start; padding-top: 0; padding-bottom: 0; }
+.lot-f .vroll-track { display: flex; flex-direction: column; }
+.lot-f .vroll-track .mark { height: 68px; display: flex; align-items: center; justify-content: center; width: 100%; }
+@media (prefers-reduced-motion: no-preference) {
+  .lot-f .vroll-track { animation: lot-f-vroll 6s linear infinite; }
+}
+@keyframes lot-f-vroll {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(-68px); }
+}
+.lot-f.v-vroll.peak .vroll-track { animation: none; transform: translateY(-25px); }
+
+/* ---------- 2. tracking bar ---------- */
+.lot-f .trackbar-wrap { position: relative; display: inline-block; }
+.lot-f .trackbar-wrap .smear {
+  position: absolute; inset: 0;
+  color: var(--p-hot);
+  text-shadow: var(--bloom-lg);
+  filter: blur(2.5px);
+  clip-path: inset(-30% 0 100% 0);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .lot-f .trackbar-wrap .smear { animation: lot-f-trackbar 7s linear infinite; }
+}
+@keyframes lot-f-trackbar {
+  0%   { clip-path: inset(-30% 0 100% 0); }
+  45%  { clip-path: inset(-30% 0 100% 0); }
+  60%  { clip-path: inset(38% 0 42% 0); }
+  75%  { clip-path: inset(100% 0 -30% 0); }
+  100% { clip-path: inset(100% 0 -30% 0); }
+}
+.lot-f.v-trackbar.peak .smear { animation: none; clip-path: inset(38% 0 42% 0); }
+
+/* ---------- 3. misconvergence ---------- */
+.lot-f .converge-wrap { position: relative; display: inline-block; }
+.lot-f .converge-wrap .fringe {
+  position: absolute; inset: 0;
+  mix-blend-mode: screen;
+  opacity: 0;
+  transform: translate(0, 0);
+}
+.lot-f .converge-wrap .fringe.r { color: var(--p-coral); }
+.lot-f .converge-wrap .fringe.b { color: var(--p-cyan); }
+@media (prefers-reduced-motion: no-preference) {
+  .lot-f .converge-wrap .fringe.r { animation: lot-f-fringe-r 8s steps(1) infinite; }
+  .lot-f .converge-wrap .fringe.b { animation: lot-f-fringe-b 8s steps(1) infinite; }
+}
+@keyframes lot-f-fringe-r {
+  0%, 92%, 100% { opacity: 0; transform: translate(0, 0); }
+  94%, 97%      { opacity: .85; transform: translate(-2.5px, 0); }
+}
+@keyframes lot-f-fringe-b {
+  0%, 92%, 100% { opacity: 0; transform: translate(0, 0); }
+  94%, 97%      { opacity: .85; transform: translate(2.5px, 0); }
+}
+.lot-f.v-converge.peak .fringe.r { animation: none; opacity: .85; transform: translate(-2.5px, 0); }
+.lot-f.v-converge.peak .fringe.b { animation: none; opacity: .85; transform: translate(2.5px, 0); }
+
+/* ---------- 4. brownout ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .lot-f .mark.brownout { animation: lot-f-brownout 9s ease-in-out infinite; }
+}
+@keyframes lot-f-brownout {
+  0%, 84%, 100% { opacity: 1;   filter: brightness(1);    color: var(--p-amber); text-shadow: var(--bloom); }
+  89%           { opacity: .5;  filter: brightness(.45);  color: var(--p-dim);   text-shadow: none; }
+  93%           { opacity: .68; filter: brightness(.6);   color: var(--p-dim);   text-shadow: none; }
+}
+.lot-f.v-brownout.peak .mark { animation: none; opacity: .5; filter: brightness(.45); color: var(--p-dim); text-shadow: none; }
+
+/* ---------- 5. degauss ---------- */
+.lot-f .degauss-wrap { position: relative; display: inline-block; }
+.lot-f .degauss-wrap::after {
+  content: "";
+  position: absolute;
+  inset: -60% -20%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 176, 0, 0.4), transparent 62%);
+  opacity: 0;
+  transform: scale(.3);
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .lot-f .degauss-wrap .mark { animation: lot-f-degauss-warp 9s ease-in-out infinite; }
+  .lot-f .degauss-wrap::after { animation: lot-f-degauss-bloom 9s ease-in-out infinite; }
+}
+@keyframes lot-f-degauss-warp {
+  0%, 88%, 100% { transform: scale(1) skewX(0deg);      filter: none; }
+  91%           { transform: scale(1.05) skewX(-3deg);  filter: hue-rotate(18deg) saturate(1.5); }
+  94%           { transform: scale(.96) skewX(3deg);    filter: hue-rotate(-14deg) saturate(1.7); }
+  97%           { transform: scale(1.02) skewX(-1deg);  filter: hue-rotate(6deg) saturate(1.2); }
+}
+@keyframes lot-f-degauss-bloom {
+  0%, 88%, 100% { opacity: 0;   transform: scale(.3); }
+  92%           { opacity: .55; transform: scale(1);  }
+  97%           { opacity: 0;   transform: scale(1.5); }
+}
+.lot-f.v-degauss.peak .mark { animation: none; transform: scale(.96) skewX(3deg); filter: hue-rotate(-14deg) saturate(1.7); }
+.lot-f.v-degauss.peak .degauss-wrap::after { animation: none; opacity: .55; transform: scale(1); }
+
+/* ---------- 6. interlace flicker ---------- */
+.lot-f .interlace-wrap { position: relative; display: inline-block; }
+.lot-f .interlace-wrap::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(to bottom, var(--p-panel) 0 1px, transparent 1px 3px);
+  opacity: 0;
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .lot-f .interlace-wrap::before { animation: lot-f-interlace 6s steps(1) infinite; }
+}
+@keyframes lot-f-interlace {
+  0%, 93%, 100%  { opacity: 0;   background-position: 0 0; }
+  95%            { opacity: .85; background-position: 0 0; }
+  96%            { opacity: .85; background-position: 0 2px; }
+  98%            { opacity: .85; background-position: 0 0; }
+}
+.lot-f.v-interlace.peak .interlace-wrap::before { animation: none; opacity: .85; background-position: 0 2px; }
+
+/* ---------- 7. phosphor burn-in / ghost ---------- */
+.lot-f .burnin-wrap { position: relative; display: inline-block; }
+.lot-f .burnin-wrap .ghost {
+  position: absolute; inset: 0;
+  color: var(--p-rule);
+  text-shadow: none;
+  opacity: .3;
+  transform: translate(4px, -3px);
+  z-index: 0;
+}
+.lot-f .burnin-wrap .mark { position: relative; z-index: 1; }
+/* The rule above matches the ghost too and would pull it back into the flow;
+   this restates the ghost's own positioning after it. */
+.lot-f .burnin-wrap .mark.ghost { position: absolute; z-index: 0; }
+@media (prefers-reduced-motion: no-preference) {
+  .lot-f .burnin-wrap .ghost { animation: lot-f-burnin-breathe 10s ease-in-out infinite; }
+}
+@keyframes lot-f-burnin-breathe {
+  0%, 100% { opacity: .24; }
+  50%      { opacity: .38; }
+}
+.lot-f.v-burnin.peak .ghost { animation: none; opacity: .5; }
+
+/* ---------- 8. dead pixels / missing segments ---------- */
+.lot-f .deadpix .cell { position: relative; display: inline-block; }
+@media (prefers-reduced-motion: no-preference) {
+  .lot-f .deadpix .cell.blank { animation: lot-f-cell-blank 7s steps(1) infinite; }
+  .lot-f .deadpix .cell.wrong::after { animation: lot-f-cell-wrong 7s steps(1) infinite; animation-delay: .35s; }
+}
+@keyframes lot-f-cell-blank {
+  0%, 90%, 100% { color: var(--p-amber); text-shadow: var(--bloom); }
+  92%, 96%      { color: var(--p-panel); text-shadow: none; }
+}
+.lot-f .deadpix .cell.wrong::after {
+  content: "X";
+  position: absolute; inset: 0;
+  background: var(--p-panel);
+  color: var(--p-pale);
+  opacity: 0;
+}
+@keyframes lot-f-cell-wrong {
+  0%, 90%, 100% { opacity: 0; }
+  92%, 96%      { opacity: 1; }
+}
+.lot-f.v-deadpix.peak .cell.blank { animation: none; color: var(--p-panel); text-shadow: none; }
+.lot-f.v-deadpix.peak .cell.wrong::after { animation: none; opacity: 1; }
+</style>
+
+<article class="card lot-f v-vroll">
+  <h2 class="cap">Vertical roll — bad vertical hold, the picture climbs and wraps</h2>
+  <div class="stage vroll-stage">
+    <div class="vroll-track">
+      <span class="mark">ARCADE404</span>
+      <span class="mark">ARCADE404</span>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-f v-trackbar">
+  <h2 class="cap">Tracking bar — a band of distortion sweeps once through the mark</h2>
+  <div class="stage">
+    <span class="trackbar-wrap">
+      <span class="mark">ARCADE404</span>
+      <span class="mark smear" aria-hidden="true">ARCADE404</span>
+    </span>
+  </div>
+</article>
+
+<article class="card lot-f v-converge">
+  <h2 class="cap">Misconvergence — clean amber at rest, guns drift apart for a moment</h2>
+  <div class="stage">
+    <span class="converge-wrap">
+      <span class="mark">ARCADE404</span>
+      <span class="mark fringe r" aria-hidden="true">ARCADE404</span>
+      <span class="mark fringe b" aria-hidden="true">ARCADE404</span>
+    </span>
+  </div>
+</article>
+
+<article class="card lot-f v-brownout">
+  <h2 class="cap">Brownout — the glow sags toward dim, then recovers</h2>
+  <div class="stage">
+    <span class="mark brownout">ARCADE404</span>
+  </div>
+</article>
+
+<article class="card lot-f v-degauss">
+  <h2 class="cap">Degauss — a warp and colour bloom on a slow cycle</h2>
+  <div class="stage">
+    <span class="degauss-wrap">
+      <span class="mark">ARCADE404</span>
+    </span>
+  </div>
+</article>
+
+<article class="card lot-f v-interlace">
+  <h2 class="cap">Interlace flicker — alternate scanlines drop for a frame</h2>
+  <div class="stage">
+    <span class="interlace-wrap">
+      <span class="mark">ARCADE404</span>
+    </span>
+  </div>
+</article>
+
+<article class="card lot-f v-burnin">
+  <h2 class="cap">Phosphor ghost — a stale copy sits behind the live mark, permanently</h2>
+  <div class="stage">
+    <span class="burnin-wrap">
+      <span class="mark ghost" aria-hidden="true">ARCADE404</span>
+      <span class="mark">ARCADE404</span>
+    </span>
+  </div>
+</article>
+
+<article class="card lot-f v-deadpix">
+  <h2 class="cap">Dead cells — a couple of characters stay dark or misread, then heal</h2>
+  <div class="stage">
+    <span class="mark deadpix">AR<span class="cell blank">C</span>ADE<span class="cell wrong">4</span>04</span>
+  </div>
+</article>
+
+</div>
+</section>
+
+<section class="lot">
+<h2>Lot G — the error as meaning: the mark behaving like software reporting a fault</h2>
+<div class="lots">
+<style>
+/* lot-g: the error as MEANING, not visual damage — every selector scoped
+   under .lot-g, every keyframe prefixed lg- to avoid cross-lot collision. */
+
+.lot-g { font-family: "VT323", monospace; }
+.lot-g .stage {
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  background: var(--p-ground);
+}
+.lot-g .mark {
+  font-size: 2.6rem;
+  line-height: 1;
+  color: var(--p-amber);
+  text-shadow: var(--bloom);
+  letter-spacing: 0.02em;
+  white-space: pre;
+}
+.lot-g .sub {
+  font-size: 1.05rem;
+  color: var(--p-dim);
+  letter-spacing: 0.04em;
+}
+
+/* ---------- v1: load fault — 404 occasionally fails to render ---------- */
+.lot-g.v1 .mark { position: relative; }
+.lot-g.v1 .tail { position: relative; display: inline-block; }
+.lot-g.v1 .digits { }
+.lot-g.v1 .box {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  border: 2px solid var(--p-dim);
+  border-radius: 2px;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .lot-g.v1 .digits { animation: lg-v1-digits 7s steps(1) infinite; }
+  .lot-g.v1 .box { animation: lg-v1-box 7s steps(1) infinite; }
+}
+@keyframes lg-v1-digits {
+  0%, 91% { opacity: 1; }
+  92%, 96% { opacity: 0; }
+  97%, 100% { opacity: 1; }
+}
+@keyframes lg-v1-box {
+  0%, 91% { opacity: 0; }
+  92%, 96% { opacity: 1; }
+  97%, 100% { opacity: 0; }
+}
+.lot-g.v1.peak .digits { opacity: 0; animation: none; }
+.lot-g.v1.peak .box { opacity: 1; animation: none; }
+
+/* ---------- v2: checksum / hex dump ---------- */
+.lot-g.v2 .hexrow { font-size: 1rem; color: var(--p-dim); letter-spacing: 0.05em; }
+.lot-g.v2 .hexrow .byte { display: inline-block; }
+@media (prefers-reduced-motion: no-preference) {
+  .lot-g.v2 .byte.b3 { animation: lg-v2-flicker 8s steps(1) infinite; }
+}
+@keyframes lg-v2-flicker {
+  0%, 93% { opacity: 1; }
+  94%, 97% { opacity: 0.15; }
+  98%, 100% { opacity: 1; }
+}
+.lot-g.v2.peak .byte.b3 { opacity: 0.15; animation: none; }
+
+/* ---------- v3: stack trace ---------- */
+.lot-g.v3 .trace { font-size: 0.95rem; color: var(--p-dim); line-height: 1.5; }
+.lot-g.v3 .trace .frame.dim2 { color: var(--p-rule); }
+.lot-g.v3 .cursor {
+  display: inline-block;
+  width: 0.55em;
+  height: 1em;
+  background: var(--p-dim);
+  vertical-align: text-bottom;
+  margin-left: 2px;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .lot-g.v3 .cursor { animation: lg-v3-blink 1.1s steps(1) infinite; }
+}
+@keyframes lg-v3-blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+.lot-g.v3.peak .cursor { opacity: 1; animation: none; }
+
+/* ---------- v4: retry / reconnect ---------- */
+.lot-g.v4 .sub.retry { opacity: 0; }
+@media (prefers-reduced-motion: no-preference) {
+  .lot-g.v4 .sub.retry { animation: lg-v4-retry 6s steps(1) infinite; }
+}
+@keyframes lg-v4-retry {
+  0%, 89% { opacity: 0; }
+  90%, 96% { opacity: 1; }
+  97%, 100% { opacity: 0; }
+}
+.lot-g.v4.peak .sub.retry { opacity: 1; animation: none; }
+
+/* ---------- v5: the socket that empties ---------- */
+.lot-g.v5 .socket { position: relative; display: inline-block; }
+.lot-g.v5 .socket .fill { }
+@media (prefers-reduced-motion: no-preference) {
+  .lot-g.v5 .socket .fill { animation: lg-v5-drop 9s steps(1) infinite; }
+}
+@keyframes lg-v5-drop {
+  0%, 92% { opacity: 1; }
+  93%, 95% { opacity: 0; }
+  96%, 100% { opacity: 1; }
+}
+.lot-g.v5.peak .socket .fill { opacity: 0; animation: none; }
+
+/* ---------- v6: diagnostic table (static) ---------- */
+.lot-g.v6 table.diag { border-collapse: collapse; font-size: 1.1rem; }
+.lot-g.v6 table.diag td {
+  padding: 2px 14px 2px 0;
+  color: var(--p-dim);
+  border-bottom: 1px solid var(--p-hairline);
+}
+.lot-g.v6 table.diag td.val { color: var(--p-pale); }
+.lot-g.v6 table.diag tr:last-child td { border-bottom: none; }
+
+/* ---------- v7: scrambling decode ---------- */
+/* The resting digit stays in the flow and sizes the reel; only the wrong
+   digit is absolute. A reel of purely absolute children collapses onto the
+   baseline and draws the tail below the word. */
+.lot-g.v7 .reel { position: relative; display: inline-block; }
+.lot-g.v7 .reel span { position: absolute; left: 0; top: 0; opacity: 0; }
+.lot-g.v7 .reel span.at-rest { position: static; opacity: 1; }
+@media (prefers-reduced-motion: no-preference) {
+  .lot-g.v7 .reel.r1 span { animation: lg-v7-r1 8s steps(1) infinite; }
+  .lot-g.v7 .reel.r2 span { animation: lg-v7-r2 8s steps(1) infinite; }
+  .lot-g.v7 .reel.r3 span { animation: lg-v7-r3 8s steps(1) infinite; }
+}
+@keyframes lg-v7-r1 {
+  0%, 93% { opacity: 0; } 93.1%, 100% { opacity: 0; }
+}
+.lot-g.v7 .reel.r1 span.at-rest { animation-name: lg-v7-r1-rest !important; }
+.lot-g.v7 .reel.r2 span.at-rest { animation-name: lg-v7-r2-rest !important; }
+.lot-g.v7 .reel.r3 span.at-rest { animation-name: lg-v7-r3-rest !important; }
+.lot-g.v7 .reel.r1 span.s1 { animation-name: lg-v7-r1-s1 !important; }
+.lot-g.v7 .reel.r2 span.s1 { animation-name: lg-v7-r2-s1 !important; }
+.lot-g.v7 .reel.r3 span.s1 { animation-name: lg-v7-r3-s1 !important; }
+@keyframes lg-v7-r1-rest { 0%, 92% { opacity: 1; } 93%, 97% { opacity: 0; } 98%, 100% { opacity: 1; } }
+@keyframes lg-v7-r1-s1   { 0%, 92% { opacity: 0; } 93%, 97% { opacity: 1; } 98%, 100% { opacity: 0; } }
+@keyframes lg-v7-r2-rest { 0%, 93% { opacity: 1; } 94%, 96% { opacity: 0; } 97%, 100% { opacity: 1; } }
+@keyframes lg-v7-r2-s1   { 0%, 93% { opacity: 0; } 94%, 96% { opacity: 1; } 97%, 100% { opacity: 0; } }
+@keyframes lg-v7-r3-rest { 0%, 94% { opacity: 1; } 95%, 96% { opacity: 0; } 97%, 100% { opacity: 1; } }
+@keyframes lg-v7-r3-s1   { 0%, 94% { opacity: 0; } 95%, 96% { opacity: 1; } 97%, 100% { opacity: 0; } }
+.lot-g.v7.peak .reel span.at-rest { opacity: 0; animation: none; }
+.lot-g.v7.peak .reel span.s1 { opacity: 1; animation: none; }
+
+/* ---------- v8: cursor waiting forever ---------- */
+.lot-g.v8 .prompt { color: var(--p-dim); }
+.lot-g.v8 .block-cursor {
+  display: inline-block;
+  width: 0.55em;
+  height: 1em;
+  background: var(--p-amber);
+  box-shadow: var(--bloom);
+  vertical-align: text-bottom;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .lot-g.v8 .block-cursor { animation: lg-v8-blink 1s steps(1) infinite; }
+}
+@keyframes lg-v8-blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+.lot-g.v8.peak .block-cursor { opacity: 1; animation: none; }
+</style>
+
+<article class="card lot-g v1">
+  <h2 class="cap">Load fault — the tail occasionally fails to render</h2>
+  <div class="stage">
+    <div class="mark">ARCADE<span class="tail"><span class="digits">404</span><span class="box" aria-hidden="true"></span></span></div>
+  </div>
+</article>
+
+<article class="card lot-g v2">
+  <h2 class="cap">Checksum — the name beside a hex dump of itself</h2>
+  <div class="stage">
+    <div class="mark">ARCADE404</div>
+    <div class="hexrow">0x01<span class="byte b3">94</span> &nbsp; 01000001 01110010</div>
+  </div>
+</article>
+
+<article class="card lot-g v3">
+  <h2 class="cap">Stack trace — the name as the top frame</h2>
+  <div class="stage">
+    <div class="mark">arcade404</div>
+    <div class="trace">
+      <div class="frame">at game.load (arcade404:404)<span class="cursor"></span></div>
+      <div class="frame dim2">at boot.init (arcade404:1)</div>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-g v4">
+  <h2 class="cap">Retry / reconnect — a machine that keeps trying</h2>
+  <div class="stage">
+    <div class="mark">ARCADE404</div>
+    <div class="sub retry">RETRY 1 OF 3</div>
+  </div>
+</article>
+
+<article class="card lot-g v5">
+  <h2 class="cap">The socket — a slot that occasionally empties</h2>
+  <div class="stage">
+    <div class="mark">ARCADE [<span class="socket"><span class="fill">404</span></span>]</div>
+  </div>
+</article>
+
+<article class="card lot-g v6">
+  <h2 class="cap">Self-test — a diagnostic readout under the name</h2>
+  <div class="stage">
+    <div class="mark">ARCADE404</div>
+    <table class="diag">
+      <tr><td>GAME</td><td class="val">NOT FOUND</td></tr>
+      <tr><td>CODE</td><td class="val">404</td></tr>
+    </table>
+  </div>
+</article>
+
+<article class="card lot-g v7">
+  <h2 class="cap">Decode — the tail briefly loses sync, then relands</h2>
+  <div class="stage">
+    <div class="mark">ARCADE<span class="reel r1"><span class="at-rest">4</span><span class="s1">8</span></span><span class="reel r2"><span class="at-rest">0</span><span class="s1">5</span></span><span class="reel r3"><span class="at-rest">4</span><span class="s1">9</span></span></div>
+  </div>
+</article>
+
+<article class="card lot-g v8">
+  <h2 class="cap">Waiting — typed at a prompt, the error never comes</h2>
+  <div class="stage">
+    <div class="mark"><span class="prompt">&gt;</span> arcade404<span class="block-cursor" aria-hidden="true"></span></div>
+  </div>
+</article>
+
+</div>
+</section>
+
+<section class="lot">
+<h2>Lot I — horror inside the amber palette: no colour that is not already a token</h2>
+<div class="lots">
+<style>
+.lot-i .stage {
+  background: var(--p-ground);
+  padding: 48px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  font-family: "VT323", monospace;
+}
+
+/* ---------- v1: the dying tube ---------- */
+.lot-i .v1 {
+  position: relative;
+  font-size: 52px;
+  letter-spacing: 0.06em;
+  color: var(--p-rule);
+  text-shadow: none;
+}
+.lot-i .v1 .tail {
+  color: var(--p-hairline);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .lot-i .v1 { animation: lot-i-dying 7s ease-in-out infinite; }
+}
+@keyframes lot-i-dying {
+  0%, 100% { color: var(--p-rule); text-shadow: none; }
+  50% { color: var(--p-dim); text-shadow: 0 0 6px rgba(255,176,0,0.15); }
+}
+.lot-i .v1.peak { color: var(--p-dim); text-shadow: 0 0 6px rgba(255,176,0,0.15); }
+.lot-i .v1.peak .tail { color: var(--p-hairline); }
+
+/* ---------- v2: something behind it ---------- */
+.lot-i .v2 {
+  position: relative;
+  width: 100%;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.lot-i .v2 .ghost {
+  position: absolute;
+  font-size: 68px;
+  color: var(--p-hairline);
+  opacity: 0.35;
+  left: 50%;
+  top: 55%;
+  transform: translate(-46%, -50%) scale(1.15);
+  letter-spacing: 0.08em;
+  filter: blur(0.4px);
+}
+.lot-i .v2 .front {
+  position: relative;
+  font-size: 44px;
+  color: var(--p-amber);
+  text-shadow: var(--bloom);
+  letter-spacing: 0.05em;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .lot-i .v2 .ghost { animation: lot-i-drift 9s ease-in-out infinite; }
+}
+@keyframes lot-i-drift {
+  0%, 100% { transform: translate(-46%, -50%) scale(1.15); opacity: 0.35; }
+  50% { transform: translate(-44%, -52%) scale(1.17); opacity: 0.5; }
+}
+.lot-i .v2.peak .ghost { transform: translate(-44%, -52%) scale(1.17); opacity: 0.5; }
+
+/* ---------- v3: the watcher ---------- */
+.lot-i .v3 {
+  position: relative;
+  font-size: 52px;
+  letter-spacing: 0.05em;
+  color: var(--p-amber);
+  text-shadow: var(--bloom);
+}
+.lot-i .v3 .eyes {
+  position: absolute;
+  top: 46%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  gap: 22px;
+  pointer-events: none;
+}
+.lot-i .v3 .eyes span {
+  width: 7px;
+  height: 4px;
+  background: var(--p-ground);
+  border-radius: 1px;
+  box-shadow: 0 0 3px rgba(0,0,0,0.9);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .lot-i .v3 .eyes span { animation: lot-i-blink 8s ease-in-out infinite; }
+}
+@keyframes lot-i-blink {
+  0%, 92%, 100% { height: 4px; }
+  95% { height: 1px; }
+}
+.lot-i .v3.peak .eyes span { height: 1px; }
+
+/* ---------- v4: the slow approach ---------- */
+.lot-i .v4 {
+  font-size: 46px;
+  letter-spacing: 0.05em;
+  color: var(--p-soft);
+  text-shadow: 0 0 3px rgba(242,188,98,0.2);
+  display: inline-block;
+  transform: scale(1);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .lot-i .v4 { animation: lot-i-creep 20s linear infinite; }
+}
+@keyframes lot-i-creep {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.6); }
+}
+.lot-i .v4.peak { transform: scale(1.6); }
+
+/* ---------- v5: the flicker that stops ---------- */
+.lot-i .v5 {
+  font-size: 50px;
+  letter-spacing: 0.05em;
+  color: var(--p-amber);
+  text-shadow: var(--bloom);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .lot-i .v5 { animation: lot-i-die 10s steps(1, end) infinite; }
+}
+@keyframes lot-i-die {
+  0%, 79% { color: var(--p-amber); text-shadow: var(--bloom); }
+  80%, 90% { color: var(--p-ground); text-shadow: none; }
+  91%, 100% { color: var(--p-amber); text-shadow: var(--bloom); }
+}
+.lot-i .v5.peak { color: var(--p-ground); text-shadow: none; }
+
+/* ---------- v6: breathing glow ---------- */
+.lot-i .v6 {
+  font-size: 50px;
+  letter-spacing: 0.05em;
+  color: var(--p-pale);
+  text-shadow: var(--bloom);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .lot-i .v6 { animation: lot-i-breathe 8s ease-in-out infinite; }
+}
+@keyframes lot-i-breathe {
+  0%, 100% { text-shadow: 0 0 4px rgba(255,176,0,0.25); }
+  50% { text-shadow: var(--bloom-lg); }
+}
+.lot-i .v6.peak { text-shadow: var(--bloom-lg); }
+
+/* ---------- v7: the long shadow ---------- */
+.lot-i .v7 {
+  font-size: 50px;
+  letter-spacing: 0.05em;
+  color: var(--p-soft);
+  text-shadow:
+    2px 3px 0 var(--p-hairline),
+    4px 6px 0 var(--p-hairline),
+    6px 9px 0 var(--p-hairline),
+    8px 12px 0 var(--p-hairline),
+    10px 15px 2px rgba(0,0,0,0.6);
+}
+.lot-i .v7.peak { text-shadow:
+    2px 3px 0 var(--p-hairline),
+    4px 6px 0 var(--p-hairline),
+    6px 9px 0 var(--p-hairline),
+    8px 12px 0 var(--p-hairline),
+    10px 15px 2px rgba(0,0,0,0.6); }
+
+/* ---------- v8: wrong spacing ---------- */
+.lot-i .v8 {
+  font-size: 50px;
+  letter-spacing: 0.05em;
+  color: var(--p-amber);
+  text-shadow: var(--bloom);
+}
+.lot-i .v8 .off {
+  display: inline-block;
+  transform: translateY(6px);
+  margin-left: 0.14em;
+}
+.lot-i .v8.peak .off { transform: translateY(6px); }
+
+/* ---------- v9: scratched into the dark ---------- */
+.lot-i .v9 {
+  font-size: 50px;
+  letter-spacing: 0.05em;
+  color: var(--p-ground);
+  background: var(--p-ground);
+  -webkit-text-stroke: 1px var(--p-rule);
+  text-shadow: 0 0 2px rgba(255,176,0,0.3);
+}
+.lot-i .v9.peak { -webkit-text-stroke: 1px var(--p-amber); text-shadow: 0 0 4px rgba(255,176,0,0.5); }
+@media (prefers-reduced-motion: no-preference) {
+  .lot-i .v9 { animation: lot-i-scratch 9s ease-in-out infinite; }
+}
+@keyframes lot-i-scratch {
+  0%, 100% { -webkit-text-stroke: 1px var(--p-rule); text-shadow: 0 0 2px rgba(255,176,0,0.3); }
+  50% { -webkit-text-stroke: 1px var(--p-amber); text-shadow: 0 0 4px rgba(255,176,0,0.5); }
+}
+
+/* ---------- v10: the last frame ---------- */
+.lot-i .v10 {
+  position: relative;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.lot-i .v10 .txt {
+  font-size: 50px;
+  letter-spacing: 0.05em;
+  color: var(--p-amber);
+  text-shadow: var(--bloom);
+  transform: scaleY(1);
+}
+.lot-i .v10 .line {
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: var(--p-amber);
+  box-shadow: var(--bloom);
+  opacity: 0;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .lot-i .v10 .txt { animation: lot-i-collapse 9s ease-in-out infinite; }
+  .lot-i .v10 .line { animation: lot-i-line 9s ease-in-out infinite; }
+}
+@keyframes lot-i-collapse {
+  0%, 70%, 100% { transform: scaleY(1); opacity: 1; }
+  78%, 92% { transform: scaleY(0.02); opacity: 0; }
+}
+@keyframes lot-i-line {
+  0%, 70%, 100% { opacity: 0; }
+  78%, 92% { opacity: 1; }
+}
+.lot-i .v10.peak .txt { transform: scaleY(0.02); opacity: 0; }
+.lot-i .v10.peak .line { opacity: 1; }
+</style>
+
+<article class="card lot-i">
+  <h2 class="cap">the dying tube — most of the mark swallowed by the ground, as if the power is nearly gone</h2>
+  <div class="stage">
+    <div class="v1 peak">arcade<span class="tail">404</span></div>
+  </div>
+</article>
+
+<article class="card lot-i">
+  <h2 class="cap">something behind it — a dimmer, misaligned copy of the name sitting deeper in the dark</h2>
+  <div class="stage">
+    <div class="v2 peak">
+      <span class="ghost">arcade404</span>
+      <span class="front">arcade404</span>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-i">
+  <h2 class="cap">the watcher — two unlit gaps in the letterforms that read as eyes once you notice them</h2>
+  <div class="stage">
+    <div class="v3 peak">
+      arcade404
+      <span class="eyes"><span></span><span></span></span>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-i">
+  <h2 class="cap">the slow approach — the mark creeps larger over 20s with no reset, as if coming closer</h2>
+  <div class="stage">
+    <span class="v4 peak">arcade404</span>
+  </div>
+</article>
+
+<article class="card lot-i">
+  <h2 class="cap">the flicker that stops — a steady lamp that dies for a full second, long enough to feel wrong, then returns</h2>
+  <div class="stage">
+    <div class="v5 peak">arcade404</div>
+  </div>
+</article>
+
+<article class="card lot-i">
+  <h2 class="cap">breathing glow — the bloom swells and fades on a slow human breathing rhythm</h2>
+  <div class="stage">
+    <div class="v6 peak">arcade404</div>
+  </div>
+</article>
+
+<article class="card lot-i">
+  <h2 class="cap">the long shadow — the letters cast a hard shadow into the dark as if a single bare light hangs above</h2>
+  <div class="stage">
+    <div class="v7 peak">arcade404</div>
+  </div>
+</article>
+
+<article class="card lot-i">
+  <h2 class="cap">wrong spacing — one character sitting fractionally low, barely perceptible, uncanny rather than broken</h2>
+  <div class="stage">
+    <div class="v8 peak">arcade40<span class="off">4</span></div>
+  </div>
+</article>
+
+<article class="card lot-i">
+  <h2 class="cap">scratched into the dark — the name gouged out of a black surface, thin bright edges where the phosphor shows through</h2>
+  <div class="stage">
+    <div class="v9 peak">arcade404</div>
+  </div>
+</article>
+
+<article class="card lot-i">
+  <h2 class="cap">the last frame — the mark collapses to a single line like an old tube switching off, then slowly reopens</h2>
+  <div class="stage">
+    <div class="v10 peak">
+      <span class="txt">arcade404</span>
+      <span class="line"></span>
+    </div>
+  </div>
+</article>
+
+</div>
+</section>
+
+<section class="lot">
+<h2>Lot J — horror that breaks the palette, and says what it broke</h2>
+<div class="lots">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nosifer&family=Special+Elite&display=swap');
+
+/* ---------- v1 : Emergency Red ---------- */
+.lot-j.v1 .stage{ display:flex; align-items:center; justify-content:center; padding:48px 32px; background:var(--p-ground); }
+.lot-j.v1 .mark{ font-family:"VT323",monospace; font-size:64px; letter-spacing:3px; color:#ff2b2b; text-shadow:0 0 6px rgba(255,40,40,.6),0 0 18px rgba(255,20,20,.4); }
+@media (prefers-reduced-motion: no-preference){
+  .lot-j.v1 .mark{ animation:v1pulse 3.4s ease-in-out infinite; }
+}
+@keyframes v1pulse{
+  0%,100%{ text-shadow:0 0 6px rgba(255,40,40,.6),0 0 18px rgba(255,20,20,.4); }
+  50%{ text-shadow:0 0 10px rgba(255,60,60,1),0 0 34px rgba(255,20,20,.85); }
+}
+.lot-j.v1.peak .mark{ animation:none; text-shadow:0 0 10px rgba(255,60,60,1),0 0 34px rgba(255,20,20,.85); }
+
+/* ---------- v2 : The Wrong Hue Creeping In ---------- */
+.lot-j.v2 .stage{ display:flex; align-items:center; justify-content:center; padding:48px 32px; background:var(--p-ground); }
+.lot-j.v2 .markwrap{ position:relative; display:inline-block; font-family:"VT323",monospace; font-size:64px; letter-spacing:2px; }
+.lot-j.v2 .base{ position:relative; display:block; white-space:nowrap; color:var(--p-amber); text-shadow:var(--bloom); }
+.lot-j.v2 .creep{ position:absolute; inset:0; display:block; white-space:nowrap; color:#6bff4a; text-shadow:0 0 10px #3a7d1e; clip-path:inset(0 100% 0 0); }
+@media (prefers-reduced-motion: no-preference){
+  .lot-j.v2 .creep{ animation:v2creep 9s ease-in-out infinite; }
+}
+@keyframes v2creep{
+  0%,15%{ clip-path:inset(0 100% 0 0); }
+  45%,55%{ clip-path:inset(0 55% 0 0); }
+  85%,100%{ clip-path:inset(0 100% 0 0); }
+}
+.lot-j.v2.peak .creep{ animation:none; clip-path:inset(0 55% 0 0); }
+
+/* ---------- v3 : Bone ---------- */
+.lot-j.v3 .stage{ display:flex; align-items:center; justify-content:center; padding:48px 32px; background:#000; }
+.lot-j.v3 .mark{ font-family:"VT323",monospace; font-size:64px; letter-spacing:2px; color:#f2f0e6; text-shadow:none; }
+@media (prefers-reduced-motion: no-preference){
+  .lot-j.v3 .mark{ animation:v3flicker 14s linear infinite; }
+}
+@keyframes v3flicker{
+  0%,96%,100%{ opacity:1; }
+  97%{ opacity:.55; }
+  98%{ opacity:.9; }
+  99%{ opacity:.6; }
+}
+.lot-j.v3.peak .mark{ animation:none; opacity:.55; }
+
+/* ---------- v4 : Wet ---------- */
+.lot-j.v4 .stage{ display:flex; align-items:center; justify-content:center; padding:56px 32px; background:var(--p-ground); }
+.lot-j.v4 .markwrap{ position:relative; display:inline-block; }
+.lot-j.v4 .mark{ display:block; font-family:"VT323",monospace; font-size:64px; letter-spacing:2px; color:#d94a33; text-shadow:0 0 8px rgba(120,10,0,.5); }
+.lot-j.v4 .drip{ position:absolute; top:76%; width:5px; background:linear-gradient(to bottom, #7a0000, rgba(122,0,0,0)); border-radius:0 0 3px 3px; transform-origin:top center; transform:scaleY(.15); }
+.lot-j.v4 .d1{ left:10%; height:60px; }
+.lot-j.v4 .d2{ left:47%; height:80px; }
+.lot-j.v4 .d3{ left:83%; height:56px; }
+@media (prefers-reduced-motion: no-preference){
+  .lot-j.v4 .drip{ animation:v4drip 10s ease-in-out infinite; }
+  .lot-j.v4 .d2{ animation-delay:1.5s; }
+  .lot-j.v4 .d3{ animation-delay:3s; }
+}
+@keyframes v4drip{
+  0%,20%{ transform:scaleY(.15); }
+  60%,80%{ transform:scaleY(1); }
+  100%{ transform:scaleY(.15); }
+}
+.lot-j.v4.peak .drip{ animation:none; transform:scaleY(1); }
+
+/* ---------- v5 : The Carved Face ---------- */
+.lot-j.v5 .stage{ display:flex; align-items:center; justify-content:center; padding:56px 32px; background:#0a0806; }
+.lot-j.v5 .mark{ font-family:"Nosifer","Creepster",cursive; font-size:36px; letter-spacing:1px; color:#120b06; text-shadow:0 0 2px rgba(140,180,255,.9),0 0 10px rgba(90,150,255,.6),0 0 34px rgba(60,110,220,.4); }
+@media (prefers-reduced-motion: no-preference){
+  .lot-j.v5 .mark{ animation:v5flicker 6s ease-in-out infinite; }
+}
+@keyframes v5flicker{
+  0%,100%{ text-shadow:0 0 2px rgba(140,180,255,.9),0 0 10px rgba(90,150,255,.6),0 0 34px rgba(60,110,220,.4); }
+  50%{ text-shadow:0 0 3px rgba(140,180,255,1),0 0 16px rgba(90,150,255,.85),0 0 46px rgba(60,110,220,.6); }
+}
+.lot-j.v5.peak .mark{ animation:none; text-shadow:0 0 3px rgba(140,180,255,1),0 0 16px rgba(90,150,255,.85),0 0 46px rgba(60,110,220,.6); }
+
+/* ---------- v6 : Decay ---------- */
+.lot-j.v6 .stage{ display:flex; align-items:center; justify-content:center; padding:48px 32px; background:var(--p-ground); }
+.lot-j.v6 .markwrap{ position:relative; display:inline-block; }
+.lot-j.v6 .mark{ display:block; font-family:"VT323",monospace; font-size:66px; letter-spacing:3px; color:var(--p-amber); text-shadow:var(--bloom); }
+.lot-j.v6 .hole{ position:absolute; border-radius:50%; background:radial-gradient(circle, #16280f 0%, #0a0704 70%); box-shadow:inset 0 0 6px rgba(0,0,0,.85); transform:scale(.7); }
+.lot-j.v6 .h1{ width:14px; height:14px; left:19%; top:30%; }
+.lot-j.v6 .h2{ width:20px; height:20px; left:53%; top:55%; }
+.lot-j.v6 .h3{ width:11px; height:11px; left:74%; top:25%; }
+.lot-j.v6 .h4{ width:16px; height:16px; left:90%; top:50%; }
+@media (prefers-reduced-motion: no-preference){
+  .lot-j.v6 .hole{ animation:v6rot 11s ease-in-out infinite; }
+  .lot-j.v6 .h2{ animation-delay:1.2s; }
+  .lot-j.v6 .h3{ animation-delay:2.4s; }
+  .lot-j.v6 .h4{ animation-delay:.6s; }
+}
+@keyframes v6rot{
+  0%,20%{ transform:scale(.55); opacity:.7; }
+  55%,75%{ transform:scale(1.1); opacity:1; }
+  100%{ transform:scale(.55); opacity:.7; }
+}
+.lot-j.v6.peak .hole{ animation:none; transform:scale(1.1); opacity:1; }
+
+/* ---------- v7 : The Negative ---------- */
+.lot-j.v7 .stage{ display:flex; align-items:center; justify-content:center; padding:48px 32px; background:#efe6d2; }
+.lot-j.v7 .mark{ font-family:"VT323",monospace; font-size:64px; letter-spacing:3px; color:#1c1208; text-shadow:none; }
+@media (prefers-reduced-motion: no-preference){
+  .lot-j.v7 .mark{ animation:v7weave 13s linear infinite; }
+}
+@keyframes v7weave{
+  0%,92%,100%{ transform:translate(0,0); }
+  94%{ transform:translate(1px,-1px); }
+  96%{ transform:translate(-1px,0); }
+}
+.lot-j.v7.peak .mark{ animation:none; transform:translate(1px,-1px); }
+
+/* ---------- v8 : Candlelight ---------- */
+.lot-j.v8 .stage{ position:relative; display:flex; align-items:center; justify-content:center; padding:64px 32px 48px; background:#0a0704; overflow:hidden; }
+.lot-j.v8 .glow{ position:absolute; left:50%; bottom:14px; width:420px; height:170px; transform:translateX(-50%) scale(1); background:radial-gradient(ellipse at center, rgba(255,170,80,.55), rgba(255,120,40,.15) 45%, transparent 70%); filter:blur(6px); }
+.lot-j.v8 .mark{ position:relative; display:block; text-align:center; font-family:"Special Elite","Courier New",monospace; font-size:38px; letter-spacing:2px; color:#f2d6a4; text-shadow:0 6px 16px rgba(255,150,60,.55), 0 2px 2px rgba(255,120,40,.5), 0 -3px 0 rgba(0,0,0,.65), 0 -16px 24px rgba(0,0,0,.6); }
+@media (prefers-reduced-motion: no-preference){
+  .lot-j.v8 .glow{ animation:v8flickerA 4.2s ease-in-out infinite, v8flickerB 5.7s ease-in-out infinite; }
+}
+@keyframes v8flickerA{ 0%,100%{ opacity:.85; } 50%{ opacity:1; } }
+@keyframes v8flickerB{ 0%,100%{ transform:translateX(-50%) scale(1); } 50%{ transform:translateX(-50%) scale(1.06); } }
+.lot-j.v8.peak .glow{ animation:none; opacity:1; transform:translateX(-50%) scale(1.06); }
+</style>
+
+<article class="card lot-j v1">
+  <h2 class="cap">Emergency Red — restrained enough to ship as an accent. breaks: amber replaced wholesale by a deep signal red that is in no token</h2>
+  <div class="stage">
+    <div class="mark">ARCADE404</div>
+  </div>
+</article>
+
+<article class="card lot-j v2">
+  <h2 class="cap">The Wrong Hue Creeping In — breaks: a sick green outside the guest-hue set, bleeding into chrome that is normally amber-only</h2>
+  <div class="stage">
+    <div class="markwrap">
+      <span class="base">ARCADE404</span>
+      <span class="creep" aria-hidden="true">ARCADE404</span>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-j v3">
+  <h2 class="cap">Bone — restrained enough to ship as an accent. breaks: pure black ground and a flat dead white with the phosphor bloom removed entirely</h2>
+  <div class="stage">
+    <div class="mark">arcade404</div>
+  </div>
+</article>
+
+<article class="card lot-j v4">
+  <h2 class="cap">Wet — breaks: a deep arterial red, in no token, bleeding downward off the letters</h2>
+  <div class="stage">
+    <div class="markwrap">
+      <span class="mark">ARCADE404</span>
+      <span class="drip d1" aria-hidden="true"></span>
+      <span class="drip d2" aria-hidden="true"></span>
+      <span class="drip d3" aria-hidden="true"></span>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-j v5">
+  <h2 class="cap">The Carved Face — legible but slower to read than the rest of the lot. breaks: swaps VT323 for a heavy display face (Nosifer) and lights the mark with a cold blue backlight instead of amber</h2>
+  <div class="stage">
+    <div class="mark">ARCADE404</div>
+  </div>
+</article>
+
+<article class="card lot-j v6">
+  <h2 class="cap">Decay — breaks: a diseased green showing through the ground wherever a letter has rotted out</h2>
+  <div class="stage">
+    <div class="markwrap">
+      <span class="mark">ARCADE404</span>
+      <span class="hole h1" aria-hidden="true"></span>
+      <span class="hole h2" aria-hidden="true"></span>
+      <span class="hole h3" aria-hidden="true"></span>
+      <span class="hole h4" aria-hidden="true"></span>
+    </div>
+  </div>
+</article>
+
+<article class="card lot-j v7">
+  <h2 class="cap">The Negative — breaks: chrome inverted outright, a bright parchment ground with dark letters and no phosphor glow anywhere</h2>
+  <div class="stage">
+    <div class="mark">ARCADE404</div>
+  </div>
+</article>
+
+<article class="card lot-j v8">
+  <h2 class="cap">Candlelight — legible, but nothing about it reads as a screen any more. breaks: a warm firelight palette and a typewriter face (Special Elite) in place of amber and VT323</h2>
+  <div class="stage">
+    <div class="glow" aria-hidden="true"></div>
+    <div class="mark">arcade404</div>
+  </div>
+</article>
+
+</div>
+</section>
+</div>
+<script src="gallery.js"></script>
+</body>
+</html>
