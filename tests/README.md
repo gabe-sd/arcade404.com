@@ -204,3 +204,24 @@ Three rules came out of it, and they are cheap:
   every position the paddle can reach. Two of this session's fixes were sized
   that way and one was abandoned because the numbers said it cost more than it
   gave.
+
+**A bare `await` on a page condition crashes the run instead of failing it.**
+`tests/wordmark.test.js` had this twice in one pass — one wait wrapped, an
+identical one left bare — so the rule is not "wrap that call" but that any
+`waitForFunction` or `waitForSelector` awaited bare is a crash waiting to be
+somebody's confusing morning. It throws a TimeoutError after the default thirty
+seconds: no FAIL line, no page named, and every check after it abandoned. The
+run does still go red — `run-all.js` reads each suite's exit code and an
+unhandled rejection exits 1 — but red with nothing to read, and the checks it
+never reached go missing rather than reported. Catch it, name the page, carry on:
+
+```js
+const ok = await page.waitForFunction(cond, null, { timeout: 5000 })
+  .then(() => true, () => false);
+if (!ok) { check(`${p} — the thing never happened`, false, "where to look"); continue; }
+```
+
+**`$?` after a pipeline is the pipeline's last command, not your suite.**
+`node tests/x.test.js | tail -2; echo $?` prints `tail`'s 0 while the suite
+exited 1, which is how a crashing suite got reported here as exiting cleanly.
+Redirect to a file and read `$?`, or read `${PIPESTATUS[0]}`.
