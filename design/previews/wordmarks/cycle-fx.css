@@ -81,14 +81,15 @@
   clip-path: inset(38% 0 24% 0);
   opacity: 1;
 }
-.wm.fx-quiet-tear.glitch .l1 { animation: wm-quiet-tear 420ms ease 1; }
+.wm.fx-quiet-tear.glitch .l1 { animation: wm-quiet-tear 420ms steps(1, end) 1; }
 .wm.fx-quiet-tear.peak .l1 { animation: none; transform: translateX(9px); }
+/* Every step is a jump: steps(1, end) holds each value until the next
+   keyframe, so nothing travels. The band is already displaced on frame one —
+   a glitch does not arrive, it is simply there. */
 @keyframes wm-quiet-tear {
-  0%   { transform: translateX(0); }
-  12%  { transform: translateX(9px); }
-  38%  { transform: translateX(9px); }
-  50%  { transform: translateX(-6px); }
-  62%  { transform: translateX(0); }
+  0%   { transform: translateX(9px); }
+  33%  { transform: translateX(-4px); }
+  55%  { transform: translateX(0); }
   100% { transform: translateX(0); }
 }
 
@@ -157,12 +158,24 @@
 }
 .wm.fx-smear-fill.glitch .l1, .wm.fx-smear-fill.peak .l1 { clip-path: inset(34% 0 32% 0); opacity: 1; }
 .wm.fx-smear-fill.glitch .fr1, .wm.fx-smear-fill.peak .fr1 { clip-path: inset(34% 0 32% 0); color: var(--p-dim); }
-.wm.fx-smear-fill.glitch .l1 { animation: wm-smear-band 700ms ease 1; }
-.wm.fx-smear-fill.glitch .fr1 { animation: wm-smear-ghost 700ms ease-out 1; }
+.wm.fx-smear-fill.glitch .l1 { animation: wm-smear-band 700ms steps(1, end) 1; }
+.wm.fx-smear-fill.glitch .fr1 { animation: wm-smear-ghost 700ms steps(1, end) 1; }
 .wm.fx-smear-fill.peak .l1 { animation: none; transform: translateX(14px); }
 .wm.fx-smear-fill.peak .fr1 { animation: none; opacity: 0.6; transform: translateX(2px); }
-@keyframes wm-smear-band { 0% { transform: translateX(0); } 15% { transform: translateX(14px); } 40% { transform: translateX(14px); } 55%, 100% { transform: translateX(0); } }
-@keyframes wm-smear-ghost { 0% { opacity: 0; transform: translateX(0); } 15% { opacity: 0.8; transform: translateX(0); } 40% { opacity: 0.35; transform: translateX(4px); } 70%, 100% { opacity: 0; transform: translateX(0); } }
+/* The smear decays in discrete drops rather than fading — a trail of held
+   frames, the way a slow phosphor actually reads. */
+@keyframes wm-smear-band {
+  0%   { transform: translateX(14px); }
+  30%  { transform: translateX(14px); }
+  45%  { transform: translateX(5px); }
+  60%, 100% { transform: translateX(0); }
+}
+@keyframes wm-smear-ghost {
+  0%   { opacity: 0.85; transform: translateX(0); }
+  30%  { opacity: 0.5;  transform: translateX(4px); }
+  45%  { opacity: 0.25; transform: translateX(8px); }
+  60%, 100% { opacity: 0; transform: translateX(0); }
+}
 
 /* ===================================================================== */
 /* fx-hue-shift-tear — port of lot-e v8. Same middle-band tear again, but
@@ -175,12 +188,14 @@
   mask-image: linear-gradient(to bottom, black 0%, black 36%, transparent 36%, transparent 70%, black 70%, black 100%);
 }
 .wm.fx-hue-shift-tear.glitch .l1, .wm.fx-hue-shift-tear.peak .l1 { clip-path: inset(36% 0 30% 0); opacity: 1; }
-.wm.fx-hue-shift-tear.glitch .l1 { animation: wm-hue-tear 420ms ease 1; }
+.wm.fx-hue-shift-tear.glitch .l1 { animation: wm-hue-tear 420ms steps(1, end) 1; }
 .wm.fx-hue-shift-tear.peak .l1 { animation: none; transform: translateX(11px); color: var(--p-coral); text-shadow: none; }
+/* The colour has to snap. Interpolated, amber crosses through orange on its
+   way to coral and the eye reads a tint change instead of a wrong signal. */
 @keyframes wm-hue-tear {
-  0%   { transform: translateX(0); color: var(--p-amber); text-shadow: var(--bloom); }
-  35%  { transform: translateX(11px); color: var(--p-coral); text-shadow: none; }
-  70%  { transform: translateX(11px); color: var(--p-coral); text-shadow: none; }
+  0%   { transform: translateX(11px); color: var(--p-coral); text-shadow: none; }
+  38%  { transform: translateX(-6px); color: var(--p-coral); text-shadow: none; }
+  58%  { transform: translateX(0); color: var(--p-amber); text-shadow: var(--bloom); }
   100% { transform: translateX(0); color: var(--p-amber); text-shadow: var(--bloom); }
 }
 
@@ -212,12 +227,24 @@
 
 .wm.fx-standing-fringe.glitch .fr1, .wm.fx-standing-fringe.peak .fr1 { color: var(--p-coral); mix-blend-mode: screen; }
 .wm.fx-standing-fringe.glitch .fr2, .wm.fx-standing-fringe.peak .fr2 { color: var(--p-cyan); mix-blend-mode: screen; }
-.wm.fx-standing-fringe.glitch .fr1 { animation: wm-fringe-cr 700ms ease-in-out 1; }
-.wm.fx-standing-fringe.glitch .fr2 { animation: wm-fringe-cy 700ms ease-in-out 1; }
+.wm.fx-standing-fringe.glitch .fr1 { animation: wm-fringe-cr 700ms steps(1, end) 1; }
+.wm.fx-standing-fringe.glitch .fr2 { animation: wm-fringe-cy 700ms steps(1, end) 1; }
 .wm.fx-standing-fringe.peak .fr1 { animation: none; opacity: 0.9; transform: translateX(11px); }
 .wm.fx-standing-fringe.peak .fr2 { animation: none; opacity: 0.9; transform: translateX(-12px); }
-@keyframes wm-fringe-cr { 0% { opacity: 0; transform: translateX(0); } 40% { opacity: 0.9; transform: translateX(11px); } 70% { opacity: 0.9; transform: translateX(9px); } 100% { opacity: 0; transform: translateX(1px); } }
-@keyframes wm-fringe-cy { 0% { opacity: 0; transform: translateX(0); } 40% { opacity: 0.9; transform: translateX(-12px); } 70% { opacity: 0.9; transform: translateX(-8px); } 100% { opacity: 0; transform: translateX(-1px); } }
+/* The guns snap apart, hold, jump again, then snap shut. The two hues break
+   at different moments so the pair never looks choreographed. */
+@keyframes wm-fringe-cr {
+  0%   { opacity: 0.9; transform: translateX(11px); }
+  26%  { opacity: 0.9; transform: translateX(14px); }
+  48%  { opacity: 0.9; transform: translateX(6px); }
+  64%, 100% { opacity: 0; transform: translateX(0); }
+}
+@keyframes wm-fringe-cy {
+  0%   { opacity: 0.9; transform: translateX(-12px); }
+  32%  { opacity: 0.9; transform: translateX(-6px); }
+  52%  { opacity: 0.9; transform: translateX(-15px); }
+  64%, 100% { opacity: 0; transform: translateX(0); }
+}
 
 /* ===================================================================== */
 /* fx-damage-only-colour — port of lot-h lh-v3. Clean amber everywhere;
