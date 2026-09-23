@@ -214,8 +214,13 @@ async function describe(button) {
       deco: !!document.querySelector(".game-deco"),
       crt: !!document.querySelector(".game-crt"),
       inner: !!document.querySelector(".game-in"),
-      // The breadcrumb *is* the contract's link home on a framed page.
-      crumb: document.querySelector(".crumb")?.getAttribute("href") ?? null,
+      // The same header the hub and about page wear: the wordmark, and the nav
+      // beside it. A game page used to carry a breadcrumb here instead, which
+      // is what made arriving from the hub feel like a different site.
+      header: !!document.querySelector(".game-top header.top .nav"),
+      // The wordmark *is* the contract's link home on a framed page - it is the
+      // element that carries the href, not the mark inside it.
+      home: document.querySelector("a.brand")?.getAttribute("href") ?? null,
       title: document.querySelector("h1.game-title")?.textContent.trim() ?? null,
       strap: document.querySelector("#status.game-strap") !== null,
       foot: !!document.querySelector(".game-foot"),
@@ -225,8 +230,23 @@ async function describe(button) {
       .map(([k]) => k);
     check(`${game}: wears the shared frame`, bare.length === 0,
       bare.length ? `missing: ${bare.join(", ")}` : JSON.stringify(frame));
-    check(`${game}: the breadcrumb is the link home`,
-      frame.crumb === "../../", frame.crumb);
+    check(`${game}: the wordmark is the link home`,
+      frame.home === "../../", frame.home);
+    // The mark has to sit inside that link rather than being it: role="img" on
+    // the anchor itself would replace the link's own role, and the way home
+    // would stop announcing itself as a link at all.
+    const marked = await page.evaluate(() => {
+      const a = document.querySelector("a.brand");
+      const wm = a && a.querySelector("[data-wordmark]");
+      return {
+        inside: !!wm,
+        anchorRole: a ? a.getAttribute("role") : null,
+        markRole: wm ? wm.getAttribute("role") : null,
+      };
+    });
+    check(`${game}: the mark is inside the link home, and only the mark is an image`,
+      marked.inside && marked.anchorRole === null && marked.markRole === "img",
+      JSON.stringify(marked));
     // A canvas game draws at its backing-store resolution. If CSS renders it at
     // any other size the browser resamples every pixel, and on a dark board a
     // resampled 1px line or 10px paddle is smeared across two pixels at half

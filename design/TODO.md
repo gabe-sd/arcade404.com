@@ -187,17 +187,15 @@ Filed by Gabriel on 2026-09-15, cut from `main`.
 no gap, no tail — on 2026-09-22, from a sheet of seventy-five lockups kept at
 `design/previews/wordmarks/`. It is live on all eight pages and it glitches; see
 `design/DESIGN.md`, "The wordmark, and the faults it wears". What that closes is
-the naming half of this entry. Three things it does not close:
+the naming half of this entry. What is left is the page around it:
 
-**The link.** His words: "title text should be clickable button to go to home
-page." On a game page the breadcrumb already is the link home, so this is about
-what carries the link rather than adding one; on the hub and about page the
-wordmark has somewhere to point for the first time. It keeps the page contract's
-"links back to `../../`" — `tests/contract.test.js` checks the link exists, not
-which element carries it. Read that check before moving the link rather than
-after. **Note what the wordmark has become since this was filed**: it is now a
-labelled image with a dozen layers inside it, so making it a link is a question
-about where the anchor goes around that, not about wrapping a word.
+**The link is built too**, on 2026-09-22: the wordmark is the way home on all
+eight pages. Two claims this entry made about it were wrong and are worth
+correcting rather than deleting, because both would mislead the next reader:
+`tests/contract.test.js` did *not* check only that a link home exists — it named
+`.crumb` specifically — and the breadcrumb it named no longer exists. The check
+now asks that `a.brand` points home and that the mark sits inside that anchor
+rather than being it.
 
 **The hub around it.** The first phase put the hub on the CRT-phosphor palette and
 that stays; what it never had was a name to build a page around. The 404 joke is a

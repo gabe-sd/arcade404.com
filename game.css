@@ -1,9 +1,11 @@
 /* The frame every game page sits in: the machine around the screen.
  *
  * hub.css does this for the root page; this is its counterpart for a game, and
- * the two are deliberately the same machine one size down — the same breadcrumb
- * hue, the same bloom on the title, the same scanlines, the same hairline rules.
- * A visitor moving from the hub into a game should not feel they changed sites.
+ * the two are deliberately the same machine one size down — the same header from
+ * shared.css, the same bloom on the title, the same scanlines, the same hairline
+ * rules. A visitor moving from the hub into a game should not feel they changed
+ * sites, which is why the wordmark and nav are now literally the same element
+ * here as on the hub rather than a breadcrumb standing in for them.
  *
  * It is loaded *between* shared.css and the game's own style.css:
  *
@@ -69,38 +71,15 @@
 
 /* ---------- the head ---------- */
 
+/* Holds the shared header and the game's own title under it. It used to be a row
+   - breadcrumb on one side, title on the other - and carried the hairline that
+   separated the head of the page from the board. The header brings its own rule
+   now, so this only has to stack them. */
 .game-top {
   display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 1rem;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 1.1rem;
   padding-bottom: 0.55rem;
-  border-bottom: 1px solid var(--p-hairline);
-}
-
-/* A breadcrumb rather than a back-link: it says where you are as well as where
-   you can go, and the game's own name in it is what stops the title reading as
-   the only label on the page. Still `../../index.html` — the contract's link
-   home is this element. */
-.crumb {
-  color: var(--p-dim);
-  font-size: 1.02rem;
-  letter-spacing: 0.08em;
-  text-decoration: none;
-}
-
-.crumb b {
-  color: var(--p-pale);
-  font-weight: 400;
-}
-
-.crumb:hover {
-  color: var(--p-pale);
-}
-
-.crumb:hover b {
-  color: var(--p-hot);
 }
 
 .game-title {

@@ -439,7 +439,7 @@ stylesheet, so a game can override anything in it and
 | Frame | `.game-in`, max-width 1120px, padding `1.4rem 1.6rem 2rem` |
 | Wash | `.game-deco`, z-index 0 — amber bloom off the top, vignette into the corners |
 | Scanlines | `.game-crt`, z-index 6 — `rgba(0,0,0,.34)` 1px every 3px |
-| Breadcrumb | `.crumb`, 1.02rem, `--p-dim`, letter-spacing 0.08em; the game's name in it is `--p-pale` |
+| Header | `.top` from `shared.css` — the same wordmark and nav the hub wears, at the same size |
 | Title | `.game-title`, 2.1rem (1.7rem under 620px), `--p-hot`, `--bloom-lg`, letter-spacing 0.09em |
 | Head rule | 1px `--p-hairline` under the top row |
 | Status strap | `.game-strap`, 1.22rem, `--p-pale`, with the hub's fading block cursor |
@@ -451,8 +451,12 @@ Three rules under it:
 - **Chrome against screen, in z-index terms.** The wash is 0, the scanlines are
   6, the board is 7 with its own opaque ground. A scanline over a chess hairline
   or a Sudoku digit is texture bought at the price of reading the game.
-- **The breadcrumb is the contract's link home.** It replaces `.back-link`, and
-  it says where you are as well as where you can go.
+- **The wordmark is the contract's link home**, on every page that has one. A
+  game page used to carry a breadcrumb here instead — `← ARCADE / GAME NAME` —
+  which said where you were as well as where you could go, but meant that moving
+  from the hub into a game changed the furniture as well as the content.
+  Gabriel's call of 2026-09-22: the header is the same everywhere, and the game's
+  own title sits under it rather than beside a trail.
 - **Standing instructions go in the foot, never in `#status`.** The contract
   keeps the status line for game state, and a hint that never changes is not
   state.
@@ -671,7 +675,7 @@ column. All three of the mockup's changes landed together.
 The strap, scorebar, court, buttons and footer are `min(100%, calc(var(--court)
 + 28px))` and centre: the 600px court, plus the canvas's own 1px border, plus
 12px of bezel padding, plus the bezel's own 1px border, each doubled. The
-breadcrumb and title above them still span the page. Nothing resizes — the column
+header and title above them still span the page. Nothing resizes — the column
 simply stops where the court stops, which is what puts `you` and `ai` over the
 paddles they label instead of hundreds of pixels away on a wide monitor.
 
@@ -1065,8 +1069,13 @@ from a digit that is already placed. It still takes no digit.
 
 The site's name is `ARCADE404`, tight caps, no gap and no tail — Gabriel's choice
 of 2026-09-22 from a sheet of seventy-five lockups. It is the `.brand` on the hub
-and the about page, and the first element of every game's breadcrumb. It replaced
+and the about page, and the same again in every game page's header. It replaced
 `ARCADE`, which was a placeholder from before the site had a domain.
+
+**The mark is the link home on every page.** Clicking it goes to `../../`, or
+whatever the page's own way home is. The anchor carries the href and the mark
+sits inside it: `role="img"` on the anchor itself would replace the link's own
+role, and the way home would stop announcing itself as a link.
 
 **The mark is a display that is not quite working**, and that is the whole idea:
 a site named after an error behaves like one. It sits perfectly still and clean
@@ -1090,8 +1099,9 @@ almost all of the time, and every so often something goes briefly wrong with it.
   the site its glitch, not its name.
 - **Reduced motion skips the upgrade entirely.** Not a quieter version: the mark
   stays the plain text the HTML carries.
-- **Offsets are in `em`.** They were drawn against a 64px mark and the breadcrumb
-  is about a sixth of that, where the same tear in px would cut the mark in half.
+- **Offsets are in `em`.** They were drawn against a 64px mark, and nothing
+  guarantees every page will wear it at that size — the header is 3.1rem now and
+  2.4rem on a narrow screen. In px the same tear would cut a small mark in half.
 
 ### The twelve faults
 

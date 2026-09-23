@@ -163,6 +163,77 @@ button {
   gap: 0.6rem;
 }
 
+
+/* ---------------------------------------------------------------------------
+   The header every page wears: the wordmark on the left, the nav on the right.
+   It used to be the hub's alone and lived in `hub.css`; a game page wore a
+   breadcrumb instead, which meant moving from the hub into a game changed the
+   furniture as well as the content. Now the only difference between the two is
+   which nav link is `.active` and what sits underneath.
+
+   The wordmark is the way home on every page, which is also what the game
+   pages' breadcrumb used to be - `tests/contract.test.js` holds each game page
+   to having one.
+   --------------------------------------------------------------------------- */
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--p-hairline);
+}
+
+.brand {
+  display: inline-block;
+  font-size: 3.1rem;
+  line-height: 1;
+  letter-spacing: 0.1em;
+  color: var(--p-hot);
+  text-shadow: var(--bloom-lg);
+  text-decoration: none;
+}
+
+.nav {
+  display: flex;
+  gap: 1.6rem;
+}
+
+.nav a {
+  color: var(--p-dim);
+  font-size: 1.15rem;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  padding-bottom: 0.15rem;
+  border-bottom: 1px solid transparent;
+}
+
+.nav a:hover,
+.nav a:focus-visible {
+  color: var(--p-pale);
+  outline: none;
+}
+
+.nav a.active {
+  color: var(--p-amber);
+  border-bottom-color: var(--p-amber);
+  text-shadow: var(--bloom);
+}
+
+.brand:hover .wm,
+.brand:focus-visible .wm {
+  color: var(--p-hot);
+  text-shadow: var(--bloom-lg), 0 0 34px rgba(255, 176, 0, 0.3);
+}
+
+@media (max-width: 760px) {
+  .brand {
+    font-size: 2.4rem;
+  }
+}
+
 /* ---------------------------------------------------------------------------
    The wordmark, and the faults it wears.
 
