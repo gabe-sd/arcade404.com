@@ -201,6 +201,10 @@
   font-size: 1.2rem;
 }
 
+.menu .play .px {
+  margin-right: 0.35em;
+}
+
 /* Selected is a filled block with brown-black text; unselected is a hairline
    outline. shared.css already carries that pair as .btn / .btn.secondary, so
    what is left here is only which hue each mode fills with. */

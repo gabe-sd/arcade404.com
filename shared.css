@@ -242,6 +242,23 @@ button {
   margin-top: 0.55rem;
 }
 
+/* A character VT323 does not carry, drawn in its own pixels instead: one viewBox
+   unit is one of the font's pixels, and the box is its cap height sat on the
+   baseline, so the glyph lines up with the letters beside it. `.narrow` is a
+   glyph one pixel narrower. See design/DESIGN.md, "Glyphs the typeface lacks". */
+.px {
+  display: inline-block;
+  width: 0.4em;
+  height: 0.56em;
+  margin: 0 0.04em;
+  vertical-align: baseline;
+  fill: currentColor;
+}
+
+.px.narrow {
+  width: 0.32em;
+}
+
 .site-nav a:hover,
 .site-nav a:focus-visible {
   color: var(--p-pale);

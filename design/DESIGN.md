@@ -206,6 +206,41 @@ The Vietnamese subset Google serves is deliberately not committed. It is another
 like the stylesheet. The rule in `CLAUDE.md` is that the site must need no build
 and no install to render, and this does not.
 
+### Glyphs the typeface lacks
+
+VT323 has no arrows, no `▶` and no emoji. A character it lacks is not an error:
+the browser quietly draws it in the reader's OS font, off the palette and at a
+different width. So **no character outside the font goes on a page** — not typed,
+and not as an HTML entity either. Emoji are removed rather than drawn; the last
+three were win messages, dropped on 2026-09-25, and Pong's now reads "Victory!".
+
+**A character in a line of text is drawn in VT323's own pixels**: `.px` in
+`shared.css`, an inline SVG built from one-unit squares. VT323 is a 5×7 face —
+each pixel 0.08em, a five-pixel advance, cap height seven — so a `.px` glyph is
+drawn on that grid, sits on the baseline and takes the colour of the text around
+it. The arrows in Pong's controls, its Play triangle and the footer's GitHub
+arrow are the set. One that stands for a key (the arrows) carries
+`role="img"` and an `aria-label`; one that only decorates is `aria-hidden`.
+
+**An icon on its own** — a key face, a tile, a HUD readout — stays a 48-grid
+stroke icon (see "Icons"). Sudoku's erase key is the example: it fills the key,
+it does not sit in a sentence.
+
+**Rejected: the 48-grid stroke at text size.** Built beside the pixel version on
+2026-09-25 and Gabriel chose pixels. At text size the hub's stroke weight thins
+to about a pixel, lighter than the letters beside it, and its arrows are wider
+than a character, so they still read as another face.
+
+**Check for a missing glyph by measuring, not by reading.** Every VT323 glyph has
+the same advance; a fallback does not. Set ten of the character in a span and
+compare its width with ten `M`s — `·`, `—`, `–` and `’` match, and `↑`, `↗`, `▶`
+do not. Two things that look like evidence are not:
+
+- The `@font-face` `unicode-range` lists U+2191 and U+2193. That is Google's
+  subsetting metadata for the file, not a promise the glyph is in it.
+- A sweep of the source by codepoint misses entities. `&#8599;` sat on all eight
+  pages through a sweep that called the site clean.
+
 ## The hub
 
 Settled 2026-09-06, after several rounds against a served preview

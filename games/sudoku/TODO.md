@@ -63,7 +63,7 @@ entry exists to record the idea, not a decided design.
 
 `loadPuzzle()` (`games/sudoku/script.js`) sets `#status` to "Select a cell, then
 type a digit" and nothing ever clears it — it sits there for the whole game
-until "Solved! 🎉" replaces it on a win. CLAUDE.md's page contract says
+until "Solved!" replaces it on a win. CLAUDE.md's page contract says
 `#status` is game state only, and standing instructions belong in the
 collapsible panel instead. Minesweeper clears its own start prompt after the
 first reveal (`tests/instructions-panel.test.js` §4 pins that behaviour), so

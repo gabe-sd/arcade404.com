@@ -45,56 +45,9 @@ each of the four remaining games still needs its visual pass. The overhaul lande
 four framed but not restyled inside.
 
 **Flappy Bird's phase landed on 2026-09-10, Tic Tac Toe's on 2026-09-11 and
-Minesweeper's on 2026-09-15**, leaving Sudoku below.
-
-**The frame has landed** — header, title, strap, scanlines, footer and the
-shared `#instructions` panel are in place and covered by
-`tests/contract.test.js`. What is left is the inside of the board.
-
-### redesign-emoji-glyphs — The emoji, which are the last off-palette thing
-
-Colour emoji are rendered by the OS font, not by ours, so they ignore the palette
-entirely and are the most visible remaining break in the look. **Minesweeper's phase
-took its whole share on 2026-09-15**, and this is everything left:
-
-Re-swept on 2026-09-15 across every served `.html`, `.js` and `.css` outside
-`tests/` and `design/`, by codepoint rather than by grepping for glyphs already
-known about:
-
-| Game | Where | Glyphs |
-| --- | --- | --- |
-| pong | status line and the menu | `🎉` ×2 |
-| pong | Play button, panel, footer | `▶`, `↑`/`↓` ×2 |
-| sudoku | status line | `🎉` |
-
-Flappy Bird's, Tic Tac Toe's and Minesweeper's emoji are all gone, each taken by
-that game's own phase, and **Sudoku's `⌫` went with its own on 2026-09-15** — the
-button carries a drawn glyph now and the panel line says "the erase key". The hub
-and the About page have none.
-
-**The breadcrumb `←` was the hardest of these and it is gone**, on 2026-09-22 —
-not by being reworded but because the breadcrumb itself went. Every game page
-wears the same header as the hub now, so the six most-seen substituted glyphs on
-the site left with it. Worth keeping as the pattern: the entry had it filed as a
-wording question, and the answer turned out to be that the element asking the
-question did not need to exist.
-
-**Two kinds of problem, and the table does not separate them.** The `🎉` are a tone
-choice; everything else is a glyph the typeface does not have — "The arrows and the
-other substituted glyphs" below is that half, and it needs wording from Gabriel.
-Read both before closing this entry: an earlier version of this table listed the
-`🎉` alone under "what is left", which would have let a later session close it with
-eleven substituted glyphs still on the site.
-
-**The three `🎉` are a tone choice in a win message, not a palette
-problem**, and they sit in `#status` text. Minesweeper's phase asked and Gabriel
-handed the call over; its three were dropped, and the message needed no rewording to
-lose them. That is a precedent for the other three rather than a decision about them
-— **the words on a page are Gabriel's**, so ask before touching a sentence rather
-than a character.
-
-**Pong is the one to notice.** It went through a full redesign phase and kept two of
-them, which is why this is one entry rather than a line in each game's.
+Minesweeper's and Sudoku's on 2026-09-15.** Every game's phase has run, and the last
+off-font glyphs went on 2026-09-25 — see `design/DESIGN.md`, "Glyphs the typeface
+lacks". What is left of the redesign is the decision below.
 
 ### What the finished phases settled
 
@@ -111,40 +64,6 @@ Nothing here is open any more; it is recorded so a later session does not re-dec
 - **A control's icon** is drawn too, and is checked against whatever else is on the
   page at that size. A gear and a mine are the same ring-with-teeth at button size,
   which is why Minesweeper's advanced button is sliders.
-
-### The arrows and the other substituted glyphs
-
-**Flappy Bird's are done** — its panel and footer now say "Up arrow" in words,
-Gabriel's call on 2026-09-15. **Sudoku's is done too**, and it settled the general
-case: a glyph on a *button* is drawn rather than reworded. Its erase key carries an
-SVG backspace on the hub's 48 grid, at the hub's weight, which is the answer chess,
-Minesweeper and Flappy Bird already reached for their own drawings. Only the panel
-line needed words, and "the erase key" was enough. Two sets are left:
-
-- **Pong** says `W/S or ↑/↓` twice, which has no short rewrite. Its `▶` is on the
-  Play button and is Sudoku's case exactly — draw it; the arrows in the sentence
-  are the part that needs wording. **This is the whole of what is left**: a sweep
-  by codepoint across every served file on 2026-09-22 found no other substituted
-  glyph anywhere.
-
-VT323 has no arrows: it is monospace, so every glyph it really has measures the same
-width, and measured on a served page at 22px on 2026-09-10, `M`, `W` and `i` are
-8.8px each while `↑` and `↓` are 11px, `▶` is 16.92px and `⌫` is 31.11px. Four widths
-means four faces — the browser is falling back for every one. `▶` is on Pong's Play
-button and is the same problem in a third shape.
-
-**`shared.css` says otherwise and is not lying.** Its `@font-face` `unicode-range`
-lists U+2191 and U+2193, which is Google's subsetting metadata for the file rather
-than a promise the glyph is in it. The range decides whether the font is consulted;
-if the glyph is missing the browser falls back anyway. Do not take that line as
-evidence a character is covered — measure it.
-
-The fix is a wording change, and those words are Gabriel's — which is the whole of why
-this entry outlives the game phases. Ask him for the wording rather than picking one.
-
-**If the table is edited, sweep for non-ASCII across pages *and* scripts** rather than
-grepping for the glyphs already known about. It was counted the narrow way once and
-came out three kinds short: a screenshot cannot show a win message that has not fired.
 
 ### redesign-category-accents — Decide whether colour by category stays
 
