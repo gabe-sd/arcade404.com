@@ -1,0 +1,98 @@
+/* Dev's choice: two variants on the real hub. Preview only, not the site.
+   Both are amber, the chrome's own colour, so the highlight reads as the
+   arcade speaking rather than as a category, and neither pulses, so it
+   cannot be mistaken for an armed tile. Armed wins where they meet. */
+
+/* The label, shared by both: a box-drawing panel title set into the top
+   border, like a fieldset legend. Its background cuts the line. */
+.tfeat {
+  position: absolute;
+  top: 0;
+  left: 1.3rem;
+  transform: translateY(-50%);
+  z-index: 2;
+  padding: 0 0.45em 0 0.65em;
+  background: var(--bg);
+  color: var(--p-amber);
+  font-size: 0.95rem;
+  line-height: 1.15;
+  letter-spacing: 0.22em;
+  text-shadow: var(--bloom);
+  pointer-events: none;
+}
+
+/* ---- A: a steady amber frame ---- */
+
+body[data-variant="frame"] .tile[data-featured]:not(.selected) {
+  border-color: var(--p-amber);
+  box-shadow: 0 0 0 1px var(--p-amber), 0 0 26px 3px rgba(255, 176, 0, 0.34),
+    inset 0 0 20px rgba(255, 176, 0, 0.06);
+}
+body[data-variant="frame"] .tile[data-featured]:not(.selected):hover,
+body[data-variant="frame"] .tile[data-featured]:not(.selected):focus-visible {
+  box-shadow: 0 0 0 1px var(--p-amber), 0 0 34px 6px rgba(255, 176, 0, 0.44),
+    inset 0 0 20px rgba(255, 176, 0, 0.08);
+}
+
+/* ---- B: marquee bulbs chasing round the tile ---- */
+
+.bulbs {
+  display: none;
+}
+body[data-variant="marquee"] .bulbs {
+  display: block;
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  width: calc(100% + 12px);
+  height: calc(100% + 12px);
+  overflow: visible;
+  pointer-events: none;
+}
+.bulbs rect {
+  x: 0;
+  y: 0;
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke-linecap: round;
+  stroke-width: 5;
+}
+/* pathLength 600 on both rects, so the bulbs are evenly spaced round any
+   size of tile with no seam at the corner the path starts from. */
+.b-dim {
+  stroke: rgba(255, 176, 0, 0.26);
+  stroke-dasharray: 0 10;
+}
+.b-lit {
+  stroke: var(--p-pale);
+  stroke-dasharray: 0 30;
+  filter: drop-shadow(0 0 3px var(--p-amber)) drop-shadow(0 0 8px rgba(255, 176, 0, 0.75));
+  animation: chase 1.05s steps(3) infinite;
+}
+@keyframes chase {
+  to {
+    stroke-dashoffset: -30;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .b-lit {
+    animation: none;
+  }
+}
+
+/* ---- the preview switcher ---- */
+
+.pv-switch {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 20;
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  padding: 0.5rem 0.7rem;
+  background: var(--p-panel);
+  border: 1px solid var(--p-rule);
+  color: var(--p-dim);
+}

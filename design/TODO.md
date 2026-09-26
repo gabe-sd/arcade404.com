@@ -47,7 +47,7 @@ four framed but not restyled inside.
 **Flappy Bird's phase landed on 2026-09-10, Tic Tac Toe's on 2026-09-11 and
 Minesweeper's and Sudoku's on 2026-09-15.** Every game's phase has run, and the last
 off-font glyphs went on 2026-09-25 — see `design/DESIGN.md`, "Glyphs the typeface
-lacks". What is left of the redesign is the decision below.
+lacks". Nothing of the redesign is left open.
 
 ### What the finished phases settled
 
@@ -64,33 +64,6 @@ Nothing here is open any more; it is recorded so a later session does not re-dec
 - **A control's icon** is drawn too, and is checked against whatever else is on the
   page at that size. A gear and a mine are the same ring-with-teeth at button size,
   which is why Minesweeper's advanced button is sliders.
-
-### redesign-category-accents — Decide whether colour by category stays
-
-Not work yet — a decision to take with Gabriel once the hub and every game have been
-seen in the new palette. The broader palette is wanted; assigning a fixed colour per
-category is what is unsettled, along with whether categories exist as a visible idea at
-all. Filter chips and idea tiles were dropped for this project and can be reconsidered
-here.
-
-**One half of this now has an answer, and it is no.** Whether a game's in-game
-accent inherits from its hub tile: chess and Pong each said yes independently —
-chess's black army is the strategy tile's jade, Pong's player is the arcade tile's
-rose — and **Flappy Bird said no**. Its tile is arcade rose; its bird is cyan.
-Rose was built and looked at first, and lost for reasons particular to that board;
-`design/DESIGN.md`, "What this answers about hub-tile inheritance", has them.
-
-**Tic Tac Toe is the fourth, and it splits.** Its O is the strategy tile's jade,
-its X is violet, which belongs to no tile — one board carrying both answers at
-once. It went that way for contrast between the two players rather than out of
-any view about the hub, which is itself worth knowing: a game with two actors
-cannot inherit one tile colour for both.
-
-Two out of three is a tendency, not a rule. What is left to decide here is
-narrower than it was: whether categories are a visible idea at all, and whether the
-hub keeps a fixed colour per category — not whether games are obliged to match.
-
-Close this entry by writing the answer into `design/DESIGN.md`, whichever way it goes.
 
 ---
 

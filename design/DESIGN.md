@@ -307,6 +307,11 @@ rose `#ff7fcb` (Anime Pong, Flappy Bird). The category label text itself is
 tinted with the same hue, not left dim — an intentional bit more colour than the
 original preview used for that label.
 
+**Categories stay as built, fixed colour per category included** — Gabriel,
+2026-09-26, after seeing the hub and every game in the new palette: indifferent,
+revisit if the site grows. Games are not obliged to inherit their tile's colour;
+see "What this answers about hub-tile inheritance".
+
 **A per-tile "new" or "staff pick" badge, using a similar accent treatment, was
 floated as a future idea — not decided, not this phase.** Six live games don't
 need a badge system yet; if it's wanted later it is new work, not an extension of
