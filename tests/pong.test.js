@@ -626,7 +626,8 @@ const { check, report } = makeChecks();
 
     const text = await page.textContent("#instructions");
     check("it covers keyboard, mouse and serving",
-      ["W", "S", "Mouse", "Space"].every((t) => text.includes(t)), text.trim());
+      ["W", "S", "Space"].every((t) => text.includes(t)) && /mouse/i.test(text),
+      text.trim());
     check("the win score comes from the constant, not the markup",
       (await page.textContent("#win-score")) === String(WIN_SCORE),
       await page.textContent("#win-score"));
