@@ -178,8 +178,12 @@ const pages = ["/", "/about/"].concat(games.map((g) => `/games/${g}/`));
     // Caught rather than awaited bare: a scheduler that never runs is exactly
     // what this case exists to notice, and an uncaught timeout would abandon
     // every check after it instead of reporting one failure.
+    // Sampled every frame: waitForSelector settles into polling every 500ms,
+    // and the shortest fault is over before the next sample, so it read a
+    // fault that fired as one that never did - about one run in twelve.
     const fired = await page
-      .waitForSelector("[data-wordmark].glitch", { timeout: 4000 })
+      .waitForFunction(() => !!document.querySelector("[data-wordmark].glitch"),
+        null, { polling: "raf", timeout: 4000 })
       .then(() => true, () => false);
     const firedAt = Date.now() - opened;
     const fx = await page.evaluate(() =>
