@@ -408,7 +408,7 @@ const { check, report } = makeChecks();
     check("player reaches the win score", s.player.score === WIN_SCORE, s.player.score);
     check("game is over", s.gameOver === true);
     check("the menu announces the win",
-      (await page.textContent("#menu-heading")).includes("You win"),
+      (await page.textContent("#menu-heading")).includes("Victory"),
       await page.textContent("#menu-heading"));
     const before = (await read()).ball.x;
     await step(5);
@@ -626,7 +626,8 @@ const { check, report } = makeChecks();
 
     const text = await page.textContent("#instructions");
     check("it covers keyboard, mouse and serving",
-      ["W", "S", "Mouse", "Space"].every((t) => text.includes(t)), text.trim());
+      ["W", "S", "Space"].every((t) => text.includes(t)) && /mouse/i.test(text),
+      text.trim());
     check("the win score comes from the constant, not the markup",
       (await page.textContent("#win-score")) === String(WIN_SCORE),
       await page.textContent("#win-score"));
@@ -1203,7 +1204,7 @@ const { check, report } = makeChecks();
       ["serve", "play", "countdown"].every((p) => game.phases.includes(p)),
       game.phases.join(", "));
     check("points did not chain without the pause between them", game.sawCountdown);
-    check("the menu announces the result", /win|wins/i.test(game.heading),
+    check("the menu announces the result", /Victory|AI wins/.test(game.heading),
       game.heading);
     check("and the status line is left to it", game.status.trim() === "",
       game.status);
@@ -1366,7 +1367,7 @@ const { check, report } = makeChecks();
     await page.waitForFunction(() => gameOver === true, null, { timeout: 2000 });
     check("the menu returns when the game ends", await page.isVisible("#menu"));
     check("with the result in its heading",
-      (await page.textContent("#menu-heading")).includes("win"),
+      (await page.textContent("#menu-heading")).includes("Victory"),
       await page.textContent("#menu-heading"));
     check("and the loop has stopped scheduling frames",
       (await page.evaluate(() => running)) === false);

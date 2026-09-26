@@ -16,15 +16,12 @@ const PAGE = url("/games/minesweeper/index.html");
 const { check, report } = makeChecks();
 
 // Where the glyphs this replaced lived - the clock and the gear as much as the
-// flag and the bomb. The floor is above the arrows and the dashes on purpose:
-// those are the site's own typography, used in prose across the site, and a
-// sweep that flags them is a sweep nobody will keep. (The breadcrumb this used
-// to name is gone; every game page wears the shared header instead.)
-//
-// The arrows are a separate problem with its own entry - design/TODO.md,
-// redesign-emoji-glyphs - because the typeface has no arrow either. When that
-// lands, this floor can come down.
-const SYMBOLS = /[\u{2300}-\u{1FAFF}]/u;
+// flag and the bomb. The floor starts at the arrows, which the typeface does
+// not carry either - the footer's GitHub arrow is drawn now, so a text one
+// coming back is a regression. It stays above the dashes and the middot on
+// purpose: those are the site's own typography, used in prose across the site,
+// and a sweep that flags them is a sweep nobody will keep.
+const SYMBOLS = /[\u{2190}-\u{1FAFF}]/u;
 
 (async () => {
   const browser = await launch();

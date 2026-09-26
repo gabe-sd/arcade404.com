@@ -1000,7 +1000,7 @@ function updateStatus() {
   if (phase === "menu") {
     statusEl.textContent = ""; // the menu heading carries the result
   } else if (gameOver) {
-    statusEl.textContent = player.score > ai.score ? "You win! 🎉" : "AI wins!";
+    statusEl.textContent = player.score > ai.score ? "Victory!" : "AI wins!";
   } else if (paused) {
     statusEl.textContent = "Paused · Esc to resume";
   } else if (phase === "countdown") {
@@ -1246,7 +1246,7 @@ function update() {
 function onScore(scorer) {
   if (player.score >= WIN_SCORE || ai.score >= WIN_SCORE) {
     gameOver = true;
-    showMenu(player.score > ai.score ? "You win! 🎉" : "AI wins!");
+    showMenu(player.score > ai.score ? "Victory!" : "AI wins!");
     return;
   }
   concededStreak = scorer === "ai" ? concededStreak + 1 : 0;

@@ -781,7 +781,7 @@ function checkWin() {
   }
   gameOver = true;
   selected = null;
-  statusEl.textContent = "Solved! 🎉";
+  statusEl.textContent = "Solved!";
   renderBoard();
 }
 
