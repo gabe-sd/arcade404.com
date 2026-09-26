@@ -1,47 +1,113 @@
-/* Dev's choice: two variants on the real hub. Preview only, not the site.
-   Both are amber, the chrome's own colour, so the highlight reads as the
-   arcade speaking rather than as a category, and neither pulses, so it
-   cannot be mistaken for an armed tile. Armed wins where they meet. */
+/* Dev's choice, round 2: five heavier treatments on the real hub. Preview
+   only, not the site. Every one draws its frame in ::after, painted over the
+   tile's category bar, so amber outweighs the category colour. */
 
-/* The label, shared by both: a box-drawing panel title set into the top
-   border, like a fieldset legend. Its background cuts the line. */
+.tile[data-featured]::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  transition: filter 0.16s ease;
+}
+.tile[data-featured]:hover,
+.tile[data-featured]:focus-visible {
+  box-shadow: none;
+}
+/* Label-only variants keep the ordinary tile hover and draw no frame. */
+body[data-variant^="label"] .tile[data-featured]:hover,
+body[data-variant^="label"] .tile[data-featured]:focus-visible {
+  box-shadow: 0 0 24px 2px color-mix(in srgb, var(--cat-accent) 30%, transparent);
+}
+body[data-variant^="label"] .tile[data-featured]::after {
+  content: none;
+}
+.tile[data-featured]:hover::after,
+.tile[data-featured]:focus-visible::after {
+  filter: brightness(1.25);
+}
+
+/* The label, 25% up on round 1. Each variant decides how it sits. */
 .tfeat {
   position: absolute;
+  z-index: 3;
   top: 0;
   left: 1.3rem;
   transform: translateY(-50%);
-  z-index: 2;
-  padding: 0 0.45em 0 0.65em;
-  background: var(--bg);
-  color: var(--p-amber);
-  font-size: 0.95rem;
-  line-height: 1.15;
-  letter-spacing: 0.22em;
-  text-shadow: var(--bloom);
+  padding: 0.05em 0.5em 0.05em 0.7em;
+  font-size: 1.2rem;
+  line-height: 1.1;
+  letter-spacing: 0.2em;
+  white-space: nowrap;
   pointer-events: none;
 }
-
-/* ---- A: a steady amber frame ---- */
-
-body[data-variant="frame"] .tile[data-featured]:not(.selected) {
-  border-color: var(--p-amber);
-  box-shadow: 0 0 0 1px var(--p-amber), 0 0 26px 3px rgba(255, 176, 0, 0.34),
-    inset 0 0 20px rgba(255, 176, 0, 0.06);
+/* Solid tab: dark text on amber. */
+body[data-variant="slab"] .tfeat,
+body[data-variant="rail"] .tfeat,
+body[data-variant="label-tab"] .tfeat {
+  background: var(--p-amber);
+  color: var(--p-ground);
+  box-shadow: 0 0 14px 2px rgba(255, 176, 0, 0.55);
 }
-body[data-variant="frame"] .tile[data-featured]:not(.selected):hover,
-body[data-variant="frame"] .tile[data-featured]:not(.selected):focus-visible {
-  box-shadow: 0 0 0 1px var(--p-amber), 0 0 34px 6px rgba(255, 176, 0, 0.44),
-    inset 0 0 20px rgba(255, 176, 0, 0.08);
+/* Legend: glowing text cutting the line. */
+body[data-variant="double"] .tfeat,
+body[data-variant="neon"] .tfeat,
+body[data-variant="label-glow"] .tfeat {
+  background: var(--bg);
+  color: var(--p-hot);
+  text-shadow: var(--bloom-lg);
 }
 
-/* ---- B: marquee bulbs chasing round the tile ---- */
+/* ---- C: slab. A thick solid amber frame with a heavy glow. ---- */
+body[data-variant="slab"] .tile[data-featured]::after {
+  inset: -3px;
+  border: 3px solid var(--p-amber);
+  box-shadow: 0 0 16px 2px rgba(255, 176, 0, 0.55),
+    0 0 48px 8px rgba(255, 176, 0, 0.2), inset 0 0 26px rgba(255, 176, 0, 0.14);
+}
 
+/* ---- D: double. A box-drawing double rule standing off the tile. ---- */
+body[data-variant="double"] .tile[data-featured]::after {
+  inset: -9px;
+  border: 6px double var(--p-amber);
+  box-shadow: 0 0 20px 3px rgba(255, 176, 0, 0.4);
+}
+body[data-variant="double"] .tile[data-featured] {
+  border-color: var(--p-rule);
+}
+body[data-variant="double"] .tfeat {
+  top: -9px;
+}
+
+/* ---- E: neon. A white-hot core in an amber tube. ---- */
+body[data-variant="neon"] .tile[data-featured]::after {
+  inset: -4px;
+  border: 3px solid var(--p-hot);
+  border-radius: 4px;
+  box-shadow: 0 0 3px 1px var(--p-amber), 0 0 14px 4px rgba(255, 176, 0, 0.75),
+    0 0 44px 12px rgba(255, 176, 0, 0.28), inset 0 0 3px 1px var(--p-amber),
+    inset 0 0 18px rgba(255, 176, 0, 0.35);
+}
+body[data-variant="neon"] .tfeat {
+  top: -4px;
+}
+
+/* ---- F: rail. A marquee sign: a lit band with chasing bulbs. ---- */
+body[data-variant="rail"] .tile[data-featured]::after {
+  inset: -12px;
+  border: 12px solid #2a1b06;
+  outline: 2px solid var(--p-amber);
+  box-shadow: 0 0 22px 4px rgba(255, 176, 0, 0.4),
+    inset 0 0 0 2px var(--p-amber);
+}
+body[data-variant="rail"] .tfeat {
+  top: -12px;
+}
 .bulbs {
   display: none;
 }
-body[data-variant="marquee"] .bulbs {
+body[data-variant="rail"] .bulbs {
   display: block;
   position: absolute;
+  z-index: 2;
   top: -6px;
   left: -6px;
   width: calc(100% + 12px);
@@ -56,18 +122,17 @@ body[data-variant="marquee"] .bulbs {
   height: 100%;
   fill: none;
   stroke-linecap: round;
-  stroke-width: 5;
+  stroke-width: 6;
 }
-/* pathLength 600 on both rects, so the bulbs are evenly spaced round any
-   size of tile with no seam at the corner the path starts from. */
+/* pathLength on both rects spaces the bulbs evenly round any size of tile. */
 .b-dim {
-  stroke: rgba(255, 176, 0, 0.26);
+  stroke: rgba(255, 176, 0, 0.4);
   stroke-dasharray: 0 10;
 }
 .b-lit {
-  stroke: var(--p-pale);
+  stroke: var(--p-hot);
   stroke-dasharray: 0 30;
-  filter: drop-shadow(0 0 3px var(--p-amber)) drop-shadow(0 0 8px rgba(255, 176, 0, 0.75));
+  filter: drop-shadow(0 0 3px var(--p-amber)) drop-shadow(0 0 8px rgba(255, 176, 0, 0.8));
   animation: chase 1.05s steps(3) infinite;
 }
 @keyframes chase {
@@ -81,6 +146,26 @@ body[data-variant="marquee"] .bulbs {
   }
 }
 
+/* ---- G: title bar. The label is an amber band across the top. ---- */
+body[data-variant="bar"] .tile[data-featured]::after {
+  inset: -3px;
+  border: 3px solid var(--p-amber);
+  box-shadow: 0 0 16px 2px rgba(255, 176, 0, 0.5),
+    0 0 44px 6px rgba(255, 176, 0, 0.18);
+}
+body[data-variant="bar"] .tile[data-featured] {
+  padding-top: calc(1.4rem + 1.9rem);
+}
+body[data-variant="bar"] .tfeat {
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  transform: none;
+  padding: 0.3em 0.9em 0.25em;
+  background: var(--p-amber);
+  color: var(--p-ground);
+}
+
 /* ---- the preview switcher ---- */
 
 .pv-switch {
@@ -89,7 +174,8 @@ body[data-variant="marquee"] .bulbs {
   bottom: 1rem;
   z-index: 20;
   display: flex;
-  gap: 0.6rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
   align-items: center;
   padding: 0.5rem 0.7rem;
   background: var(--p-panel);

@@ -107,8 +107,13 @@
   </div>
   <div class="pv-switch">
     <span>preview</span>
-    <button class="btn" data-v="frame">A · frame</button>
-    <button class="btn" data-v="marquee">B · marquee</button>
+    <button class="btn" data-v="slab">slab</button>
+    <button class="btn" data-v="double">double</button>
+    <button class="btn" data-v="neon">neon</button>
+    <button class="btn" data-v="rail">marquee</button>
+    <button class="btn" data-v="bar">title bar</button>
+    <button class="btn" data-v="label-tab">label: tab</button>
+    <button class="btn" data-v="label-glow">label: glow</button>
   </div>
   <script>
     // Preview only: picks the variant from the hash so each has its own link.
@@ -121,7 +126,8 @@
     document.querySelectorAll(".pv-switch .btn").forEach(function (b) {
       b.addEventListener("click", function () { location.hash = b.dataset.v; pick(b.dataset.v); });
     });
-    pick(location.hash === "#marquee" ? "marquee" : "frame");
+    addEventListener("hashchange", function () { pick(location.hash.slice(1) || "slab"); });
+    pick(location.hash.slice(1) || "slab");
   </script>
   <script src="../../../hub.js"></script>
   <script src="../../../wordmark.js" defer></script>
