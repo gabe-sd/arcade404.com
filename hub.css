@@ -220,6 +220,27 @@
   color: var(--cat-accent);
 }
 
+/* Dev's choice: a solid amber tab set into one tile's top border. Amber is
+   the chrome's colour, not a category's, so it reads as the arcade speaking.
+   Promoting another game is moving the span. See design/DESIGN.md, "Dev's
+   choice". The left padding exceeds the right by the letter-spacing, which
+   trails the last letter. */
+.tfeat {
+  position: absolute;
+  top: 0;
+  left: 1.3rem;
+  transform: translateY(-50%);
+  padding: 0.05em 0.5em 0.05em 0.7em;
+  background: var(--p-amber);
+  color: var(--p-ground);
+  font-size: 1.2rem;
+  line-height: 1.1;
+  letter-spacing: 0.2em;
+  white-space: nowrap;
+  box-shadow: 0 0 14px 2px rgba(255, 176, 0, 0.55);
+  pointer-events: none;
+}
+
 /* Tap 1 arms the tile (pulsing glow); tap 2 on the armed tile plays it —
    the whole tile is the control, no separate button or panel. See
    design/DESIGN.md, "Tile selection: the whole tile is the control". */

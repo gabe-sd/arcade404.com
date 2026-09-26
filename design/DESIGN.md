@@ -60,9 +60,8 @@ built:
   category owning it would make "selected" ambiguous.
 - **Six guest hues, for the screen only**, listed with their values under "The
   guest hues" below.
-- **Colour by category is in**, which pre-answers most of the
-  `redesign-category-accents` entry in `design/TODO.md`. Close that entry when
-  the games are done rather than treating it as still open.
+- **Colour by category is in**, and stays: Gabriel confirmed it on 2026-09-26
+  once every game was done — see "Category colour: at rest, all the time".
 
 ### The rule that came out of it: chrome against screen
 
@@ -312,10 +311,8 @@ original preview used for that label.
 revisit if the site grows. Games are not obliged to inherit their tile's colour;
 see "What this answers about hub-tile inheritance".
 
-**A per-tile "new" or "staff pick" badge, using a similar accent treatment, was
-floated as a future idea — not decided, not this phase.** Six live games don't
-need a badge system yet; if it's wanted later it is new work, not an extension of
-category colour.
+A per-tile badge was floated here as a future idea; it became "Dev's choice"
+below.
 
 **The bar itself is a glow, not a flat `border-left`, and the tile gets a real
 hover state.** A flat 4px `border-left` with a background-swap hover drew "why does
@@ -362,6 +359,44 @@ markup element, not a second pseudo-element — `::before` is already spoken for
 `.tile.selected`'s pulsing arm glow is untouched by any of this — it is a
 separate, already-tuned state, and hover and selected read as two different
 things on purpose.
+
+### Dev's choice: a tab, not a frame
+
+Settled 2026-09-26 against a served preview. One tile carries a label promoting
+the game Gabriel wants shown off — Pong, when this was written. **A label and
+nothing else**: a solid amber tab, dark text, straddling the tile's top border
+near its left edge.
+
+- **The words are `DEV'S CHOICE`**, Gabriel's, in caps. Visitor-facing prose.
+- **Amber, never the category hue.** Amber is the chrome's colour, so the tab
+  reads as the arcade speaking rather than as a fourth category.
+- **One tile at a time.** Two promoted games promote neither.
+- **It is one `<span class="tfeat">` inside the tile's `<a>`**, and nothing
+  else — no attribute, no script. Promoting another game is moving the span.
+- **It never pulses.** Pulsing is the armed state's; a tab that did would read as
+  a tile already selected.
+
+```css
+.tfeat {
+  position: absolute; top: 0; left: 1.3rem; transform: translateY(-50%);
+  padding: 0.05em 0.5em 0.05em 0.7em;
+  background: var(--p-amber); color: var(--p-ground);
+  font-size: 1.2rem; line-height: 1.1; letter-spacing: 0.2em;
+  box-shadow: 0 0 14px 2px rgba(255, 176, 0, 0.55);
+}
+```
+
+**Rejected, shown on the same page and not chosen:**
+
+- A glowing frame round the tile was the first idea, and it is the armed state's
+  look — a glowing tile reads as selected. A steady thin amber frame and a ring of
+  small chasing marquee bulbs were built with a smaller legend label; Gabriel:
+  "far from usable". Too faint, and the category bar outweighed them.
+- A second round made the frame outweigh the category bar, drawn over it: a thick
+  solid slab, a box-drawing double rule, a neon tube, a marquee band with big
+  bulbs, and an amber title bar across the tile's top. The bare tab beat all five.
+- The same label as glowing text cut into the border, with no background. The
+  solid tab won.
 
 ### Icons
 
@@ -862,7 +897,7 @@ when it dies, which is why it is worth having twice.
 
 ### What this answers about hub-tile inheritance
 
-`design/TODO.md`'s `redesign-category-accents` noted that chess and Pong each
+An old `design/TODO.md` entry on category accents noted that chess and Pong each
 chose an in-game accent matching their hub tile, independently, and asked whether
 Flappy Bird would make it three. **It did not.** Arcade is rose; the bird is cyan.
 
