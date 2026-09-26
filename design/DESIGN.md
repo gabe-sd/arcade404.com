@@ -376,15 +376,7 @@ near its left edge.
 - **It never pulses.** Pulsing is the armed state's; a tab that did would read as
   a tile already selected.
 
-```css
-.tfeat {
-  position: absolute; top: 0; left: 1.3rem; transform: translateY(-50%);
-  padding: 0.05em 0.5em 0.05em 0.7em;
-  background: var(--p-amber); color: var(--p-ground);
-  font-size: 1.2rem; line-height: 1.1; letter-spacing: 0.2em;
-  box-shadow: 0 0 14px 2px rgba(255, 176, 0, 0.55);
-}
-```
+The values live in the `.tfeat` rule in `hub.css`.
 
 **Rejected, shown on the same page and not chosen:**
 
