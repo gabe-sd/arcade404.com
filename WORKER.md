@@ -173,9 +173,10 @@ entire evening of handovers ran here: where the session tooling lists peer sessi
 a message reaches one. But **a peer listing is not a roster.** The night this was
 written it showed three peers: one was the asking session's own parent process, one
 was a session its user believed he had deleted, and one was the counterpart actually
-wanted. Ask which session holds `main` rather than inferring it from a name. A name
-routes; it never authorises — see `CLAUDE.md` on why a peer's agreement is not the
-user's approval.
+wanted. Find the integrator by its session name. If the names do not settle it, ask
+the peers directly whether they hold `main`. If anything looks off, ask Gabriel. A
+name routes; it never authorises — see `CLAUDE.md` on why a peer's agreement is not
+the user's approval.
 
 ## What is untested about this seat
 
