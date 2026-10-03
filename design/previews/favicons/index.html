@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Favicon candidates</title>
+<link rel="stylesheet" href="../../../shared.css">
+<style>
+  body { margin: 0; padding: 1.4rem 1.6rem 3rem; background: var(--bg); color: var(--fg); }
+  h1 { font-size: 2rem; color: var(--p-hot); margin: 0 0 .2rem; font-weight: normal; letter-spacing: .06em; }
+  p.note { color: var(--p-dim); margin: 0 0 1.2rem; max-width: 60rem; }
+  .bar { margin: 0 0 1.4rem; display: flex; gap: .6rem; align-items: center; }
+  .sheet { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 1rem; }
+  .card { border: 1px solid var(--p-hairline); background: var(--p-panel); padding: .9rem 1rem 1rem; }
+  .card h2 { font-size: 1.35rem; font-weight: normal; color: var(--p-pale); margin: 0; }
+  .card .why { color: var(--p-dim); font-size: 1rem; margin: .1rem 0 .8rem; min-height: 2.4em; }
+  .sizes { display: flex; align-items: flex-end; gap: 14px; margin-bottom: .9rem; }
+  .sizes figure { margin: 0; text-align: center; color: var(--p-dim); font-size: .85rem; }
+  .sizes svg, .tab svg { display: block; shape-rendering: crispEdges; }
+  /* A neutral backing behind the big sizes, so a transparent ground shows as one. */
+  .sizes .well { padding: 6px; background: #1b1b1d; }
+  .tabs { display: grid; gap: 6px; }
+  .tab { display: flex; align-items: center; gap: 8px; padding: 7px 10px; width: 210px;
+         font: 12px/16px system-ui, sans-serif; border-radius: 8px 8px 0 0; }
+  .tab.dark { background: #35363a; color: #e8eaed; }
+  .tab.light { background: #ffffff; color: #202124; }
+  .tab.strip-dark { background: #202124; padding: 6px 6px 0; width: auto; border-radius: 0; }
+  .tab.strip-light { background: #dee1e6; padding: 6px 6px 0; width: auto; border-radius: 0; }
+</style>
+</head>
+<body>
+<h1>FAVICON CANDIDATES</h1>
+<p class="note">Each is drawn on a 16&times;16 pixel grid and shown at 128, 64, 32 and 16px, then at 16px in a dark and a light browser tab. The tab rows are the real test.</p>
+<div class="bar">
+  <button class="btn secondary" id="ground" type="button">Ground: solid</button>
+</div>
+<div class="sheet" id="sheet"></div>
+
+<script>
+// Palette, from design/DESIGN.md.
+const G = "#0a0704", A = "#ffb000", HOT = "#fff2da", CY = "#6fdcf2", CO = "#ff6a56", DIM = "#b8790a";
+
+const FOUR_4 = ["#..#", "#..#", "#..#", "####", "...#", "...#", "...#"];
+const ZERO_4 = [".##.", "#..#", "#..#", "#..#", "#..#", "#..#", ".##."];
+const BLOCK_4 = ["####", "####", "####", "####", "####", "####", "####"];
+// VT323's own 5x7 shapes.
+const FOUR_5 = ["...#.", "..##.", ".#.#.", "#..#.", "#####", "...#.", "...#."];
+const A_5 = [".###.", "#...#", "#...#", "#####", "#...#", "#...#", "#...#"];
+
+// Stamp a glyph as rects: origin, pixel scale per axis, colour, optional per-row x shift.
+function stamp(glyph, ox, oy, sx, sy, fill, shift) {
+  const out = [];
+  glyph.forEach((row, r) => {
+    [...row].forEach((c, i) => {
+      if (c !== "#") return;
+      const dx = shift ? shift(r) : 0;
+      out.push([ox + i * sx + dx, oy + r * sy, sx, sy, fill]);
+    });
+  });
+  return out;
+}
+const rect = (x, y, w, h, fill) => [[x, y, w, h, fill]];
+
+function word404(oy, sy, fill, mid) {
+  return [
+    ...stamp(FOUR_4, 1, oy, 1, sy, fill),
+    ...stamp(mid ? BLOCK_4 : ZERO_4, 6, oy, 1, sy, mid || fill),
+    ...stamp(FOUR_4, 11, oy, 1, sy, fill),
+  ];
+}
+
+// The torn band: rows 3-4 of the 5x7 glyph, which at 2x is the crossbar.
+const torn = (r) => (r === 3 || r === 4 ? 2 : 0);
+const tornOnly = (glyph) => glyph.map((row, r) => (r === 3 || r === 4 ? row : "....."));
+
+const CANDIDATES = [
+  { name: "404", why: "The whole joke, three digits across.", ink: A,
+    draw: (ink) => word404(4, 1, ink) },
+  { name: "404, tall", why: "Same digits at double height, so they fill the square.", ink: A,
+    draw: (ink) => word404(1, 2, ink) },
+  { name: "404, inverted", why: "Dark digits on an amber slab, like the Dev's choice tab. Always has a ground.", ink: G, slab: A,
+    draw: (ink) => word404(1, 2, ink) },
+  { name: "4, cursor, 4", why: "The zero is the strap's block cursor.", ink: A,
+    draw: (ink) => word404(1, 2, ink, HOT) },
+  { name: "Big 4", why: "One VT323 digit at 2x. Boldest at 16px, loses the joke.", ink: A,
+    draw: (ink) => stamp(FOUR_5, 3, 1, 2, 2, ink) },
+  { name: "Torn 4", why: "The wordmark's fault, frozen: one band displaced, with a cyan and coral fringe.", ink: A,
+    draw: (ink) => [
+      ...stamp(tornOnly(FOUR_5), 0, 1, 2, 2, CY),
+      ...stamp(tornOnly(FOUR_5), 6, 1, 2, 2, CO),
+      ...stamp(FOUR_5, 3, 1, 2, 2, ink, torn),
+    ] },
+  { name: "Big A", why: "The name's initial. Reads as a letter, not as this site.", ink: A,
+    draw: (ink) => stamp(A_5, 3, 1, 2, 2, ink) },
+  { name: "Missing glyph", why: "The box a browser draws for a character it cannot find.", ink: A,
+    draw: (ink) => [
+      ...rect(3, 1, 10, 1, ink), ...rect(3, 14, 10, 1, ink), ...rect(3, 1, 1, 14, ink), ...rect(12, 1, 1, 14, ink),
+      ...[0, 1, 2, 3, 4, 5].flatMap((i) => [...rect(5 + i, 4 + i + Math.floor(i / 2), 1, 2, ink), ...rect(10 - i, 4 + i + Math.floor(i / 2), 1, 2, ink)]),
+    ] },
+  { name: "Joystick", why: "Arcade, with no 404 in it.", ink: A,
+    draw: (ink) => [
+      ...rect(6, 1, 4, 1, ink), ...rect(5, 2, 6, 3, ink), ...rect(6, 5, 4, 1, ink),
+      ...rect(7, 6, 2, 5, ink),
+      ...rect(4, 11, 8, 1, ink), ...rect(2, 12, 12, 3, ink),
+    ] },
+  { name: "Prompt", why: "A chevron and the block cursor. Terminal, generic.", ink: A,
+    draw: (ink) => [
+      ...[0, 1, 2, 3].flatMap((i) => [...rect(1 + i, 4 + i, 2, 1, ink), ...rect(1 + i, 11 - i, 2, 1, ink)]),
+      ...rect(9, 4, 5, 8, HOT),
+    ] },
+];
+
+let solid = true;
+
+function svg(c, size) {
+  const slab = c.slab || (solid ? G : null);
+  const rects = c.draw(c.ink)
+    .map(([x, y, w, h, f]) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${f}"/>`)
+    .join("");
+  const bg = slab ? `<rect width="16" height="16" fill="${slab}"/>` : "";
+  return `<svg width="${size}" height="${size}" viewBox="0 0 16 16" aria-hidden="true">${bg}${rects}</svg>`;
+}
+
+function render() {
+  document.getElementById("sheet").innerHTML = CANDIDATES.map((c, i) => `
+    <section class="card">
+      <h2>${i + 1}. ${c.name}</h2>
+      <div class="why">${c.why}</div>
+      <div class="sizes">
+        ${[128, 64, 32, 16].map((s) => `<figure><div class="well">${svg(c, s)}</div>${s}</figure>`).join("")}
+      </div>
+      <div class="tabs">
+        <div class="tab strip-dark"><div class="tab dark">${svg(c, 16)}<span>ARCADE404</span></div></div>
+        <div class="tab strip-light"><div class="tab light">${svg(c, 16)}<span>ARCADE404</span></div></div>
+      </div>
+    </section>`).join("");
+}
+
+document.getElementById("ground").addEventListener("click", (e) => {
+  solid = !solid;
+  e.currentTarget.textContent = "Ground: " + (solid ? "solid" : "transparent");
+  render();
+});
+render();
+</script>
+</body>
+</html>
