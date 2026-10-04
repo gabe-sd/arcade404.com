@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Favicon candidates</title>
+<link rel="stylesheet" href="../../../shared.css">
+<style>
+  body { margin: 0; padding: 1.4rem 1.6rem 3rem; background: var(--bg); color: var(--fg); }
+  h1 { font-size: 2rem; color: var(--p-hot); margin: 0 0 .2rem; font-weight: normal; letter-spacing: .06em; }
+  p.note { color: var(--p-dim); margin: 0 0 1.2rem; max-width: 60rem; }
+  .bar { margin: 0 0 1.4rem; display: flex; gap: .6rem; align-items: center; }
+  .sheet { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 1rem; }
+  .card { border: 1px solid var(--p-hairline); background: var(--p-panel); padding: .9rem 1rem 1rem; }
+  .card h2 { font-size: 1.35rem; font-weight: normal; color: var(--p-pale); margin: 0; }
+  .card .why { color: var(--p-dim); font-size: 1rem; margin: .1rem 0 .8rem; min-height: 2.4em; }
+  .sizes { display: flex; align-items: flex-end; gap: 14px; margin-bottom: .9rem; }
+  .sizes figure { margin: 0; text-align: center; color: var(--p-dim); font-size: .85rem; }
+  .sizes svg, .tab svg { display: block; shape-rendering: crispEdges; }
+  /* A neutral backing behind the big sizes, so a transparent ground shows as one. */
+  .sizes .well { padding: 6px; background: #1b1b1d; }
+  .tabs { display: grid; gap: 6px; }
+  .tab { display: flex; align-items: center; gap: 8px; padding: 7px 10px; width: 210px;
+         font: 12px/16px system-ui, sans-serif; border-radius: 8px 8px 0 0; }
+  .tab.dark { background: #35363a; color: #e8eaed; }
+  .tab.light { background: #ffffff; color: #202124; }
+  .tab.strip-dark { background: #202124; padding: 6px 6px 0; width: auto; border-radius: 0; }
+  .tab.strip-light { background: #dee1e6; padding: 6px 6px 0; width: auto; border-radius: 0; }
+</style>
+</head>
+<body>
+<h1>FAVICON CANDIDATES</h1>
+<p class="note">Each is drawn on a 16&times;16 pixel grid (15 on have a 32&times;32 drawing as well, used above 16px) and shown at 128, 64, 32 and 16px, then at 16px in a dark and a light browser tab. The tab rows are the real test.</p>
+<div class="bar">
+  <button class="btn secondary" id="ground" type="button">Ground: solid</button>
+</div>
+<div class="sheet" id="sheet"></div>
+
+<script>
+// Palette, from design/DESIGN.md.
+const G = "#0a0704", A = "#ffb000", HOT = "#fff2da", CY = "#6fdcf2", CO = "#ff6a56", DIM = "#b8790a";
+
+const FOUR_4 = ["#..#", "#..#", "#..#", "####", "...#", "...#", "...#"];
+const ZERO_4 = [".##.", "#..#", "#..#", "#..#", "#..#", "#..#", ".##."];
+const BLOCK_4 = ["####", "####", "####", "####", "####", "####", "####"];
+// VT323's own 5x7 shapes.
+const FOUR_5 = ["...#.", "..##.", ".#.#.", "#..#.", "#####", "...#.", "...#."];
+const A_5 = [".###.", "#...#", "#...#", "#####", "#...#", "#...#", "#...#"];
+
+// 3x5 digits, for when the 404 has to fit on something.
+const FOUR_3 = ["#.#", "#.#", "###", "..#", "..#"];
+const ZERO_3 = ["###", "#.#", "#.#", "#.#", "###"];
+// A gamepad, solid and as a line, 16 wide.
+const PAD = [
+  "..############..", ".##############.",
+  "################", "################", "################", "################",
+  "################", "################", "################", "################",
+  "#####......#####", "####........####", ".##..........##.",
+];
+const PAD_LINE = [
+  "..############..", ".#............#.",
+  "#..............#", "#..............#", "#..............#", "#..............#",
+  "#..............#", "#..............#", "#..............#",
+  "#....######....#", "#...#......#...#", ".###........###.",
+];
+const PAD_SMALL = [
+  ".##############.", "################", "################", "################",
+  "#####......#####", "####........####", ".##..........##.",
+];
+const small404 = (ox, oy, fill) => [
+  ...stamp(FOUR_3, ox, oy, 1, 1, fill), ...stamp(ZERO_3, ox + 4, oy, 1, 1, fill), ...stamp(FOUR_3, ox + 8, oy, 1, 1, fill),
+];
+
+// Stamp a glyph as rects: origin, pixel scale per axis, colour, optional per-row x shift.
+function stamp(glyph, ox, oy, sx, sy, fill, shift) {
+  const out = [];
+  glyph.forEach((row, r) => {
+    [...row].forEach((c, i) => {
+      if (c !== "#") return;
+      const dx = shift ? shift(r) : 0;
+      out.push([ox + i * sx + dx, oy + r * sy, sx, sy, fill]);
+    });
+  });
+  return out;
+}
+const rect = (x, y, w, h, fill) => [[x, y, w, h, fill]];
+
+function word404(oy, sy, fill, mid) {
+  return [
+    ...stamp(FOUR_4, 1, oy, 1, sy, fill),
+    ...stamp(mid ? BLOCK_4 : ZERO_4, 6, oy, 1, sy, mid || fill),
+    ...stamp(FOUR_4, 11, oy, 1, sy, fill),
+  ];
+}
+
+// --- Round three: the gamepad whose controls are 4 0 4 ---
+const RULE = "#7a5008", PANEL = "#221709";
+// 2px-stroke digits for the 32 grid.
+const FOUR_7 = ["##...##", "##...##", "##...##", "##...##", "#######", "#######", ".....##", ".....##", ".....##"];
+const ZERO_6 = [".####.", "######", "##..##", "##..##", "##..##", "##..##", "##..##", "######", ".####."];
+const ZERO_4S = [".##.", "#..#", "#..#", "#..#", ".##."];
+
+// Silhouettes as [firstRow, lastRow, ...[x0, x1] spans].
+const SHAPES = {
+  grip32: [[5, 5, [5, 10], [21, 26]], [6, 6, [3, 28]], [7, 7, [1, 30]], [8, 21, [0, 31]],
+           [22, 22, [0, 12], [19, 31]], [23, 23, [0, 10], [21, 31]], [24, 24, [0, 9], [22, 31]],
+           [25, 25, [1, 8], [23, 30]], [26, 26, [2, 7], [24, 29]]],
+  grip16: [[2, 2, [2, 13]], [3, 3, [1, 14]], [4, 11, [0, 15]], [12, 12, [0, 4], [11, 15]],
+           [13, 13, [0, 3], [12, 15]], [14, 14, [1, 2], [13, 14]]],
+  slab32: [[3, 4, [4, 10], [21, 27]], [5, 5, [2, 29]], [6, 6, [1, 30]], [7, 25, [0, 31]],
+           [26, 26, [0, 12], [19, 31]], [27, 27, [1, 10], [21, 30]], [28, 28, [2, 8], [23, 29]]],
+  slab16: [[1, 1, [2, 5], [10, 13]], [2, 2, [1, 14]], [3, 12, [0, 15]], [13, 13, [0, 5], [10, 15]],
+           [14, 14, [1, 4], [11, 14]]],
+};
+// Where the digits sit on each: [glyph, x, y, scale] for 4, 0, 4, then the 0's hollow.
+const FACES = {
+  grip32: { d: [[FOUR_7, 3, 10, 1], [ZERO_6, 13, 10, 1], [FOUR_7, 22, 10, 1]], core: [15, 12, 2, 5] },
+  grip16: { d: [[FOUR_3, 2, 5, 1], [ZERO_4S, 6, 5, 1], [FOUR_3, 11, 5, 1]], core: [7, 6, 2, 3] },
+  slab32: { d: [[FOUR_4, 2, 9, 2], [ZERO_4, 12, 9, 2], [FOUR_4, 22, 9, 2]], core: [14, 11, 4, 10] },
+  slab16: { d: [[FOUR_4, 1, 4, 1], [ZERO_4, 6, 4, 1], [FOUR_4, 11, 4, 1]], core: [7, 5, 2, 5] },
+};
+
+function mask(n, spec) {
+  const m = Array.from({ length: n }, () => Array(n).fill(false));
+  for (const [y0, y1, ...spans] of spec)
+    for (let y = y0; y <= y1; y++) for (const [a, b] of spans) for (let x = a; x <= b; x++) m[y][x] = true;
+  return m;
+}
+// A pixel survives only if all eight neighbours are in the shape: one step of rim.
+function erode(m) {
+  const n = m.length;
+  return m.map((row, y) => row.map((v, x) => {
+    for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
+      const yy = y + dy, xx = x + dx;
+      if (yy < 0 || xx < 0 || yy >= n || xx >= n || !m[yy][xx]) return false;
+    }
+    return true;
+  }));
+}
+function paint(m, fill) {
+  const out = [];
+  m.forEach((row, y) => row.forEach((v, x) => { if (v) out.push([x, y, 1, 1, fill]); }));
+  return out;
+}
+function pad(n, s) {
+  const key = (s.slab ? "slab" : "grip") + n;
+  const body = mask(n, SHAPES[key]);
+  let out;
+  if (s.rim) {
+    let inner = body;
+    for (let i = 0; i < n / 16; i++) inner = erode(inner);
+    out = [...paint(body, s.rim), ...paint(inner, s.body)];
+  } else out = paint(body, s.body);
+  const f = FACES[key];
+  f.d.forEach(([glyph, x, y, k], i) => out.push(...stamp(glyph, x, y, k, k, i === 1 ? s.zero : s.ink)));
+  if (s.core) out.push([...f.core, s.core]);
+  return out;
+}
+
+// The torn band: rows 3-4 of the 5x7 glyph, which at 2x is the crossbar.
+const torn = (r) => (r === 3 || r === 4 ? 2 : 0);
+const tornOnly = (glyph) => glyph.map((row, r) => (r === 3 || r === 4 ? row : "....."));
+
+const CANDIDATES = [
+  { name: "404", why: "The whole joke, three digits across.", ink: A,
+    draw: (ink) => word404(4, 1, ink) },
+  { name: "404, tall", why: "Same digits at double height, so they fill the square.", ink: A,
+    draw: (ink) => word404(1, 2, ink) },
+  { name: "404, inverted", why: "Dark digits on an amber slab, like the Dev's choice tab. Always has a ground.", ink: G, slab: A,
+    draw: (ink) => word404(1, 2, ink) },
+  { name: "4, cursor, 4", why: "The zero is the strap's block cursor.", ink: A,
+    draw: (ink) => word404(1, 2, ink, HOT) },
+  { name: "Big 4", why: "One VT323 digit at 2x. Boldest at 16px, loses the joke.", ink: A,
+    draw: (ink) => stamp(FOUR_5, 3, 1, 2, 2, ink) },
+  { name: "Torn 4", why: "The wordmark's fault, frozen: one band displaced, with a cyan and coral fringe.", ink: A,
+    draw: (ink) => [
+      ...stamp(tornOnly(FOUR_5), 0, 1, 2, 2, CY),
+      ...stamp(tornOnly(FOUR_5), 6, 1, 2, 2, CO),
+      ...stamp(FOUR_5, 3, 1, 2, 2, ink, torn),
+    ] },
+  { name: "Big A", why: "The name's initial. Reads as a letter, not as this site.", ink: A,
+    draw: (ink) => stamp(A_5, 3, 1, 2, 2, ink) },
+  { name: "Missing glyph", why: "The box a browser draws for a character it cannot find.", ink: A,
+    draw: (ink) => [
+      ...rect(3, 1, 10, 1, ink), ...rect(3, 14, 10, 1, ink), ...rect(3, 1, 1, 14, ink), ...rect(12, 1, 1, 14, ink),
+      ...[0, 1, 2, 3, 4, 5].flatMap((i) => [...rect(5 + i, 4 + i + Math.floor(i / 2), 1, 2, ink), ...rect(10 - i, 4 + i + Math.floor(i / 2), 1, 2, ink)]),
+    ] },
+  { name: "Joystick", why: "Arcade, with no 404 in it.", ink: A,
+    draw: (ink) => [
+      ...rect(6, 1, 4, 1, ink), ...rect(5, 2, 6, 3, ink), ...rect(6, 5, 4, 1, ink),
+      ...rect(7, 6, 2, 5, ink),
+      ...rect(4, 11, 8, 1, ink), ...rect(2, 12, 12, 3, ink),
+    ] },
+  { name: "Prompt", why: "A chevron and the block cursor. Terminal, generic.", ink: A,
+    draw: (ink) => [
+      ...[0, 1, 2, 3].flatMap((i) => [...rect(1 + i, 4 + i, 2, 1, ink), ...rect(1 + i, 11 - i, 2, 1, ink)]),
+      ...rect(9, 4, 5, 8, HOT),
+    ] },
+  { name: "Controller, 404 cut in", why: "A solid gamepad with the digits cut out of its face.", ink: A,
+    draw: (ink) => [...stamp(PAD, 0, 2, 1, 1, ink), ...small404(3, 5, G)] },
+  { name: "Controller outline, 404 inside", why: "The gamepad as a line drawing, digits lit inside it.", ink: A,
+    draw: (ink) => [...stamp(PAD_LINE, 0, 2, 1, 1, ink), ...small404(3, 5, ink)] },
+  { name: "404 over controller", why: "Full-size digits on top, a small gamepad with d-pad and buttons underneath.", ink: A,
+    draw: (ink) => [
+      ...word404(0, 1, ink),
+      ...stamp(PAD_SMALL, 0, 9, 1, 1, ink),
+      ...rect(4, 10, 1, 3, G), ...rect(3, 11, 3, 1, G), ...rect(10, 12, 1, 1, G), ...rect(12, 10, 1, 1, G),
+    ] },
+  { name: "Controller, 404 as its face", why: "The 4s sit where the d-pad and buttons go; the 0 is the middle button, white-hot.", ink: A,
+    draw: (ink) => [
+      ...stamp(PAD, 0, 2, 1, 1, DIM),
+      ...stamp(FOUR_3, 2, 5, 1, 1, ink), ...rect(7, 6, 2, 3, HOT),
+      ...stamp(FOUR_3, 11, 5, 1, 1, ink),
+    ] },
+  // Round three: 14 redrawn. Each of these is two drawings - a 32 grid for 32px
+  // and up, and a 16 grid of its own for the tab - because a 16px icon that is
+  // just the big one shrunk is how the digits got lost.
+  { name: "14, contrast fixed", why: "The same idea with a darker body, so the digits are the bright thing.",
+    pad: { body: RULE, ink: A, zero: HOT } },
+  { name: "Lit outline", why: "A dark pad with an amber rim. Amber 4s, white-hot 0.",
+    pad: { rim: A, body: PANEL, ink: A, zero: HOT } },
+  { name: "Solid, cut face", why: "Amber pad, the 4 0 4 cut out of it dark.",
+    pad: { body: A, ink: G, zero: G } },
+  { name: "Solid, lit button", why: "As 17, with the 0 as a button lit white-hot from inside.",
+    pad: { body: A, ink: G, zero: G, core: HOT } },
+  { name: "Slab pad", why: "Grips shrunk to nubs so the digits get the whole face. Built to survive 16px.",
+    pad: { slab: true, body: A, ink: G, zero: G } },
+  { name: "Slab pad, lit button", why: "As 19, with the 0 lit.",
+    pad: { slab: true, body: A, ink: G, zero: G, core: HOT } },
+];
+
+let solid = true;
+
+function svg(c, size) {
+  const n = c.pad && size !== 16 ? 32 : 16;
+  const slab = c.slab || (solid ? G : null);
+  const rects = (c.pad ? pad(n, c.pad) : c.draw(c.ink))
+    .map(([x, y, w, h, f]) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${f}"/>`)
+    .join("");
+  const bg = slab ? `<rect width="${n}" height="${n}" fill="${slab}"/>` : "";
+  return `<svg width="${size}" height="${size}" viewBox="0 0 ${n} ${n}" aria-hidden="true">${bg}${rects}</svg>`;
+}
+
+function render() {
+  // The newest round leads; the numbers stay what they were.
+  const round = (i) => (i >= 14 ? 2 : i >= 10 ? 1 : 0);
+  const order = CANDIDATES.map((c, i) => [c, i]).sort((a, b) => round(b[1]) - round(a[1]));
+  document.getElementById("sheet").innerHTML = order.map(([c, i]) => `
+    <section class="card">
+      <h2>${i + 1}. ${c.name}</h2>
+      <div class="why">${c.why}</div>
+      <div class="sizes">
+        ${[128, 64, 32, 16].map((s) => `<figure><div class="well">${svg(c, s)}</div>${s}</figure>`).join("")}
+      </div>
+      <div class="tabs">
+        <div class="tab strip-dark"><div class="tab dark">${svg(c, 16)}<span>ARCADE404</span></div></div>
+        <div class="tab strip-light"><div class="tab light">${svg(c, 16)}<span>ARCADE404</span></div></div>
+      </div>
+    </section>`).join("");
+}
+
+document.getElementById("ground").addEventListener("click", (e) => {
+  solid = !solid;
+  e.currentTarget.textContent = "Ground: " + (solid ? "solid" : "transparent");
+  render();
+});
+render();
+</script>
+</body>
+</html>
