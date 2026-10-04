@@ -30,7 +30,7 @@
 </head>
 <body>
 <h1>FAVICON CANDIDATES</h1>
-<p class="note">Each is drawn on a 16&times;16 pixel grid and shown at 128, 64, 32 and 16px, then at 16px in a dark and a light browser tab. The tab rows are the real test.</p>
+<p class="note">Each is drawn on a 16&times;16 pixel grid (15 on have a 32&times;32 drawing as well, used above 16px) and shown at 128, 64, 32 and 16px, then at 16px in a dark and a light browser tab. The tab rows are the real test.</p>
 <div class="bar">
   <button class="btn secondary" id="ground" type="button">Ground: solid</button>
 </div>
@@ -93,6 +93,70 @@ function word404(oy, sy, fill, mid) {
   ];
 }
 
+// --- Round three: the gamepad whose controls are 4 0 4 ---
+const RULE = "#7a5008", PANEL = "#221709";
+// 2px-stroke digits for the 32 grid.
+const FOUR_7 = ["##...##", "##...##", "##...##", "##...##", "#######", "#######", ".....##", ".....##", ".....##"];
+const ZERO_6 = [".####.", "######", "##..##", "##..##", "##..##", "##..##", "##..##", "######", ".####."];
+const ZERO_4S = [".##.", "#..#", "#..#", "#..#", ".##."];
+
+// Silhouettes as [firstRow, lastRow, ...[x0, x1] spans].
+const SHAPES = {
+  grip32: [[5, 5, [5, 10], [21, 26]], [6, 6, [3, 28]], [7, 7, [1, 30]], [8, 21, [0, 31]],
+           [22, 22, [0, 12], [19, 31]], [23, 23, [0, 10], [21, 31]], [24, 24, [0, 9], [22, 31]],
+           [25, 25, [1, 8], [23, 30]], [26, 26, [2, 7], [24, 29]]],
+  grip16: [[2, 2, [2, 13]], [3, 3, [1, 14]], [4, 11, [0, 15]], [12, 12, [0, 4], [11, 15]],
+           [13, 13, [0, 3], [12, 15]], [14, 14, [1, 2], [13, 14]]],
+  slab32: [[3, 4, [4, 10], [21, 27]], [5, 5, [2, 29]], [6, 6, [1, 30]], [7, 25, [0, 31]],
+           [26, 26, [0, 12], [19, 31]], [27, 27, [1, 10], [21, 30]], [28, 28, [2, 8], [23, 29]]],
+  slab16: [[1, 1, [2, 5], [10, 13]], [2, 2, [1, 14]], [3, 12, [0, 15]], [13, 13, [0, 5], [10, 15]],
+           [14, 14, [1, 4], [11, 14]]],
+};
+// Where the digits sit on each: [glyph, x, y, scale] for 4, 0, 4, then the 0's hollow.
+const FACES = {
+  grip32: { d: [[FOUR_7, 3, 10, 1], [ZERO_6, 13, 10, 1], [FOUR_7, 22, 10, 1]], core: [15, 12, 2, 5] },
+  grip16: { d: [[FOUR_3, 2, 5, 1], [ZERO_4S, 6, 5, 1], [FOUR_3, 11, 5, 1]], core: [7, 6, 2, 3] },
+  slab32: { d: [[FOUR_4, 2, 9, 2], [ZERO_4, 12, 9, 2], [FOUR_4, 22, 9, 2]], core: [14, 11, 4, 10] },
+  slab16: { d: [[FOUR_4, 1, 4, 1], [ZERO_4, 6, 4, 1], [FOUR_4, 11, 4, 1]], core: [7, 5, 2, 5] },
+};
+
+function mask(n, spec) {
+  const m = Array.from({ length: n }, () => Array(n).fill(false));
+  for (const [y0, y1, ...spans] of spec)
+    for (let y = y0; y <= y1; y++) for (const [a, b] of spans) for (let x = a; x <= b; x++) m[y][x] = true;
+  return m;
+}
+// A pixel survives only if all eight neighbours are in the shape: one step of rim.
+function erode(m) {
+  const n = m.length;
+  return m.map((row, y) => row.map((v, x) => {
+    for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
+      const yy = y + dy, xx = x + dx;
+      if (yy < 0 || xx < 0 || yy >= n || xx >= n || !m[yy][xx]) return false;
+    }
+    return true;
+  }));
+}
+function paint(m, fill) {
+  const out = [];
+  m.forEach((row, y) => row.forEach((v, x) => { if (v) out.push([x, y, 1, 1, fill]); }));
+  return out;
+}
+function pad(n, s) {
+  const key = (s.slab ? "slab" : "grip") + n;
+  const body = mask(n, SHAPES[key]);
+  let out;
+  if (s.rim) {
+    let inner = body;
+    for (let i = 0; i < n / 16; i++) inner = erode(inner);
+    out = [...paint(body, s.rim), ...paint(inner, s.body)];
+  } else out = paint(body, s.body);
+  const f = FACES[key];
+  f.d.forEach(([glyph, x, y, k], i) => out.push(...stamp(glyph, x, y, k, k, i === 1 ? s.zero : s.ink)));
+  if (s.core) out.push([...f.core, s.core]);
+  return out;
+}
+
 // The torn band: rows 3-4 of the 5x7 glyph, which at 2x is the crossbar.
 const torn = (r) => (r === 3 || r === 4 ? 2 : 0);
 const tornOnly = (glyph) => glyph.map((row, r) => (r === 3 || r === 4 ? row : "....."));
@@ -148,22 +212,39 @@ const CANDIDATES = [
       ...stamp(FOUR_3, 2, 5, 1, 1, ink), ...rect(7, 6, 2, 3, HOT),
       ...stamp(FOUR_3, 11, 5, 1, 1, ink),
     ] },
+  // Round three: 14 redrawn. Each of these is two drawings - a 32 grid for 32px
+  // and up, and a 16 grid of its own for the tab - because a 16px icon that is
+  // just the big one shrunk is how the digits got lost.
+  { name: "14, contrast fixed", why: "The same idea with a darker body, so the digits are the bright thing.",
+    pad: { body: RULE, ink: A, zero: HOT } },
+  { name: "Lit outline", why: "A dark pad with an amber rim. Amber 4s, white-hot 0.",
+    pad: { rim: A, body: PANEL, ink: A, zero: HOT } },
+  { name: "Solid, cut face", why: "Amber pad, the 4 0 4 cut out of it dark.",
+    pad: { body: A, ink: G, zero: G } },
+  { name: "Solid, lit button", why: "As 17, with the 0 as a button lit white-hot from inside.",
+    pad: { body: A, ink: G, zero: G, core: HOT } },
+  { name: "Slab pad", why: "Grips shrunk to nubs so the digits get the whole face. Built to survive 16px.",
+    pad: { slab: true, body: A, ink: G, zero: G } },
+  { name: "Slab pad, lit button", why: "As 19, with the 0 lit.",
+    pad: { slab: true, body: A, ink: G, zero: G, core: HOT } },
 ];
 
 let solid = true;
 
 function svg(c, size) {
+  const n = c.pad && size !== 16 ? 32 : 16;
   const slab = c.slab || (solid ? G : null);
-  const rects = c.draw(c.ink)
+  const rects = (c.pad ? pad(n, c.pad) : c.draw(c.ink))
     .map(([x, y, w, h, f]) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${f}"/>`)
     .join("");
-  const bg = slab ? `<rect width="16" height="16" fill="${slab}"/>` : "";
-  return `<svg width="${size}" height="${size}" viewBox="0 0 16 16" aria-hidden="true">${bg}${rects}</svg>`;
+  const bg = slab ? `<rect width="${n}" height="${n}" fill="${slab}"/>` : "";
+  return `<svg width="${size}" height="${size}" viewBox="0 0 ${n} ${n}" aria-hidden="true">${bg}${rects}</svg>`;
 }
 
 function render() {
-  // The controller round (11 on) leads; the numbers stay what they were.
-  const order = CANDIDATES.map((c, i) => [c, i]).sort((a, b) => (b[1] >= 10) - (a[1] >= 10));
+  // The newest round leads; the numbers stay what they were.
+  const round = (i) => (i >= 14 ? 2 : i >= 10 ? 1 : 0);
+  const order = CANDIDATES.map((c, i) => [c, i]).sort((a, b) => round(b[1]) - round(a[1]));
   document.getElementById("sheet").innerHTML = order.map(([c, i]) => `
     <section class="card">
       <h2>${i + 1}. ${c.name}</h2>
