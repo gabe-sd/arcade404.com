@@ -47,6 +47,30 @@ const BLOCK_4 = ["####", "####", "####", "####", "####", "####", "####"];
 const FOUR_5 = ["...#.", "..##.", ".#.#.", "#..#.", "#####", "...#.", "...#."];
 const A_5 = [".###.", "#...#", "#...#", "#####", "#...#", "#...#", "#...#"];
 
+// 3x5 digits, for when the 404 has to fit on something.
+const FOUR_3 = ["#.#", "#.#", "###", "..#", "..#"];
+const ZERO_3 = ["###", "#.#", "#.#", "#.#", "###"];
+// A gamepad, solid and as a line, 16 wide.
+const PAD = [
+  "..############..", ".##############.",
+  "################", "################", "################", "################",
+  "################", "################", "################", "################",
+  "#####......#####", "####........####", ".##..........##.",
+];
+const PAD_LINE = [
+  "..############..", ".#............#.",
+  "#..............#", "#..............#", "#..............#", "#..............#",
+  "#..............#", "#..............#", "#..............#",
+  "#....######....#", "#...#......#...#", ".###........###.",
+];
+const PAD_SMALL = [
+  ".##############.", "################", "################", "################",
+  "#####......#####", "####........####", ".##..........##.",
+];
+const small404 = (ox, oy, fill) => [
+  ...stamp(FOUR_3, ox, oy, 1, 1, fill), ...stamp(ZERO_3, ox + 4, oy, 1, 1, fill), ...stamp(FOUR_3, ox + 8, oy, 1, 1, fill),
+];
+
 // Stamp a glyph as rects: origin, pixel scale per axis, colour, optional per-row x shift.
 function stamp(glyph, ox, oy, sx, sy, fill, shift) {
   const out = [];
@@ -108,6 +132,22 @@ const CANDIDATES = [
       ...[0, 1, 2, 3].flatMap((i) => [...rect(1 + i, 4 + i, 2, 1, ink), ...rect(1 + i, 11 - i, 2, 1, ink)]),
       ...rect(9, 4, 5, 8, HOT),
     ] },
+  { name: "Controller, 404 cut in", why: "A solid gamepad with the digits cut out of its face.", ink: A,
+    draw: (ink) => [...stamp(PAD, 0, 2, 1, 1, ink), ...small404(3, 5, G)] },
+  { name: "Controller outline, 404 inside", why: "The gamepad as a line drawing, digits lit inside it.", ink: A,
+    draw: (ink) => [...stamp(PAD_LINE, 0, 2, 1, 1, ink), ...small404(3, 5, ink)] },
+  { name: "404 over controller", why: "Full-size digits on top, a small gamepad with d-pad and buttons underneath.", ink: A,
+    draw: (ink) => [
+      ...word404(0, 1, ink),
+      ...stamp(PAD_SMALL, 0, 9, 1, 1, ink),
+      ...rect(4, 10, 1, 3, G), ...rect(3, 11, 3, 1, G), ...rect(10, 12, 1, 1, G), ...rect(12, 10, 1, 1, G),
+    ] },
+  { name: "Controller, 404 as its face", why: "The 4s sit where the d-pad and buttons go; the 0 is the middle button, white-hot.", ink: A,
+    draw: (ink) => [
+      ...stamp(PAD, 0, 2, 1, 1, DIM),
+      ...stamp(FOUR_3, 2, 5, 1, 1, ink), ...rect(7, 6, 2, 3, HOT),
+      ...stamp(FOUR_3, 11, 5, 1, 1, ink),
+    ] },
 ];
 
 let solid = true;
@@ -122,7 +162,9 @@ function svg(c, size) {
 }
 
 function render() {
-  document.getElementById("sheet").innerHTML = CANDIDATES.map((c, i) => `
+  // The controller round (11 on) leads; the numbers stay what they were.
+  const order = CANDIDATES.map((c, i) => [c, i]).sort((a, b) => (b[1] >= 10) - (a[1] >= 10));
+  document.getElementById("sheet").innerHTML = order.map(([c, i]) => `
     <section class="card">
       <h2>${i + 1}. ${c.name}</h2>
       <div class="why">${c.why}</div>
