@@ -1209,6 +1209,43 @@ screen" above, which is the rule this bends rather than breaks.
   one fault and removes it is both simpler and the only version that can pick at
   random.
 
+## The favicon
+
+**A solid amber gamepad whose controls are `4 0 4`**, the digits painted in the
+ground colour. Gabriel's choice of 2026-10-03, candidate 17 on the sheet kept at
+`design/previews/favicons/`.
+
+- **It is one file, `favicon.ico` at the repo root, and no page links it.**
+  Browsers ask for that path unprompted, which keeps it out of eight `<head>`s.
+- **It is two drawings, not one scaled**: a 16 grid for the tab and a 32 grid for
+  everything larger. The first round drew one size and shrank it, and the digits
+  were the first thing lost.
+- **The ground is transparent and the digits are not.** They are painted
+  `--p-ground` rather than cut out, so they stay dark on a light tab bar instead
+  of turning into holes the colour of whatever is behind.
+- **Amber only.** The favicon is chrome.
+- **`design/favicon.js` draws it**, and is run by hand when the drawing changes.
+  The `.ico` is committed and served as-is; the script is not a build step.
+
+### Rejected, with the reason
+
+All on the sheet, where each can be seen at 16px in a dark and a light tab.
+
+- **`404` alone**, plain, tall, and dark on an amber slab. Legible, and the
+  strongest of the first round at tab size, but Gabriel asked for a controller
+  with it.
+- **A torn 4 with the wordmark's cyan and coral fringe.** Good at 64px, mush at 16.
+- **A missing-glyph box.** Reads as a close button.
+- **A joystick, a prompt, a lone `4`, a lone `A`.** Each is half the name or none.
+- **`404` on a pad** with small digits centred as a word (11–13), rather than
+  spaced out as the pad's own controls. 14 was the idea that won; 15–20 are its
+  redraws.
+- **A dim body with bright digits** (14, 15) fades into a dark tab bar, and **an
+  outlined pad** (16) leaves the digits cramped inside the rim.
+- **The 0 lit white-hot as a button** (18, 20), and **a slab-shaped pad with
+  larger digits** (19, 20). The slab reads best at 16px; 17 is the better
+  controller and is what he picked.
+
 ## How the tokens are layered
 
 `shared.css` already owns nine token names — `--bg`, `--fg`, `--card-bg`,
