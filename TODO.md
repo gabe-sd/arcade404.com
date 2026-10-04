@@ -99,6 +99,10 @@ players. A high score table is the obvious first thing that needs a server, and
 also the first thing that would break the "no build, no dependencies, files served
 as-is" property the site has now. Worth planning before it is wanted.
 
+Two more things Gabriel wants from the same server, from his notes: a global
+visit counter for the site, and a play count for each game. Start with the
+simplest of these.
+
 ## Cloudflare migration
 
 The site moved off GitHub Pages to Cloudflare Workers, which serves the repo root

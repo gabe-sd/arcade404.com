@@ -26,3 +26,10 @@ the best time.
 - `tests/instructions-panel.test.js` and `tests/best-time.test.js` both assume the
   panels start closed. Restoring a saved "open" would break them, so either clear
   the keys in test setup or assert the restore explicitly.
+
+### minesweeper-difficulties — Medium and hard difficulties
+
+From Gabriel's notes: add medium and hard, which means larger grids. There is no
+difficulty control today. Ask Gabriel what the presets are and how they are
+chosen before building; each difficulty keeps its own best time, so the best-time
+key needs namespacing per difficulty.
