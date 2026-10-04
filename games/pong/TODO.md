@@ -417,6 +417,20 @@ not depend on it.
 Worth doing after `pong-high-dpi-canvas` rather than before — there is no point
 art-directing against a backing store that is about to change resolution.
 
+### pong-charge-reason-popup — Say why a charge was earned
+
+**Gate: Gabriel looks at it on a served page.** From his August 2026 playtest
+notes. Charge fills from close calls and streaks, and the meter shows that it
+filled but not why. Show a short text popup when the meter gains, naming the
+cause — near miss, volley streak.
+
+### pong-random-charge-powerup — A charge awards a random powerup
+
+**Gate: Gabriel playtests it.** From his notes: the player holds several
+powerups, roughly in balance with what the opponent paddle has. A change to what
+charging gives, so it changes how the game feels and does not share a playtest
+with another feel change.
+
 ### pong-two-player — Two-player mode
 
 **Gate: try it.** Confirm the two sets of controls do not fight each other, and
