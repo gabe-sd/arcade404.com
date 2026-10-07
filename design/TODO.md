@@ -93,8 +93,3 @@ composition the hub can lean into, not only a string in a header — and now tha
 the mark itself carries the joke in how it behaves, there is a real question about
 whether the page should say anything more at all.
 
-**Two stale strings.** Statements of fact rather than prose: the hub's `<title>`
-is `Arcade` and the about page's is `About — Gabe-SD Arcade`, naming a repo that
-has moved. Every game page's is `<Game> · Game Arcade`. All of them now disagree
-with the name in the page itself.
-
